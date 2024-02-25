@@ -1,17 +1,16 @@
-
 #Menu ul li {
 	height: 40px;
 	line-height: 40px;
 	padding: 0 10px;
 	background-size: 30px 30px;
 }
+
 #Menu ul li:hover {
 	background-image: url('../images/finger.png');
 	background-repeat: no-repeat;
 	background-position: 10px center;
 	padding-left: 40px;
 }
-
 
 .ff7-window {
   border: solid 2px #424542;
@@ -28,14 +27,9 @@
   overflow: hidden;
 }
 
-
-
 .ff7-window h1, .ff7-window p, .ff7-window ul {
   margin: 0 0 0 0;
 }
-
-
-
 
 .ff7-text, .ff7-window h1, .ff7-window p, .ff7-window li {
   color: #eff1ff;
@@ -53,8 +47,11 @@
   padding-left: 3.4em;
 }
 
-
-
+a {
+    color: white; /* Mantener el color del texto como está */
+    text-decoration: none; /* Evitar que el enlace se subraye cuando está activo */
+    underline: none;
+}
 
 body {
   background: black;
