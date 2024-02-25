@@ -4,7 +4,9 @@ import traceback
 
 cred = credentials.Certificate("proyecto-firebase-flask-fdef4-firebase-adminsdk-pppt6-cc2ea7ffe1.json")
 
-firebase_admin.initialize_app(cred,{'databaseURL': 'https://proyecto-firebase-flask-fdef4-default-rtdb.europe-west1.firebasedatabase.app/'})
+firebase_admin.initialize_app(cred, {
+    'databaseURL': 'https://proyecto-firebase-flask-fdef4-default-rtdb.europe-west1.firebasedatabase.app/'})
+
 
 def insert(tabla, datos):
     try:
@@ -14,6 +16,8 @@ def insert(tabla, datos):
     except:
         print(traceback.format_exc())
     return False
+
+
 def delete(tabla, clave):
     try:
         ref = db.reference(tabla)
@@ -23,6 +27,8 @@ def delete(tabla, clave):
     except:
         print(traceback.format_exc())
     return False
+
+
 def update(tabla, datos):
     try:
         ref = db.reference(tabla)
@@ -32,6 +38,8 @@ def update(tabla, datos):
     except:
         print(traceback.format_exc())
     return False
+
+
 def selectOne(tabla, datos):
     try:
         ref = db.reference(tabla)
@@ -39,6 +47,8 @@ def selectOne(tabla, datos):
     except:
         print(traceback.format_exc())
     return None
+
+
 def selectAll(tabla):
     try:
         ref = db.reference()
@@ -49,5 +59,4 @@ def selectAll(tabla):
 
 
 def selectFiltro(tabla, campo, valor):
-
     return 0

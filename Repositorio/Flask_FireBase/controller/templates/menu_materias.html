@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Administrador de Materia de Final Fantasy 7</title>
+	<link rel="stylesheet" type="text/css" href="static/assets/css/styles.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body>
+ <audio id="menu-sound">
+    <source src="static/assets/audio/menu_display.mp3" type="audio/mpeg">
+    Tu navegador no soporta el elemento de audio.
+  </audio>
+	<div class="ff7-window">
+		<h1 class="ff7-text">Administrador de Materia de Final Fantasy 7</h1>
+			<nav id="Menu">
+				<ul>
+					<li>Crear Materia</li>
+					<li>Buscar Materia</li>
+					<li>Eliminar Materia</li>
+					<li>Modificar Materia</li>
+					<li>Mostrar todas las materias</li>
+					<li>Volver a la página principal</li>
+				</ul>
+			</nav>
+		<main class="ff7-text">
+			<!-- El contenido se mostrará aquí en función de la selección del usuario -->
+		</main>
+	</div>
+	<script>
+		// Código JavaScript para manejar la lógica de cada opción
+		function crearMateria() {
+			// Código para crear una materia
+		}
+		function buscarMateria() {
+			// Código para buscar una materia
+		}
+		function eliminarMateria() {
+			// Código para eliminar una materia
+		}
+		function modificarMateria() {
+			// Código para modificar una materia
+		}
+		function mostrarTodasLasMaterias() {
+			// Código para mostrar todas las materias
+		}
+		function volverAPaginaPrincipal() {
+			window.location.href = "index.html";
+		}
+		function mostrarImagen(event) {
+			const imagen = event.target.dataset.image;
+			event.target.style.backgroundImage = `url(${imagen})`;
+			event.target.style.backgroundRepeat = "no-repeat";
+			event.target.style.backgroundPosition = "10px center";
+			event.target.style.paddingLeft = "40px";
+		}
+		function ocultarImagen(event) {
+			event.target.style.backgroundImage = "none";
+			event.target.style.paddingLeft = "10px";
+		}
+	</script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      var menuSound = document.getElementById("menu-sound");
+
+      document.querySelectorAll("*").forEach(function(element) {
+        element.addEventListener("mouseover", function() {
+          menuSound.pause();
+          menuSound.currentTime = 0;
+          menuSound.play();
+        });
+      });
+    });
+  </script>
+
+</body>
+</html>
