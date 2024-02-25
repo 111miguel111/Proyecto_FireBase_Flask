@@ -5,6 +5,7 @@ app = Flask(__name__)
 
 app.config['STATIC_FOLDER'] = 'static'
 
+
 @app.route('/menu')
 def menu_principal():
     return render_template('index.html')
