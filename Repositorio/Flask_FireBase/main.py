@@ -1,5 +1,5 @@
 from model import BBDD
 
 
-for i in Connection.selectAll("libros"):
+for i in BBDD.selectAll("libros"):
     print(i)
