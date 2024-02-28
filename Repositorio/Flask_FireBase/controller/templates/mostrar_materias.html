@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <table border="1" class="table table-striped">
+        <tr>
+            <th>Nombre</th>
+            <th>Descripcion</th>
+            <th>Tipo</th>
+            <th>Nivel</th>
+            <th>Experiencia</th>
+            <th>Fuerza</th>
+            <th>Magia</th>
+            <th>MaxPG%</th>
+            <th>MaxPM%</th>
+            <th>Coste</th>
+
+        {% for dato in datos %}
+        <tr>
+            <td>{{ datos[dato]["nombre"] }}</td>
+            <td>{{ datos[dato]["descripcion"] }}</td>
+            <td>{{ datos[dato]["tipo"] }}</td>
+            <td>{{ datos[dato]["nivel"] }}</td>
+            <td>{{ datos[dato]["experiencia"] }}</td>
+            <td>{{ datos[dato]["fuerza"] }}</td>
+            <td>{{ datos[dato]["magia"] }}</td>
+            <td>{{ datos[dato]["maxpg"] }}</td>
+            <td>{{ datos[dato]["maxpm"] }}</td>
+            <td>{{ datos[dato]["coste"] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

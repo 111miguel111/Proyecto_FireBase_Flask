@@ -60,3 +60,18 @@ def selectAll(tabla):
 
 def selectFiltro(tabla, campo, valor):
     return 0
+
+
+def calcularClave(tabla, datos):
+    elementos = selectAll(tabla)
+    if elementos != None:
+        cont=0
+        for elemento in elementos:
+            if(elemento["nombre"]==datos["nombre"]):
+                num = elemento["clave"].split('_')[1]
+                if(int(num)>cont):
+                    cont = int(num)
+        datos["clave"] = datos["nombre"]+"_"+str((cont+1))
+    else:
+        datos["clave"]=datos["nombre"]+"_"+str(1)
+    return datos
