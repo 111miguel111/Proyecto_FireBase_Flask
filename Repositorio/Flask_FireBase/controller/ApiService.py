@@ -6,7 +6,7 @@ app = Flask(__name__)
 app.config['STATIC_FOLDER'] = 'static'
 
 
-@app.route('/menu')
+@app.route('/')
 def menu_principal():
     return render_template('index.html')
 
@@ -20,6 +20,7 @@ def menu_materias():
 def menu_crear_materias():
     return render_template('crear_materia.html')
 
+
 @app.route('/materias/crear', methods=['POST'])
 def crear_materias():
     datos = {}
@@ -27,15 +28,17 @@ def crear_materias():
     for key in request.form:
         datos[key] = request.form[key]
 
-    datos=BBDD.calcularClave("materia",datos)
+    datos = BBDD.calcularClave("materia", datos)
     BBDD.insert("materia", datos)
-    #return render_template('crear_materia.html')
+    # return render_template('crear_materia.html')
+
 
 @app.route('/materias/mostrar', methods=['GET'])
 def menu_mostrar_materias():
     datos = BBDD.selectAll("materia")
     print(datos)
-    return render_template('mostrar_materias.html', datos = datos)
+    return render_template('mostrar_materias.html', datos=datos)
+
 
 def lanzar():
     app.run(debug=True)

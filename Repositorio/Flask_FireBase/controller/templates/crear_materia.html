@@ -1,45 +1,59 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <style>
-        .radio_group {
-            display: flex;
-        }
-        .radio_group label {
-            margin-right: 10px;
-        }
-    </style>
-</head>
-<body>
-<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="../static/assets/css/Animated-Radial-Menu.css">
+    <script defer type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script defer nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script defer src="../static/assets/js/Animated-Radial-Menu.js"></script>
+
     <title>Formulario</title>
 </head>
 <body>
-    <form action="/materias/crear" method="POST">
+    
+    <div class="cuerpo">
+    <form action="#" method="POST">
         <label for="nombre">Nombre:</label><br>
         <input type="text" id="nombre" name="nombre"><br>
 
         <label for="descripcion">Descripción:</label><br>
         <textarea id="descripcion" name="descripcion"></textarea><br>
 
-        <div class="radio_group">
-            <label>Tipo:</label><br>
-            <input type="radio" id="magia" name="tipo" value="magia">
-            <label for="magia">Magia</label><br>
-            <input type="radio" id="invocacion" name="tipo" value="invocacion">
-            <label for="invocacion">Invocación</label><br>
-            <input type="radio" id="soporte" name="tipo" value="soporte">
-            <label for="soporte">Soporte</label><br>
-            <input type="radio" id="independiente" name="tipo" value="independiente">
-            <label for="independiente">Independiente</label><br>
-            <input type="radio" id="comando" name="tipo" value="comando">
-            <label for="comando">Comando</label><br>
+        <label for="nivel">Tipo:</label><br>
+        <div class="Animated-Radial-Menu">
+
+            <ul class="menu">
+                <div class="toggle"><ion-icon name="add-outline"></ion-icon></div>
+                <li style="--i: 0; --clr: #ff2972;" >
+                    <a href="#">
+                        <input type="radio" id="magia" name="tipo" value="magia" >
+                    </a>
+                </li>
+                <li style="--i: 1; --clr: #fee800;" >
+                    <a href="#">
+                        <input type="radio" id="invocacion" name="tipo" value="invocacion">
+                    </a>
+                </li>
+                <li style="--i: 2; --clr: #04fc43;" >
+                    <a href="#">
+                        <input type="radio" id="soporte" name="tipo" value="soporte">
+                    </a>
+                </li>
+                <li style="--i: 3; --clr: #00b0fe;" >
+                    <a href="#">
+                        <input type="radio" id="independiente" name="tipo" value="independiente">
+                    </a>
+                </li>
+                <li style="--i: 4; --clr: #a529ff;" >
+                    <a href="#">
+                        <input type="radio" id="comando" name="tipo" value="comando">
+                    </a>
+                </li>
+            </ul>
+    
         </div>
 
         <label for="nivel">Nivel:</label><br>
@@ -58,7 +72,7 @@
         <input type="text" id="fuerza" name="fuerza"><br>
 
         <label for="magia">Magia:</label><br>
-        <input type="text" id="magia" name="magia"><br>
+        <input type="text" id="magias" name="magia"><br>
 
         <label for="maxpg">MaxPG%:</label><br>
         <input type="text" id="maxpg" name="maxpg"><br>
@@ -71,5 +85,6 @@
 
         <input type="submit" value="Enviar">
     </form>
+</div>
 </body>
 </html>
