@@ -18,12 +18,7 @@ def menu_materias():
 
 @app.route('/materias/crear', methods=['GET', 'POST'])
 def crear_materias():
-    datos = {}
-    # if request.method == 'POST':
-    for key in request.form:
-        datos[key] = request.form[key]
-
-    print(datos)
+    return render_template('crear_materia.html')
 
 
 def lanzar():

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .radio_group {
+            display: flex;
+        }
+        .radio_group label {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario</title>
+</head>
+<body>
+    <form action="#" method="POST">
+        <label for="nombre">Nombre:</label><br>
+        <input type="text" id="nombre" name="nombre"><br>
+
+        <label for="descripcion">Descripción:</label><br>
+        <textarea id="descripcion" name="descripcion"></textarea><br>
+
+        <div class="radio_group">
+            <label>Tipo:</label><br>
+            <input type="radio" id="magia" name="tipo" value="magia">
+            <label for="magia">Magia</label><br>
+            <input type="radio" id="invocacion" name="tipo" value="invocacion">
+            <label for="invocacion">Invocación</label><br>
+            <input type="radio" id="soporte" name="tipo" value="soporte">
+            <label for="soporte">Soporte</label><br>
+            <input type="radio" id="independiente" name="tipo" value="independiente">
+            <label for="independiente">Independiente</label><br>
+            <input type="radio" id="comando" name="tipo" value="comando">
+            <label for="comando">Comando</label><br>
+        </div>
+
+        <label for="nivel">Nivel:</label><br>
+        <select id="nivel" name="nivel">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </select><br>
+
+        <label for="experiencia">Experiencia:</label><br>
+        <input type="text" id="experiencia" name="experiencia"><br>
+
+        <label for="fuerza">Fuerza:</label><br>
+        <input type="text" id="fuerza" name="fuerza"><br>
+
+        <label for="magia">Magia:</label><br>
+        <input type="text" id="magia" name="magia"><br>
+
+        <label for="maxpg">MaxPG%:</label><br>
+        <input type="text" id="maxpg" name="maxpg"><br>
+
+        <label for="maxpm">MaxPM%:</label><br>
+        <input type="text" id="maxpm" name="maxpm"><br>
+
+        <label for="coste">Coste:</label><br>
+        <input type="text" id="coste" name="coste"><br>
+
+        <input type="submit" value="Enviar">
+    </form>
+</body>
+</html>
