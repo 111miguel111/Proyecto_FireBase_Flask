@@ -7,6 +7,7 @@
 <body>
     <table border="1" class="table table-striped">
         <tr>
+            <th>Codigo</th>
             <th>Nombre</th>
             <th>Descripcion</th>
             <th>Tipo</th>
@@ -20,6 +21,7 @@
 
         {% for dato in datos %}
         <tr>
+            <td>{{ datos[dato]["codigo"] }}</td>
             <td>{{ datos[dato]["nombre"] }}</td>
             <td>{{ datos[dato]["descripcion"] }}</td>
             <td>{{ datos[dato]["tipo"] }}</td>
