@@ -1,10 +1,10 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, url_for, redirect
 from model import BBDD
 
 app = Flask(__name__)
 
 app.config['STATIC_FOLDER'] = 'static'
-
+app.config['JSON_AS_ASCII'] = False
 
 @app.route('/')
 def menu_principal():
@@ -18,7 +18,17 @@ def menu_materias():
 
 @app.route('/materias/crear', methods=['GET'])
 def menu_crear_materias():
-    return render_template('crear_materia.html')
+    datos=emptyMateria()
+    return render_template('crear_materia.html', datos=datos)
+
+@app.route('/materias/modificar', methods=['GET'])
+def modificar_materias():
+    clave = request.args.get('clave')
+    print(clave)
+    datos = BBDD.selectOne("materia", clave)
+    if (datos == None):
+        datos = emptyMateria()
+    return render_template('crear_materia.html', datos=datos)
 
 
 @app.route('/materias/crear', methods=['POST'])
@@ -30,15 +40,31 @@ def crear_materias():
 
     datos = BBDD.calcularClave("materia", datos)
     BBDD.insert("materia", datos)
-    # return render_template('crear_materia.html')
+    datos = BBDD.selectAll("materia")
+    return render_template('mostrar_materias.html', datos=datos)
 
 
 @app.route('/materias/mostrar', methods=['GET'])
 def menu_mostrar_materias():
     datos = BBDD.selectAll("materia")
-    print(datos)
     return render_template('mostrar_materias.html', datos=datos)
 
+
+@app.route('/materias/eliminar', methods=['POST'])
+def eliminar_materia():
+    datos = request.json
+    if(datos!=None):
+        clave = datos.get("clave")
+        materia = BBDD.selectOne("materia", clave)
+        print("Eliminar", materia)
+        if (materia != None):
+            BBDD.delete("materia", clave)
+
+    return redirect(url_for('menu_mostrar_materias'))
+
+def emptyMateria():
+    datos = {"clave":"","nombre":"","descripcion":"","tipo":"","nivel":"","experiencia":"","fuerza":"","magia":"","maxpg":"","maxpm":"","coste":""}
+    return datos
 
 def lanzar():
     app.run(debug=True)

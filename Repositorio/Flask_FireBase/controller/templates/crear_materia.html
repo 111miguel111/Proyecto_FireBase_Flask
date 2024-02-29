@@ -13,14 +13,13 @@
     <title>Formulario</title>
 </head>
 <body>
-    
     <div class="cuerpo">
     <form action="#" method="POST">
         <label for="nombre">Nombre:</label><br>
-        <input type="text" id="nombre" name="nombre"><br>
+        <input type="text" id="nombre" name="nombre" value="{{datos.nombre}}"><br>
 
         <label for="descripcion">Descripción:</label><br>
-        <textarea id="descripcion" name="descripcion"></textarea><br>
+        <textarea id="descripcion" name="descripcion" value="{{datos.descripcion}}"></textarea><br>
 
         <label for="nivel">Tipo:</label><br>
         <div class="Animated-Radial-Menu">
@@ -57,7 +56,7 @@
         </div>
 
         <label for="nivel">Nivel:</label><br>
-        <select id="nivel" name="nivel">
+        <select id="nivel" name="nivel" value="{{datos.nivel}}>
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
@@ -66,22 +65,22 @@
         </select><br>
 
         <label for="experiencia">Experiencia:</label><br>
-        <input type="text" id="experiencia" name="experiencia"><br>
+        <input type="text" id="experiencia" name="experiencia" value="{{datos.experiencia}}><br>
 
         <label for="fuerza">Fuerza:</label><br>
-        <input type="text" id="fuerza" name="fuerza"><br>
+        <input type="text" id="fuerza" name="fuerza" value="{{datos.fuerza}}>><br>
 
         <label for="magia">Magia:</label><br>
-        <input type="text" id="magias" name="magia"><br>
+        <input type="text" id="magias" name="magia" value="{{datos.magia}}><br>
 
         <label for="maxpg">MaxPG%:</label><br>
-        <input type="text" id="maxpg" name="maxpg"><br>
+        <input type="text" id="maxpg" name="maxpg" value="{{datos.magia}}><br>
 
         <label for="maxpm">MaxPM%:</label><br>
-        <input type="text" id="maxpm" name="maxpm"><br>
+        <input type="text" id="maxpm" name="maxpm" value="{{datos.maxpm}}><br>
 
         <label for="coste">Coste:</label><br>
-        <input type="text" id="coste" name="coste"><br>
+        <input type="text" id="coste" name="coste" value="{{datos.coste}}><br>
 
         <input type="submit" value="Enviar">
     </form>

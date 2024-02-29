@@ -18,10 +18,11 @@
             <th>MaxPG%</th>
             <th>MaxPM%</th>
             <th>Coste</th>
+            <th>Botones</th>
 
         {% for dato in datos %}
         <tr>
-            <td>{{ datos[dato]["codigo"] }}</td>
+            <td>{{ datos[dato]["clave"] }}</td>
             <td>{{ datos[dato]["nombre"] }}</td>
             <td>{{ datos[dato]["descripcion"] }}</td>
             <td>{{ datos[dato]["tipo"] }}</td>
@@ -32,8 +33,62 @@
             <td>{{ datos[dato]["maxpg"] }}</td>
             <td>{{ datos[dato]["maxpm"] }}</td>
             <td>{{ datos[dato]["coste"] }}</td>
+            <td><button onclick="modificar(this)">Modificar</button> <button onclick="eliminar(this)">Eliminar</button></td>
         </tr>
         {% endfor %}
     </table>
+    <script>
+      function eliminar(boton) {
+        var fila = boton.parentNode.parentNode;
+        var clave = fila.cells[0].innerText;
+
+        var datos = {
+          "clave": clave
+        };
+
+        // Realizar la solicitud POST a "/materias/modificar"
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "/materias/eliminar", true);
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState === 4 && xhr.status === 200) {
+            // Manejar la respuesta aquí si es necesario
+            console.log(xhr.responseText);
+          }
+        };
+        xhr.send(JSON.stringify(datos));
+        recargarPagina();
+      }
+
+      function modificar(boton) {
+        var fila = boton.parentNode.parentNode;
+        var clave = fila.cells[0].innerText;
+
+        var datos = {
+          "clave": clave
+        };
+
+        // Realizar la solicitud GET a "/materias/modificar"
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "/materias/modificar", true);
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState === 4 && xhr.status === 200) {
+            // Manejar la respuesta aquí si es necesario
+            console.log(xhr.responseText);
+          }
+        };
+
+        const queryString = new URLSearchParams(datos).toString();
+
+      window.location.href = `/materias/modificar?${queryString}`;
+      }
+    </script>
+    <script>
+        function recargarPagina() {
+            // Llama a la función location.reload() para recargar la página
+            location.reload();
+        }
+    </script>
 </body>
 </html>

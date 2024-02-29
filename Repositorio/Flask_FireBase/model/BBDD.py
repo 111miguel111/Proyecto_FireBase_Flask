@@ -40,10 +40,10 @@ def update(tabla, datos):
     return False
 
 
-def selectOne(tabla, datos):
+def selectOne(tabla, clave):
     try:
         ref = db.reference(tabla)
-        return ref.child(datos["clave"]).get()
+        return ref.child(clave).get()
     except:
         print(traceback.format_exc())
     return None
