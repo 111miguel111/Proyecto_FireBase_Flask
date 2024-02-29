@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,78 +13,90 @@
 
     <title>Formulario</title>
 </head>
+
 <body>
     <div class="cuerpo">
-    <form action="#" method="POST">
-        <label for="nombre">Nombre:</label><br>
-        <input type="text" id="nombre" name="nombre" value="{{datos.nombre}}"><br>
+        {% if datos.clave == "" %}
+        <form action="#" method="POST">
+            {% else %}
+            <form action="#" method="PUT">
+                {% endif %}
+                <label for="nombre">Nombre:</label><br>
+                <input type="text" id="nombre" name="nombre" value="{{datos.nombre}}"><br>
 
-        <label for="descripcion">Descripción:</label><br>
-        <textarea id="descripcion" name="descripcion" value="{{datos.descripcion}}"></textarea><br>
+                <label for="descripcion">Descripción:</label><br>
+                <textarea id="descripcion" name="descripcion">{{datos.descripcion}}</textarea><br>
 
-        <label for="nivel">Tipo:</label><br>
-        <div class="Animated-Radial-Menu">
+                <label for="nivel">Tipo:</label><br>
+                <div class="Animated-Radial-Menu">
 
-            <ul class="menu">
-                <div class="toggle"><ion-icon name="add-outline"></ion-icon></div>
-                <li style="--i: 0; --clr: #ff2972;" >
-                    <a href="#">
-                        <input type="radio" id="invocacion" name="tipo" value="invocacion" >
-                    </a>
-                </li>
-                <li style="--i: 1; --clr: #fee800;" >
-                    <a href="#">
-                        <input type="radio" id="comando" name="tipo" value="comando">
-                    </a>
-                </li>
-                <li style="--i: 2; --clr: #04fc43;" >
-                    <a href="#">
-                        <input type="radio" id="magia" name="tipo" value="magia">
-                    </a>
-                </li>
-                <li style="--i: 3; --clr: #00b0fe;" >
-                    <a href="#">
-                        <input type="radio" id="soporte" name="tipo" value="soporte">
-                    </a>
-                </li>
-                <li style="--i: 4; --clr: #a529ff;" >
-                    <a href="#">
-                        <input type="radio" id="independiente" name="tipo" value="independiente">
-                    </a>
-                </li>
-            </ul>
-    
-        </div>
+                    <ul class="menu">
+                        <div class="toggle"><ion-icon name="add-outline"></ion-icon></div>
+                        <li style="--i: 0; --clr: #ff2972;">
+                            <a href="#">
+                                <input type="radio" id="invocacion" name="tipo" value="invocacion">
+                            </a>
+                        </li>
+                        <li style="--i: 1; --clr: #fee800;">
+                            <a href="#">
+                                <input type="radio" id="comando" name="tipo" value="comando">
+                            </a>
+                        </li>
+                        <li style="--i: 2; --clr: #04fc43;">
+                            <a href="#">
+                                <input type="radio" id="magia" name="tipo" value="magia">
+                            </a>
+                        </li>
+                        <li style="--i: 3; --clr: #00b0fe;">
+                            <a href="#">
+                                <input type="radio" id="soporte" name="tipo" value="soporte">
+                            </a>
+                        </li>
+                        <li style="--i: 4; --clr: #a529ff;">
+                            <a href="#">
+                                <input type="radio" id="independiente" name="tipo" value="independiente">
+                            </a>
+                        </li>
+                    </ul>
 
-        <label for="nivel">Nivel:</label><br>
-        <select id="nivel" name="nivel" value="{{datos.nivel}}>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-        </select><br>
+                </div>
 
-        <label for="experiencia">Experiencia:</label><br>
-        <input type="text" id="experiencia" name="experiencia" value="{{datos.experiencia}}><br>
+                <label for="nivel">Nivel:</label><br>
+                <select id="nivel" name="nivel" value="{{datos.nivel}}">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select><br>
 
-        <label for="fuerza">Fuerza:</label><br>
-        <input type="text" id="fuerza" name="fuerza" value="{{datos.fuerza}}>><br>
+                <label for="experiencia">Experiencia:</label><br>
+                <input type="text" id="experiencia" name="experiencia" value="{{datos.experiencia}}"><br>
 
-        <label for="magia">Magia:</label><br>
-        <input type="text" id="magias" name="magia" value="{{datos.magia}}><br>
+                <label for="fuerza">Fuerza:</label><br>
+                <input type="text" id="fuerza" name="fuerza" value="{{datos.fuerza}}"><br>
 
-        <label for="maxpg">MaxPG%:</label><br>
-        <input type="text" id="maxpg" name="maxpg" value="{{datos.magia}}><br>
+                <label for="magia">Magia:</label><br>
+                <input type="text" id="magias" name="magia" value="{{datos.magia}}"><br>
 
-        <label for="maxpm">MaxPM%:</label><br>
-        <input type="text" id="maxpm" name="maxpm" value="{{datos.maxpm}}><br>
+                <label for="maxpg">MaxPG%:</label><br>
+                <input type="text" id="maxpg" name="maxpg" value="{{datos.magia}}"><br>
 
-        <label for="coste">Coste:</label><br>
-        <input type="text" id="coste" name="coste" value="{{datos.coste}}><br>
+                <label for="maxpm">MaxPM%:</label><br>
+                <input type="text" id="maxpm" name="maxpm" value="{{datos.maxpm}}"><br>
 
-        <input type="submit" value="Enviar">
-    </form>
-</div>
+                <label for="coste">Coste:</label><br>
+                <input type="text" id="coste" name="coste" value="{{datos.coste}}"><br>
+
+                <input type="submit" value="Enviar">
+            </form>
+
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    document.getElementById("{{datos.tipo}}").checked = true;
+                });
+            </script>
+    </div>
 </body>
+
 </html>

@@ -21,16 +21,6 @@ def menu_crear_materias():
     datos=emptyMateria()
     return render_template('crear_materia.html', datos=datos)
 
-@app.route('/materias/modificar', methods=['GET'])
-def modificar_materias():
-    clave = request.args.get('clave')
-    print(clave)
-    datos = BBDD.selectOne("materia", clave)
-    if (datos == None):
-        datos = emptyMateria()
-    return render_template('crear_materia.html', datos=datos)
-
-
 @app.route('/materias/crear', methods=['POST'])
 def crear_materias():
     datos = {}
@@ -42,6 +32,26 @@ def crear_materias():
     BBDD.insert("materia", datos)
     datos = BBDD.selectAll("materia")
     return render_template('mostrar_materias.html', datos=datos)
+
+@app.route('/materias/modificar', methods=['GET'])
+def menu_modificar_materias():
+    clave = request.args.get('clave')
+    print(clave)
+    datos = BBDD.selectOne("materia", clave)
+    if (datos == None):
+        datos = emptyMateria()
+    return render_template('crear_materia.html', datos=datos)
+
+@app.route('/materias/modificar', methods=['PUT'])
+def modificar_materias():
+    datos = {}
+    # if request.method == 'POST':
+    for key in request.form:
+        datos[key] = request.form[key]
+    if(datos["nombre"]!=datos["codigo"].split("_")[0]):
+        datos = BBDD.calcularClave("materia", datos)
+    BBDD.update("materia", datos)
+    return render_template('menu_materias.html', materias=BBDD.selectAll("Materia"))
 
 
 @app.route('/materias/mostrar', methods=['GET'])
