@@ -108,6 +108,41 @@ def menu_mostrar_armas():
     return render_template('mostrar_armas.html', datos=datos)
 
 
+@app.route('/armas/eliminar', methods=['POST'])
+def eliminar_armas():
+    datos = request.json
+    if (datos != None):
+        clave = datos.get("clave")
+        materia = BBDD.selectOne("armas", clave)
+        if (materia != None):
+            BBDD.delete("armas", clave)
+
+    return redirect(url_for('menu_mostrar_armas'))
+
+
+@app.route('/armas/modificar', methods=['GET'])
+def menu_modificar_armas():
+    clave = request.args.get('clave')
+    datos = BBDD.selectOne("armas", clave)
+    if (datos == None):
+        datos = emptyMateria()
+    return render_template('crear_arma.html', datos=datos)
+
+
+@app.route('/armas/modificar', methods=['POST'])
+def modificar_armas():
+    datos = {}
+    print("Jaja si")
+    # if request.method == 'POST':
+    for key in request.form:
+        datos[key] = request.form[key]
+    print(datos)
+    if datos["nombre"] != datos["clave"].split("_")[0]:
+        datos = BBDD.calcularClave("armas", datos)
+    BBDD.update("armas", datos)
+    return redirect(url_for('menu_mostrar_armas'))
+
+
 # Empty
 
 def emptyMateria():
