@@ -3,9 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="../static/assets/css/mostrar_materias_style.css">
+	  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
 </head>
 <body>
-    <table border="1" class="table table-striped">
+  <div class="cuerpo">
+    <table border="1" >
         <tr>
             <th>Codigo</th>
             <th>Nombre</th>
@@ -37,6 +40,7 @@
         </tr>
         {% endfor %}
     </table>
+  </div>
     <script>
       function eliminar(boton) {
         var fila = boton.parentNode.parentNode;
