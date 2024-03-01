@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="../static/assets/css/mostrar_armas_style.css">
+	  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body>
+  <div class="cuerpo">
+    <table border="1" >
+        <tr>
+            <th>Codigo</th>
+            <th>Nombre</th>
+            <th>Descripcion</th>
+            <th>Ataque</th>
+            <th>Ataque%</th>
+            <th>Magia</th>
+            <th>Materia</th>
+            <th>Coste%</th>
+
+        {% for dato in datos %}
+        <tr>
+            <td>{{ datos[dato]["clave"] }}</td>
+            <td>{{ datos[dato]["nombre"] }}</td>
+            <td>{{ datos[dato]["descripcion"] }}</td>
+            <td>{{ datos[dato]["ataque"] }}</td>
+            <td>{{ datos[dato]["ataque%"] }}</td>
+            <td>{{ datos[dato]["magia"] }}</td>
+            <td>{{ datos[dato]["materia"] }}</td>
+            <td>{{ datos[dato]["coste"] }}</td>
+            <td><button onclick="modificar(this)">Modificar</button> <button onclick="eliminar(this)">Eliminar</button></td>
+        </tr>
+        {% endfor %}
+    </table>
+  </div>
+    <script>
+      function eliminar(boton) {
+        var fila = boton.parentNode.parentNode;
+        var clave = fila.cells[0].innerText;
+
+        var datos = {
+          "clave": clave
+        };
+
+        // Realizar la solicitud POST a "/armas/modificar"
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "/armas/eliminar", true);
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState === 4 && xhr.status === 200) {
+            // Manejar la respuesta aquí si es necesario
+            console.log(xhr.responseText);
+          }
+        };
+        xhr.send(JSON.stringify(datos));
+        recargarPagina();
+      }
+
+      function modificar(boton) {
+        var fila = boton.parentNode.parentNode;
+        var clave = fila.cells[0].innerText;
+
+        var datos = {
+          "clave": clave
+        };
+
+        // Realizar la solicitud GET a "/armas/modificar"
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "/armas/modificar", true);
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState === 4 && xhr.status === 200) {
+            // Manejar la respuesta aquí si es necesario
+            console.log(xhr.responseText);
+          }
+        };
+
+        const queryString = new URLSearchParams(datos).toString();
+
+      window.location.href = `/armas/modificar?${queryString}`;
+      }
+    </script>
+    <script>
+        function recargarPagina() {
+            setTimeout(function() {
+            location.reload();
+        }, 400);
+        }
+    </script>
+</body>
+</html>

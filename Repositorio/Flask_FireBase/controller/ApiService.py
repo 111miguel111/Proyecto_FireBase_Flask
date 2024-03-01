@@ -81,17 +81,17 @@ def eliminar_materia():
 
 @app.route('/armas')
 def menu_armas():
-    return render_template('menu_armas.html', armas=BBDD.selectAll("rmas"))
+    return render_template('menu_armas.html', armas=BBDD.selectAll("armas"))
 
 
 @app.route('/armas/crear', methods=['GET'])
-def menu_crear_materias():
+def menu_crear_armas():
     datos = emptyMateria()
-    return render_template('crear_materia.html', datos=datos)
+    return render_template('crear_arma.html', datos=datos)
 
 
 @app.route('/armas/crear', methods=['POST'])
-def crear_materias():
+def crear_armas():
     datos = {}
     # if request.method == 'POST':
     for key in request.form:
@@ -100,6 +100,13 @@ def crear_materias():
     datos = BBDD.calcularClave("armas", datos)
     BBDD.insert("armas", datos)
     return redirect(url_for('menu_mostrar_armas'))
+
+
+@app.route('/armas/mostrar', methods=['GET'])
+def menu_mostrar_armas():
+    datos = BBDD.selectAll("armas")
+    return render_template('mostrar_armas.html', datos=datos)
+
 
 # Empty
 
