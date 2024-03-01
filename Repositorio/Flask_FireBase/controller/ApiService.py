@@ -11,10 +11,11 @@ app.config['JSON_AS_ASCII'] = False
 def menu_principal():
     return render_template('index.html')
 
+# Materias ----------------------------------------------------------------------
 
 @app.route('/materias')
 def menu_materias():
-    return render_template('menu_materias.html', materias=BBDD.selectAll("Materia"))
+    return render_template('menu_materias.html', materias=BBDD.selectAll("materia"))
 
 
 @app.route('/materias/crear', methods=['GET'])
@@ -75,10 +76,41 @@ def eliminar_materia():
 
     return redirect(url_for('menu_mostrar_materias'))
 
+# Armas ----------------------------------------------
+
+
+@app.route('/armas')
+def menu_armas():
+    return render_template('menu_armas.html', armas=BBDD.selectAll("rmas"))
+
+
+@app.route('/armas/crear', methods=['GET'])
+def menu_crear_materias():
+    datos = emptyMateria()
+    return render_template('crear_materia.html', datos=datos)
+
+
+@app.route('/armas/crear', methods=['POST'])
+def crear_materias():
+    datos = {}
+    # if request.method == 'POST':
+    for key in request.form:
+        datos[key] = request.form[key]
+
+    datos = BBDD.calcularClave("armas", datos)
+    BBDD.insert("armas", datos)
+    return redirect(url_for('menu_mostrar_armas'))
+
+# Empty
 
 def emptyMateria():
     datos = {"clave": "", "nombre": "", "descripcion": "", "tipo": "", "nivel": "", "experiencia": "", "fuerza": "",
              "magia": "", "maxpg": "", "maxpm": "", "coste": ""}
+    return datos
+
+def emptyArma():
+    datos = {"clave": "", "nombre": "", "descripcion": "", "ataque": "", "ataque%": "", "magia": "", "materia": "",
+             "coste": ""}
     return datos
 
 

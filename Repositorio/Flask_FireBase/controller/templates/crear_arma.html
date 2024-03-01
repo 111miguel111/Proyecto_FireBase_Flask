@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="../static/assets/css/Animated-Radial-Menu.css">
+    <script defer type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script defer nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script defer src="../static/assets/js/Animated-Radial-Menu.js"></script>
+
+    <title>Formulario</title>
+</head>
+<body>
+    <div class="cuerpo">
+        <form action="#" method="POST">
+
+            <input type="hidden" id="clave" name="clave" value="{{datos.clave}}">
+
+            <label for="nombre">Nombre:</label><br>
+            <input type="text" id="nombre" name="nombre" value="{{datos.nombre}}"><br>
+
+            <label for="descripcion">Descripción:</label><br>
+            <textarea id="descripcion" name="descripcion">{{datos.descripcion}}</textarea><br>
+
+            <label for="ataque">Ataque:</label><br>
+            <input type="text" id="ataque" name="ataque" value="{{datos.ataque}}"><br>
+
+            <label for="ataque%">Ataque%:</label><br>
+            <input type="text" id="ataque%" name="ataque%" value="{{datos.ataque%}}"><br>
+
+            <label for="magia">Magia:</label><br>
+            <input type="text" id="magia" name="magia" value="{{datos.magia}}"><br>
+
+            <label for="materia">materia:</label><br>
+            <input type="text" id="materia" name="materia" value="{{datos.materia.clave}}"><br>
+
+            <label for="coste">Coste:</label><br>
+            <input type="text" id="coste" name="coste" value="{{datos.coste}}"><br>
+
+            <input type="submit" value="Enviar">
+        </form>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            document.getElementById("{{datos.tipo}}").checked = true;
+        });
+    </script>
+</body>
+
+</html>
