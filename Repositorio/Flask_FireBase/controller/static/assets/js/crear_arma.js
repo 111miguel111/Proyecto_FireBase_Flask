@@ -1,7 +1,7 @@
 let toggle = document.querySelector('.toggle')
 let menu = document.querySelector('.menu')
 
-toggle.onclick = ()=>{
+toggle.onclick = () => {
     menu.classList.toggle('active')
 }
 
@@ -24,14 +24,15 @@ function cambiarImagen(nuevaImagen) {
     // Actualiza el texto del label con el value del radio button seleccionado
     var labelTipo = document.querySelector('label[for="nivel"]');
     labelTipo.textContent = "Tipo: " + tipoCapitalizado;
-  }
+}
 
-  function validarYEnviar() {
+function validarYEnviar() {
     if (validarFormulario()) {
         document.getElementById('env').disabled = true; // Deshabilita el botón para evitar clics adicionales
         document.getElementById('dynamicForm').submit(); // Envía el formulario programáticamente
     }
 }
+
 function validarFormulario() {
     var nombre = document.getElementById('nombre').value;
     var descripcion = document.getElementById('descripcion').value;
@@ -50,8 +51,7 @@ function validarFormulario() {
         ataquePor === "" ||
         magia === "" ||
         coste === "" ||
-        materia === "0" || // Asumiendo que 0 es la opción por defecto en el select
-        radio === ""
+        materia === "0"
     ) {
         var menuSound = document.getElementById("error-sound");
         menuSound.pause();
@@ -59,16 +59,14 @@ function validarFormulario() {
         menuSound.play();
         alert("Por favor, completa todos los campos antes de enviar el formulario.");
         return false; // Evita que se envíe el formulario
+    } else {
+
+        var menuSound = document.getElementById("start-sound");
+
+        menuSound.pause();
+        menuSound.currentTime = 0;
+        menuSound.play();
+
+        return true; // Permite que se envíe el formulario
     }
-
-    var menuSound = document.getElementById("start-sound");
-
-    menuSound.pause();
-    menuSound.currentTime = 0;
-    menuSound.play();
-    
-    setTimeout(function() {         
-    }, 1000);
-
-    return true; // Permite que se envíe el formulario
 }

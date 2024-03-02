@@ -23,7 +23,7 @@
         Tu navegador no soporta el elemento de audio.
     </audio>
 
-  <button id="backButtom" aria-label="volver"  onclick="goMenu()">
+    <button id="backButtom" aria-label="volver" onclick="goMenu()">
     <img src="../static/assets/images/volver.png" alt="volver">
   </button>
 
@@ -33,25 +33,25 @@
             <input type="hidden" id="clave" name="clave" value='{{datos.clave}}'>
 
             <label for="nombre">Nombre:</label><br>
-            <input type="text" id="nombre" name="nombre" value="{{datos.nombre}}" ><br>
+            <input type="text" id="nombre" name="nombre" value="{{datos.nombre}}"><br>
 
             <label for="descripcion">Descripción:</label><br>
-            <textarea id="descripcion" name="descripcion" >{{datos.descripcion}}</textarea><br>
+            <textarea id="descripcion" name="descripcion">{{datos.descripcion}}</textarea><br>
 
             <label for="ataque">Ataque:</label><br>
-            <input type="number" min="0" max="99" id="ataque" name="ataque" value="{{datos.ataque}}" ><br>
+            <input type="number" min="0" max="99" id="ataque" name="ataque" value="{{datos.ataque}}"><br>
 
             <label for="ataquePor">Ataque%:</label><br>
-            <input type="number" min="0" max="99" id="ataquePor" name="ataquePor" value="{{datos.ataquePor}}" ><br>
+            <input type="number" min="0" max="99" id="ataquePor" name="ataquePor" value="{{datos.ataquePor}}"><br>
 
             <label for="magia">Magia:</label><br>
-            <input type="number" min="0" max="99" id="magia" name="magia" value="{{datos.magia}}" ><br>
+            <input type="number" min="0" max="99" id="magia" name="magia" value="{{datos.magia}}"><br>
 
             <label for="coste">Coste:</label><br>
-            <input type="number" min="1" max="50" id="coste" name="coste" value="{{datos.coste}}" ><br>
+            <input type="number" min="1" max="50" id="coste" name="coste" value="{{datos.coste}}"><br>
 
             <label for="materia">Slots de Materias:</label>
-            <select id="materia" name="materia" onchange="createInputs()" value="{{datos.materia}}" >
+            <select id="materia" name="materia" onchange="createInputs()" value="{{datos.materia}}">
              <option value="0">-- SELECT --</option>
              <option value="1">1</option>
              <option value="2">2</option>
@@ -81,10 +81,10 @@
         });
     </script>
     <script>
-
-                function goMenu() {
-        window.location.href = "/armas";
+        function goMenu() {
+            window.location.href = "/armas";
         }
+
         function createInputs() {
             var numberOfInputs = parseInt(document.getElementById("materia").value);
             var form = document.getElementById("dynamicForm");
@@ -177,9 +177,8 @@
             submitButton.id = "env";
             form.appendChild(submitButton);
         }
-        
     </script>
-    
+
 </body>
 
 </html>
