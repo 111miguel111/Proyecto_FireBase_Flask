@@ -42,6 +42,16 @@ function validarFormulario() {
     var maxpg = document.getElementById('maxpg').value;
     var maxpm = document.getElementById('maxpm').value;
     var coste = document.getElementById('coste').value;
+    var radioButtons = document.getElementsByName('tipo');
+    var radio="";
+        // Itera a través de los radio buttons
+    for (var i = 0; i < radioButtons.length; i++) {
+        // Comprueba si el radio button actual está marcado
+        if (radioButtons[i].checked) {
+            // Al menos uno está marcado, puedes continuar o realizar acciones necesarias
+            radio="hay_uno";
+        }
+    }
 
     // Puedes agregar más campos según sea necesario
 
@@ -54,7 +64,7 @@ function validarFormulario() {
         magia === "" ||
         maxpg === "" ||
         maxpm === "" ||
-        coste === ""
+        coste === "" || radio===""
     ) {
         alert("Por favor, completa todos los campos antes de enviar el formulario.");
         return false; // Evita que se envíe el formulario

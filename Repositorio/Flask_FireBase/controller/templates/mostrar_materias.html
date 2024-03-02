@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" type="text/css" href="../static/assets/css/mostrar_materias_style.css">
-	  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
@@ -30,7 +30,19 @@
             <td>{{ datos[dato]["clave"] }}</td>
             <td>{{ datos[dato]["nombre"] }}</td>
             <td>{{ datos[dato]["descripcion"] }}</td>
-            <td>{{ datos[dato]["tipo"] }}</td>
+            {% if datos[dato]["tipo"] == "magia" %}
+            <td><img src="../static/assets/images/materiaVerde.png" title="Magia" height=100 width=100></td>
+            {% elif datos[dato]["tipo"] == "invocacion" %}
+            <td><img src="../static/assets/images/materiaRoja.png" title="Invocacion" height=100 width=100></td>
+            {% elif datos[dato]["tipo"] == "soporte" %}
+            <td><img src="../static/assets/images/materiaAzul.png" title="Soporte" height=100 width=100></td>
+            {% elif datos[dato]["tipo"] == "independiente" %}
+            <td><img src="../static/assets/images/materiaMorada.png" title="Independiente" height=100 width=100></td>
+            {% elif datos[dato]["tipo"] == "comando" %}
+            <td><img src="../static/assets/images/materiaAmarilla.png" title="Comando" height=100 width=100></td>
+            {% else %}
+            <td><img src="../static/assets/images/materia0.png" title="N/A" height=100 width=100></td>
+            {% endif %}
             <td>{{ datos[dato]["nivel"] }}</td>
             <td>{{ datos[dato]["experiencia"] }}</td>
             <td>{{ datos[dato]["fuerza"] }}</td>
