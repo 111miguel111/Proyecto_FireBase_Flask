@@ -76,6 +76,7 @@ def eliminar_materia():
 
     return redirect(url_for('menu_mostrar_materias'))
 
+
 # Armas ----------------------------------------------
 
 
@@ -156,6 +157,24 @@ def emptyArma():
              }
     return datos
 
+@app.route('/bbdd/sample_materia')
+def meter_armas():
+    i = 1
+    while i <= 10:
+        BBDD.insert("materia",
+                    {"codigo":"sample_"+i,
+                     "nombre":"Sample"+i,
+                     "descripcion":"Ejemplo",
+                     "tipo":"magia","nivel":"1",
+                     "experiencia":i,
+                     "fuerza":i,
+                     "magia":i,
+                     "maxpg":i,
+                     "maxpm":i,
+                     "coste":i})
+        i+=1
+    return redirect(url_for('menu_bbdd.html'))
+
 
 def lanzar():
     app.run(debug=True)
@@ -222,3 +241,44 @@ def modificar_personajes():
         datos = BBDD.calcularClave("personajes", datos)
     BBDD.update("personajes", datos)
     return redirect(url_for('menu_mostrar_personajes'))
+
+# Llenar bbdd --------------------------------------------------
+
+@app.route('/bbdd')
+def menu_bbdd():
+    return render_template('menu_bbdd.html')
+@app.route('/bbdd/llenar')
+def meter_materias():
+    i = 1
+    while i <= 10:
+        BBDD.insert("materia",
+                    {"clave":"sample_m_"+str(i),
+                     "nombre":"Sample Materia"+str(i),
+                     "descripcion":"Ejemplo",
+                     "tipo":"magia",
+                     "nivel":"1",
+                     "experiencia":str(i),
+                     "fuerza":str(i),
+                     "magia":str(i),
+                     "maxpg":str(i),
+                     "maxpm":str(i),
+                     "coste":str(i)})
+
+        BBDD.insert("armas",
+                    {"clave":"sample_w_"+str(i),
+                     "nombre": "Sample Arma" + str(i),
+                     "descripcion": "Ejemplo",
+                     "ataque":str(i),
+                     "ataquePor":str(i),
+                     "magia": str(i),
+                     "coste": str(i),
+                     "materia":str(3),
+                     "slot1":"sample_m_"+str(i),
+                     "slot2":"sample_m_"+str(i),
+                     "slot3":"sample_m_"+str(i)})
+        i+=1
+
+    return redirect(url_for('menu_bbdd'))
+
+
+
