@@ -157,25 +157,6 @@ def emptyArma():
              }
     return datos
 
-@app.route('/bbdd/sample_materia')
-def meter_armas():
-    i = 1
-    while i <= 10:
-        BBDD.insert("materia",
-                    {"codigo":"sample_"+i,
-                     "nombre":"Sample"+i,
-                     "descripcion":"Ejemplo",
-                     "tipo":"magia","nivel":"1",
-                     "experiencia":i,
-                     "fuerza":i,
-                     "magia":i,
-                     "maxpg":i,
-                     "maxpm":i,
-                     "coste":i})
-        i+=1
-    return redirect(url_for('menu_bbdd.html'))
-
-
 def lanzar():
     app.run(debug=True)
 
@@ -248,7 +229,7 @@ def modificar_personajes():
 def menu_bbdd():
     return render_template('menu_bbdd.html')
 @app.route('/bbdd/llenar')
-def meter_materias():
+def meter_datos():
     i = 1
     while i <= 10:
         BBDD.insert("materia",
@@ -280,5 +261,7 @@ def meter_materias():
 
     return redirect(url_for('menu_bbdd'))
 
-
+@app.route('/bbdd/borrar')
+def borrar_datos():
+    BBDD.dropDDBB()
 

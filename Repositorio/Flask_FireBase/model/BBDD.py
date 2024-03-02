@@ -57,6 +57,13 @@ def selectAll(tabla):
         print(traceback.format_exc())
     return None
 
+def dropDDBB():
+    try:
+        ref = db.reference()
+        ref.set({})
+    except:
+        print(traceback.format_exc())
+
 
 def selectFiltro(tabla, campo, valor):
     return 0
