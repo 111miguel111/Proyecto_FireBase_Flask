@@ -8,6 +8,10 @@ body {
     align-items: center;
     height: 100vh;
 }
+
+.menuMusic{
+    margin-top: 25px;
+}
 /* Oculta los botones inicialmente */
 nav svg {
       display: none;
@@ -15,7 +19,7 @@ nav svg {
 
 #mainNav {
     position: fixed;
-    top: 200;
+    top: 60px;
     left: 0;
     background-color: transparent; /* Cambia esto al color de fondo deseado */
     color: white;
@@ -90,8 +94,8 @@ a {
     margin-bottom: 10px;
     transition: all 0.3s ease;
     text-shadow: 0 0 2px #000, /* Borde negro alrededor de cada letra */
-                 0 0 2px #000, 
-                 0 0 2px #000, 
+                 0 0 2px #000,
+                 0 0 2px #000,
                  0 0 2px #000; /* Ajusta según el grosor del borde deseado */
 }
 
