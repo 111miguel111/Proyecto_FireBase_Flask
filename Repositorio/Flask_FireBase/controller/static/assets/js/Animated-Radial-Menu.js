@@ -24,3 +24,41 @@ function cambiarImagen(nuevaImagen) {
     var labelTipo = document.querySelector('label[for="nivel"]');
     labelTipo.textContent = "Tipo: " + tipoCapitalizado;
   }
+
+  function validarYEnviar() {
+    if (validarFormulario()) {
+        document.getElementById('env').disabled = true; // Deshabilita el botón para evitar clics adicionales
+        document.getElementById('dynamicForm').submit(); // Envía el formulario programáticamente
+    }
+}
+
+function validarFormulario() {
+    var nombre = document.getElementById('nombre').value;
+    var descripcion = document.getElementById('descripcion').value;
+    var nivel = document.getElementById('nivel').value;
+    var experiencia = document.getElementById('experiencia').value;
+    var fuerza = document.getElementById('fuerza').value;
+    var magia = document.getElementById('magias').value;
+    var maxpg = document.getElementById('maxpg').value;
+    var maxpm = document.getElementById('maxpm').value;
+    var coste = document.getElementById('coste').value;
+
+    // Puedes agregar más campos según sea necesario
+
+    if (
+        nombre === "" ||
+        descripcion === "" ||
+        nivel === "" ||
+        experiencia === "" ||
+        fuerza === "" ||
+        magia === "" ||
+        maxpg === "" ||
+        maxpm === "" ||
+        coste === ""
+    ) {
+        alert("Por favor, completa todos los campos antes de enviar el formulario.");
+        return false; // Evita que se envíe el formulario
+    }
+
+    return true; // Permite que se envíe el formulario
+}
