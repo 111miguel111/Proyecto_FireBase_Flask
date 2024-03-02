@@ -16,8 +16,8 @@
             <th>Ataque</th>
             <th>Ataque%</th>
             <th>Magia</th>
+            <th>Coste</th>
             <th>Materia</th>
-            <th>Coste%</th>
 
         {% for dato in datos %}
         <tr>
@@ -27,8 +27,8 @@
             <td>{{ datos[dato]["ataque"] }}</td>
             <td>{{ datos[dato]["ataquePor"] }}</td>
             <td>{{ datos[dato]["magia"] }}</td>
-            <td>{{ datos[dato]["materia"] }}</td>
             <td>{{ datos[dato]["coste"] }}</td>
+            <td>{{ datos[dato]["materia"] }}</td>
             <td><button onclick="modificar(this)">Modificar</button> <button onclick="eliminar(this)">Eliminar</button></td>
         </tr>
         {% endfor %}
