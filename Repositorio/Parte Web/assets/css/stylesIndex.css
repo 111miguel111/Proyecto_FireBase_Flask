@@ -8,11 +8,52 @@ body {
     align-items: center;
     height: 100vh;
 }
+/* Oculta los botones inicialmente */
+nav svg {
+      display: none;
+}
+
+#mainNav {
+    position: fixed;
+    top: 200;
+    left: 0;
+    background-color: transparent; /* Cambia esto al color de fondo deseado */
+    color: white;
+    padding: 10px 20px; /* Ajusta el relleno según sea necesario */
+    z-index: 1000; /* Ajusta el índice z si es necesario */
+}
+
+
+#mainNav a {
+    color: white;
+    text-decoration: none; /
+}
 
 .container {
     position: relative;
     text-align: center;
     color: #fff;
+}
+
+#hamburgerButton {
+    position: fixed;
+    top: 10px; /* ajusta la distancia superior según sea necesario */
+    left: 10px; /* ajusta la distancia izquierda según sea necesario */
+}
+
+#muteButton {
+    position: fixed;
+    top: 10px; /* ajusta la distancia superior según sea necesario */
+    left: 90px; /* ajusta la distancia izquierda según sea necesario */
+}
+
+.music_button button {
+    background-color: transparent; /* Cambia esto al color de fondo deseado */
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    margin-right: 10px;
+    cursor: pointer;
 }
 
 .sword {
