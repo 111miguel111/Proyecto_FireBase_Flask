@@ -9,7 +9,7 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
 <body>
-  <button id="backButtom" aria-label="volver" href="../materias" onclick="goBack()">
+  <button id="backButtom" aria-label="volver"  onclick="goMenu()">
     <img src="../static/assets/images/volver.png" alt="volver">
   </button>
   <div class="cuerpo">
@@ -112,8 +112,8 @@
             location.reload();
         }, 400);
         }
-        function goBack() {
-            window.history.back(); // Esta función de JavaScript permite volver a la página anterior
+                function goMenu() {
+        window.location.href = "/materias";
         }
     </script>
 <script>

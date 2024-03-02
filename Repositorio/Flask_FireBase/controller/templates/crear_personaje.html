@@ -8,7 +8,7 @@
 <title>Creacción de Personajes de Final Fantasy 7</title>
 </head>
 <body>
-  <button id="backButtom" aria-label="volver" href="../materias" onclick="goBack()">
+  <button id="backButtom" aria-label="volver" onclick="goMenu()">
     <img src="../static/assets/images/volver.png" alt="volver">
   </button>
 <div class="ff7-window">
@@ -103,6 +103,9 @@
         var selectedCharacter = select.options[select.selectedIndex].value;
         document.getElementById("character-image").src = selectedCharacter;
     }
+        function goMenu() {
+        window.location.href = "/personajes";
+        }
     </script>
     </body>
 </html>
