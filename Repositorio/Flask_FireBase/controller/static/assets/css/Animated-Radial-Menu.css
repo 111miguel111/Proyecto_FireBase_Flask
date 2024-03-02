@@ -166,3 +166,31 @@ input[type="submit"]:hover {
 .Animated-Radial-Menu .menu.active li {
   transform: rotate(calc(72deg * var(--i))) translateX(0px);
 }
+
+#backButtom {
+  position: relative;
+  background: black;
+  width: 80px;
+  height: 80px;
+  top: 25px;
+  left: 25px;
+  border: none; /* Elimina el borde del botón */
+  outline: none; /* Elimina el resaltado al hacer clic en el botón */
+}
+
+#backButtom img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.2s; /* Agrega una transición suave al cambio de tamaño de la imagen */
+}
+
+#backButtom:hover img {
+  transform: scale(1.1); /* Aumenta ligeramente el tamaño de la imagen al pasar el ratón sobre ella */
+}
+
+#backButtom:active img {
+  transform: scale(0.9); /* Reduce ligeramente el tamaño de la imagen cuando se presiona el botón */
+}

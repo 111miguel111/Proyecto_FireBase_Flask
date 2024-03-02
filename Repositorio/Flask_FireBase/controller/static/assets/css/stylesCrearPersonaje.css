@@ -1,0 +1,106 @@
+#Menu ul li {
+	height: 40px;
+	line-height: 40px;
+	padding: 0 10px;
+	background-size: 30px 30px;
+}
+
+#Menu ul li:hover {
+	background-image: url('../images/finger.png');
+	background-repeat: no-repeat;
+	background-position: 10px center;
+	padding-left: 40px;
+}
+
+.ff7-window {
+  border: solid 2px #424542;
+  border-radius: 7px;
+  box-shadow: 1px 1px #e7dfe7, -1px -1px #e7dfe7, 1px -1px #e7dfe7, -1px 1px #e7dfe7, 0 -2px #9c9a9c, -2px 0 #7b757b, 0 2px #424542;
+  padding: 5px 10px 0 10px;
+  background: linear-gradient(45deg, rgb(0, 0, 80), rgb(0, 0, 128));
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  outline: none;
+  overflow: hidden;
+    width: 600px; /* Ajusta el ancho del contenedor FF7 */
+  height: 400px; /* Ajusta la altura del contenedor FF7 */
+}
+
+.ff7-window h1, .ff7-window p, .ff7-window ul {
+  margin: 0 0 0 0;
+}
+
+.ff7-text, .ff7-window h1, .ff7-window p, .ff7-window li {
+  color: #eff1ff;
+  font-family: Verdana, sans-serif;
+  text-shadow: 2px 2px #212421, 1px 1px #212021;
+  font-weight: normal;
+  font-size: 1em;
+  vertical-align: top;
+  line-height: 2em;
+}
+
+.ff7-window ul {
+  list-style: none;
+  margin-left: -7px;
+  padding-left: 3.4em;
+}
+
+a {
+    color: white; /* Mantener el color del texto como está */
+    text-decoration: none; /* Evitar que el enlace se subraye cuando está activo */
+    underline: none;
+}
+
+body {
+  background: black;
+}
+
+.character-image {
+  position: absolute;
+  top: 0; /* Posición absoluta relativa al contenedor .ff7-window */
+  right: 0; /* Posición absoluta relativa al contenedor .ff7-window */
+  width: 250px;
+  height: 250px;
+  background-size: cover;
+  background-position: center;
+  border: 2px solid #fff;
+}
+
+/* Estilos para los labels */
+.ff7-window label {
+  color: white;
+  display: block;
+  margin-bottom: 5px;
+}
+
+  #backButtom {
+  position: relative;
+  background: black;
+  width: 80px;
+  height: 80px;
+  top: 25px;
+  left: 25px;
+  border: none !important;
+  outline: none; /* Elimina el resaltado al hacer clic en el botón */
+}
+
+#backButtom img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.2s; /* Agrega una transición suave al cambio de tamaño de la imagen */
+}
+
+#backButtom:hover img {
+  transform: scale(1.1); /* Aumenta ligeramente el tamaño de la imagen al pasar el ratón sobre ella */
+}
+
+#backButtom:active img {
+  transform: scale(0.9); /* Reduce ligeramente el tamaño de la imagen cuando se presiona el botón */
+}

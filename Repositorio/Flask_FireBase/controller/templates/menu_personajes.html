@@ -1,25 +1,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Administrador de Materia de Final Fantasy 7</title>
+	<title>Administrador de Personajes de Final Fantasy 7</title>
 	<link rel="stylesheet" type="text/css" href="static/assets/css/styles.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
 </head>
 <body>
- <audio id="menu-sound">
+	<audio id="menu-sound">
     <source src="static/assets/audio/menu_display.mp3" type="audio/mpeg">
     Tu navegador no soporta el elemento de audio.
-  </audio>
+  	</audio>
 	<div class="ff7-window">
-		<h1 class="ff7-text">Administrador de Armas de Final Fantasy 7</h1>
+		<h1 class="ff7-text">Administrador de Personajes de Final Fantasy 7</h1>
 			<nav id="Menu">
 				<ul>
-					<li><a id="crear" href="/armas/crear">Crear Arma</a></li>
-					<li><a id="buscar" href="#">Buscar Arma</a></li>
-					<li><a id="eliminar" href="#">Eliminar Arma</a></li>
-					<li><a id="modificar" href="#">Modificar Arma</a></li>
-					<li><a id="mostrar_todos" href="/armas/mostrar">Mostrar todas las Armas</a></li>
-					<li><a href="javascript:void(0);" onclick="cerrarPestana()">Volver a la página principal</a></li>
+					<li><a id="crear" href="personajes/crear">Crear Personaje</a></li>
+					<li><a id="buscar" href="#">Buscar Personaje</a></li>
+					<li><a id="eliminar" href="#">Eliminar Personaje</a></li>
+					<li><a id="modificar" href="#">Modificar Personaje</a></li>
+					<li><a id="mostrar_todos" href="/personajes/mostrar">Mostrar todos los Personajes</a></li>
+					<li><a href="/">Volver a la página principal</a></li>
 				</ul>
 			</nav>
 		<main class="ff7-text">
@@ -58,10 +58,11 @@
 			event.target.style.backgroundImage = "none";
 			event.target.style.paddingLeft = "10px";
 		}
-		function cerrarPestana() {
-		  // Cierra la pestaña actual
-		  window.close();
-		}
+		function showCharacterImage() {
+    var select = document.getElementById("character");
+    var selectedCharacter = select.options[select.selectedIndex].value;
+    document.getElementById("character-image").src = selectedCharacter;
+}
 	</script>
   <script>
     document.addEventListener("DOMContentLoaded", function() {
@@ -77,5 +78,7 @@
     });
   </script>
 
+
 </body>
 </html>
+

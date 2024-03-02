@@ -13,7 +13,7 @@ body {
     padding: 5px 10px 10px 10px;
     background: linear-gradient(45deg, rgb(0, 0, 80), rgb(0, 0, 128));
     position: absolute;
-    top: 5%;
+    top: 20%;
     left: 50%;
     transform: translate(-50%, 0%);
     z-index: 1;
@@ -102,3 +102,31 @@ table {
   tr td:last-child {
     border-right: 2px solid #000; /* Borde más grueso a la derecha */
   }
+
+  #backButtom {
+  position: relative;
+  background: black;
+  width: 80px;
+  height: 80px;
+  top: 25px;
+  left: 25px;
+  border: none !important;
+  outline: none; /* Elimina el resaltado al hacer clic en el botón */
+}
+
+#backButtom img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.2s; /* Agrega una transición suave al cambio de tamaño de la imagen */
+}
+
+#backButtom:hover img {
+  transform: scale(1.1); /* Aumenta ligeramente el tamaño de la imagen al pasar el ratón sobre ella */
+}
+
+#backButtom:active img {
+  transform: scale(0.9); /* Reduce ligeramente el tamaño de la imagen cuando se presiona el botón */
+}

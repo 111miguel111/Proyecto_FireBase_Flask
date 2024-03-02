@@ -5,53 +5,47 @@
     <title>Title</title>
     <link rel="stylesheet" type="text/css" href="../static/assets/css/mostrar_materias_style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
 <body>
-  <button id="backButtom" aria-label="volver" href="../materias" onclick="goBack()">
-    <img src="../static/assets/images/volver.png" alt="volver">
-  </button>
   <div class="cuerpo">
     <table border="1" >
         <tr>
-            <th>Codigo</th>
             <th>Nombre</th>
-            <th>Descripcion</th>
-            <th>Ataque</th>
-            <th>Ataque%</th>
-            <th>Magia</th>
-            <th>Coste</th>
-            <th>Slots</th>
-            <th>Materia 1</th>
-            <th>Materia 2</th>
-            <th>Materia 3</th>
-            <th>Materia 4</th>
-            <th>Materia 5</th>
+            <th>Nivel</th>
+            <th>HP</th>
+            <th>MP</th>
+            <th>Arma</th>
 
         {% for dato in datos %}
-        <tr>
-            <td>{{ datos[dato]["clave"] }}</td>
+        <tr data-aos="fade-left" data-aos-duration="1000">
             <td>{{ datos[dato]["nombre"] }}</td>
-            <td>{{ datos[dato]["descripcion"] }}</td>
-            <td>{{ datos[dato]["ataque"] }}</td>
-            <td>{{ datos[dato]["ataquePor"] }}</td>
-            <td>{{ datos[dato]["magia"] }}</td>
-            <td>{{ datos[dato]["coste"] }}</td>
-            <td>{{ datos[dato]["materia"] }}</td>
-            <td>{{ datos[dato]["slot1"] }}</td>
-            <td>{{ datos[dato]["slot2"] }}</td>
-            <td>{{ datos[dato]["slot3"] }}</td>
-            <td>{{ datos[dato]["slot4"] }}</td>
-            <td>{{ datos[dato]["slot5"] }}</td>
+            <td>{{ datos[dato]["nivel"] }}</td>
+            <td>{{ datos[dato]["arma"] }}</td>
+            {% if datos[dato]["tipo"] == "antonio" %}
+            <td><img src="../static/assets/images/personajes/antonio.png" title="antonio" height=100 width=100></td>
+            {% elif datos[dato]["tipo"] == "roberto" %}
+            <td><img src="../static/assets/images/personajes/roberto.png" title="roberto" height=100 width=100></td>
+            {% elif datos[dato]["tipo"] == "miguel" %}
+            <td><img src="../static/assets/images/personajes/miguel.png" title="miguel" height=100 width=100></td>
+            {% elif datos[dato]["tipo"] == "sergio" %}
+            <td><img src="../static/assets/images/personajes/sergio.png" title="sergio" height=100 width=100></td>
+            {% else %}
+            <td><img src="../static/assets/images/personajes/desconocido.png" title="N/A" height=100 width=100></td>
+            {% endif %}
+            <td>{{ datos[dato]["nombre"] }}</td>
+            <td>{{ datos[dato]["nivel"] }}</td>
+            <td>{{ datos[dato]["hp"] }}</td>
+            <td>{{ datos[dato]["mp"] }}</td>
+            <td>{{ datos[dato]["arma"] }}</td>
+
             <td><button onclick="modificar(this)">Modificar</button> <button onclick="eliminar(this)">Eliminar</button></td>
         </tr>
         {% endfor %}
     </table>
   </div>
     <script>
-        function goBack() {
-            window.history.back(); // Esta función de JavaScript permite volver a la página anterior
-        }
-
       function eliminar(boton) {
         var fila = boton.parentNode.parentNode;
         var clave = fila.cells[0].innerText;
@@ -60,9 +54,9 @@
           "clave": clave
         };
 
-        // Realizar la solicitud POST a "/armas/modificar"
+        // Realizar la solicitud POST a "/personajes/modificar"
         var xhr = new XMLHttpRequest();
-        xhr.open("POST", "/armas/eliminar", true);
+        xhr.open("POST", "/personajes/eliminar", true);
         xhr.setRequestHeader("Content-Type", "application/json");
         xhr.onreadystatechange = function () {
           if (xhr.readyState === 4 && xhr.status === 200) {
@@ -82,9 +76,9 @@
           "clave": clave
         };
 
-        // Realizar la solicitud GET a "/armas/modificar"
+        // Realizar la solicitud GET a "/personajes/modificar"
         var xhr = new XMLHttpRequest();
-        xhr.open("GET", "/armas/modificar", true);
+        xhr.open("GET", "/personajes/modificar", true);
         xhr.setRequestHeader("Content-Type", "application/json");
         xhr.onreadystatechange = function () {
           if (xhr.readyState === 4 && xhr.status === 200) {
@@ -95,7 +89,7 @@
 
         const queryString = new URLSearchParams(datos).toString();
 
-      window.location.href = `/armas/modificar?${queryString}`;
+      window.location.href = `/personajes/modificar?${queryString}`;
       }
     </script>
     <script>
@@ -105,5 +99,8 @@
         }, 400);
         }
     </script>
+<script>
+  AOS.init();
+</script>
 </body>
 </html>

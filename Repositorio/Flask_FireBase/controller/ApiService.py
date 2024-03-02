@@ -159,3 +159,66 @@ def emptyArma():
 
 def lanzar():
     app.run(debug=True)
+
+# Personajes ----------------------------------------------
+
+@app.route('/personajes')
+def menu_personajes():
+    return render_template('menu_personajes.html', personajes=BBDD.selectAll("personajes"))
+
+@app.route('/personajes/crear', methods=['GET'])
+def menu_crear_personajes():
+    datos = emptyMateria()
+    return render_template('crear_personaje.html', datos=datos)
+
+
+@app.route('/personajes/crear', methods=['POST'])
+def crear_personajes():
+    datos = {}
+    # if request.method == 'POST':
+    for key in request.form:
+        datos[key] = request.form[key]
+
+    datos = BBDD.calcularClave("personajes", datos)
+    BBDD.insert("personajes", datos)
+    return redirect(url_for('menu_mostrar_personajes'))
+
+@app.route('/personajes/mostrar', methods=['GET'])
+def menu_mostrar_personajes():
+    datos = BBDD.selectAll("personajes")
+    return render_template('mostrar_personajes.html', datos=datos)
+
+
+@app.route('/personajes/eliminar', methods=['POST'])
+def eliminar_personajes():
+    datos = request.json
+    if (datos != None):
+        clave = datos.get("nombre")
+        materia = BBDD.selectOne("personajes", clave)
+        if (materia != None):
+            BBDD.delete("personajes", clave)
+
+    return redirect(url_for('menu_mostrar_personajes'))
+
+
+@app.route('/personajes/modificar', methods=['GET'])
+def menu_modificar_personajes():
+    clave = request.args.get('nombre')
+    datos = BBDD.selectOne("personajes", clave)
+    if (datos == None):
+        datos = emptyMateria()
+    return render_template('crear_personaje.html', datos=datos)
+
+
+@app.route('/personajes/modificar', methods=['POST'])
+def modificar_personajes():
+    datos = {}
+
+    # if request.method == 'POST':
+    for key in request.form:
+        datos[key] = request.form[key]
+    print(datos)
+    if datos["nombre"] != datos["nombre"]:
+        datos = BBDD.calcularClave("personajes", datos)
+    BBDD.update("personajes", datos)
+    return redirect(url_for('menu_mostrar_personajes'))

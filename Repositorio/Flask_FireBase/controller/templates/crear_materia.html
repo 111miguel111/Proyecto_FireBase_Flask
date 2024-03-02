@@ -15,6 +15,9 @@
 </head>
 
 <body>
+  <button id="backButtom" aria-label="volver" href="../materias" onclick="goBack()">
+    <img src="../static/assets/images/volver.png" alt="volver">
+  </button>
     <div class="cuerpo">
         <form action="#" method="POST" onsubmit="return validarFormulario();">
 
@@ -98,6 +101,9 @@
         document.addEventListener('DOMContentLoaded', function () {
             document.getElementById("{{datos.tipo}}").checked = true;
         });
+        function goBack() {
+            window.history.back(); // Esta función de JavaScript permite volver a la página anterior
+        }
     </script>
 </body>
 

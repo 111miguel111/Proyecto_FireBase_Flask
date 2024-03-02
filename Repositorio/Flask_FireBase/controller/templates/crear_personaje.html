@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+	<link rel="stylesheet" type="text/css" href="../static/assets/css/stylesCrearPersonaje.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+
+<title>Creacción de Personajes de Final Fantasy 7</title>
+</head>
+<body>
+  <button id="backButtom" aria-label="volver" href="../materias" onclick="goBack()">
+    <img src="../static/assets/images/volver.png" alt="volver">
+  </button>
+<div class="ff7-window">
+    <h1 class="ff7-text">Creacción de Personajes</h1>
+    <div class="character-select">
+        <label for="character">Selecciona una imagen:</label>
+        <select id="character" onchange="showCharacterImage()">
+		<option value="../static/assets/images/personajes/desconocido.png">Desconocido</option>
+            <option value="../static/assets/images/personajes/antonio.png">Antonio</option>
+            <option value="../static/assets/images/personajes/roberto.png">Roberto</option>
+            <option value="../static/assets/images/personajes/miguel.png">Miguel</option>
+            <option value="../static/assets/images/personajes/sergio.png">Sergio</option>
+        </select>
+    </div>
+    <img src="../static/assets/images/personajes/desconocido.png" alt="Imagen de personaje" class="character-image" id="character-image">
+    <div class="character-details">
+<div class="character-details">
+        <div>
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre">
+        </div>
+        <div>
+            <label for="nivel">Nivel:</label>
+            <input type="text" id="nivel">
+        </div>
+        <div>
+            <label for="hp">HP:</label>
+            <input type="text" id="hp">
+        </div>
+        <div>
+            <label for="mp">MP:</label>
+            <input type="text" id="mp">
+        </div>
+        <div>
+            <label for="arma">Arma Equipada:</label>
+            <select id="arma">
+                <!-- Options will be populated dynamically from Firebase -->
+            </select>
+        </div>
+		<div>
+		<button onclick="crearPersonaje()">Crear</button>
+		</div>
+    </div>
+</div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/9.6.5/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.5/firebase-database.js"></script>
+    <script>
+        function goBack() {
+            window.history.back(); // Esta función de JavaScript permite volver a la página anterior
+        }
+
+        // Configuración de Firebase
+        const firebaseConfig = {
+            apiKey: "YOUR_API_KEY",
+            authDomain: "YOUR_AUTH_DOMAIN",
+            databaseURL: "YOUR_DATABASE_URL",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_STORAGE_BUCKET",
+            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+            appId: "YOUR_APP_ID",
+            measurementId: "YOUR_MEASUREMENT_ID"
+        };
+        // Inicializar Firebase
+        firebase.initializeApp(firebaseConfig);
+        const database = firebase.database();
+
+        // Referencia a la colección de armas en la base de datos
+        const armasRef = database.ref('armas');
+
+        // Función para cargar las armas desde Firebase
+        function cargarArmas() {
+            armasRef.once('value', snapshot => {
+                const armas = snapshot.val();
+                const armaSelect = document.getElementById('arma');
+                armaSelect.innerHTML = '';
+                for (let arma in armas) {
+                    const option = document.createElement('option');
+                    option.value = armas[arma].nombre;
+                    option.textContent = armas[arma].nombre;
+                    armaSelect.appendChild(option);
+                }
+            });
+        }
+
+        // Llamar a la función para cargar las armas al cargar la página
+        cargarArmas();
+
+        function showCharacterImage() {
+        var select = document.getElementById("character");
+        var selectedCharacter = select.options[select.selectedIndex].value;
+        document.getElementById("character-image").src = selectedCharacter;
+    }
+    </script>
+    </body>
+</html>

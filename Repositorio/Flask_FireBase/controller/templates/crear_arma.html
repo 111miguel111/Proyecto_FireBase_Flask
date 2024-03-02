@@ -14,6 +14,9 @@
 </head>
 
 <body>
+  <button id="backButtom" aria-label="volver" href="../materias" onclick="goBack()">
+    <img src="../static/assets/images/volver.png" alt="volver">
+  </button>
     <div class="cuerpo">
         <form id="dynamicForm" action="#" method="POST">
 
@@ -68,6 +71,10 @@
         });
     </script>
     <script>
+        function goBack() {
+            window.history.back(); // Esta función de JavaScript permite volver a la página anterior
+        }
+
         function createInputs() {
             var numberOfInputs = parseInt(document.getElementById("materia").value);
             var form = document.getElementById("dynamicForm");
