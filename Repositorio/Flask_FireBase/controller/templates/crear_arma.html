@@ -12,6 +12,7 @@
     <script defer src="../static/assets/js/Animated-Radial-Menu.js"></script>
     <title>Formulario</title>
 </head>
+
 <body>
     <div class="cuerpo">
         <form id="dynamicForm" action="#" method="POST">
@@ -37,8 +38,8 @@
             <input type="text" id="coste" name="coste" value="{{datos.coste}}"><br>
 
             <label for="materia">Slots de Materias:</label>
-            <select id="materia" onchange="createInputs()" value="{{datos.materia}}">
-             <option value="">-- Select --</option>
+            <select id="materia" onchange="createInputs()">
+             <option value="{{datos.materia}}">-- Select --</option>
              <option value="1">1</option>
              <option value="2">2</option>
              <option value="3">3</option>
@@ -50,11 +51,66 @@
         </form>
     </div>
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
             document.getElementById("{{datos.tipo}}").checked = true;
         });
     </script>
-    <script src="../static/assets/js/dynamicForm.js"></script>
+    <script>
+        function createInputs() {
+            var numberOfInputs = parseInt(document.getElementById("materia").value);
+            var form = document.getElementById("dynamicForm");
+
+
+            boton = document.getElementById("env")
+            form.removeChild(boton);
+            // Clear existing inputs
+            for (var i = 0; i < 5; i++) {
+                espacio = document.getElementById("spc" + (i + 1));
+                label = document.getElementById("label" + (i + 1));
+                input = document.getElementById("slot" + (i + 1));
+
+                if (form.contains(espacio)) {
+                    form.removeChild(espacio);
+                }
+
+                if (form.contains(input)) {
+                    form.removeChild(input);
+
+                }
+
+                if (form.contains(label)) {
+                    form.removeChild(label);
+                }
+            }
+
+            // Create new inputs
+            for (var i = 0; i < numberOfInputs; i++) {
+                var label = document.createElement("label");
+                label.for = "slot" + (i + 1);
+                label.textContent = "slot de materia " + (i + 1) + ":";
+                label.id = "label" + (i + 1);
+                form.appendChild(label);
+
+                var input = document.createElement("input");
+                input.type = "text";
+                input.name = "slot" + (i + 1); // Setting unique name for each input
+                input.id = "slot" + (i + 1);
+                input.value = {datos["slot" + (i + 1)]};
+                form.appendChild(input);
+
+                var espacio = document.createElement("br")
+                espacio.id = "spc" + (i + 1);
+                form.appendChild(espacio); // Line break for spacing
+            }
+
+            // Add submit button
+            var submitButton = document.createElement("input");
+            submitButton.type = "submit";
+            submitButton.value = "Enviar";
+            submitButton.id = "env";
+            form.appendChild(submitButton);
+        }
+    </script>
 </body>
 
 </html>

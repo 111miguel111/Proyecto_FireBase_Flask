@@ -151,8 +151,9 @@ def emptyMateria():
     return datos
 
 def emptyArma():
-    datos = {"clave": "", "nombre": "", "descripcion": "", "ataque": "", "ataque%": "", "magia": "", "materia": "",
-             "coste": ""}
+    datos = {"clave": "", "nombre": "", "descripcion": "", "ataque": "", "ataque%": "", "magia": "", "coste": "", "materia": "",
+             "slot1": "", "slot2": "", "slot3": "", "slot4": "", "slot5": ""
+             }
     return datos
 
 
