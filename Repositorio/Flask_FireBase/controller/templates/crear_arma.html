@@ -6,42 +6,52 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="../static/assets/css/Animated-Radial-Menu.css">
+    <link rel="stylesheet" href="../static/assets/css/crear_arma_style.css">
     <script defer type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script defer nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-    <script defer src="../static/assets/js/Animated-Radial-Menu.js"></script>
+    <script defer src="../static/assets/js/crear_arma.js"></script>
     <title>Formulario</title>
 </head>
 
 <body>
+    <audio id="start-sound">
+        <source src="../static/assets/audio/menu_start.mp3" type="audio/mpeg">
+        Tu navegador no soporta el elemento de audio.
+    </audio>
+    <audio id="error-sound">
+        <source src="../static/assets/audio/menu_error.mp3" type="audio/mpeg">
+        Tu navegador no soporta el elemento de audio.
+    </audio>
+
   <button id="backButtom" aria-label="volver"  onclick="goMenu()">
     <img src="../static/assets/images/volver.png" alt="volver">
   </button>
-    <div class="cuerpo">
-        <form id="dynamicForm" action="#" method="POST">
 
-            <input type="hidden" id="clave" name="clave" value="{{datos.clave}}">
+    <div class="cuerpo">
+        <form id="dynamicForm" action="#" method="POST" onsubmit="return validarFormulario();">
+
+            <input type="hidden" id="clave" name="clave" value='{{datos.clave}}'>
 
             <label for="nombre">Nombre:</label><br>
-            <input type="text" id="nombre" name="nombre" value="{{datos.nombre}}" required><br>
+            <input type="text" id="nombre" name="nombre" value="{{datos.nombre}}" ><br>
 
             <label for="descripcion">Descripción:</label><br>
-            <textarea id="descripcion" name="descripcion" required>{{datos.descripcion}}</textarea><br>
+            <textarea id="descripcion" name="descripcion" >{{datos.descripcion}}</textarea><br>
 
             <label for="ataque">Ataque:</label><br>
-            <input type="number" min="0" max="99" id="ataque" name="ataque" value="{{datos.ataque}}" required><br>
+            <input type="number" min="0" max="99" id="ataque" name="ataque" value="{{datos.ataque}}" ><br>
 
             <label for="ataquePor">Ataque%:</label><br>
-            <input type="number" min="0" max="99" id="ataquePor" name="ataquePor" value="{{datos.ataquePor}}" required><br>
+            <input type="number" min="0" max="99" id="ataquePor" name="ataquePor" value="{{datos.ataquePor}}" ><br>
 
             <label for="magia">Magia:</label><br>
-            <input type="number" min="0" max="99" id="magia" name="magia" value="{{datos.magia}}" required><br>
+            <input type="number" min="0" max="99" id="magia" name="magia" value="{{datos.magia}}" ><br>
 
             <label for="coste">Coste:</label><br>
-            <input type="number" min="1" max="50" id="coste" name="coste" value="{{datos.coste}}" required><br>
+            <input type="number" min="1" max="50" id="coste" name="coste" value="{{datos.coste}}" ><br>
 
             <label for="materia">Slots de Materias:</label>
-            <select id="materia" name="materia" onchange="createInputs()" value="{{datos.materia}}" required>
+            <select id="materia" name="materia" onchange="createInputs()" value="{{datos.materia}}" >
              <option value="0">-- SELECT --</option>
              <option value="1">1</option>
              <option value="2">2</option>
@@ -167,7 +177,9 @@
             submitButton.id = "env";
             form.appendChild(submitButton);
         }
+        
     </script>
+    
 </body>
 
 </html>

@@ -32,40 +32,26 @@ function cambiarImagen(nuevaImagen) {
         document.getElementById('dynamicForm').submit(); // Envía el formulario programáticamente
     }
 }
-
 function validarFormulario() {
     var nombre = document.getElementById('nombre').value;
     var descripcion = document.getElementById('descripcion').value;
-    var nivel = document.getElementById('nivel').value;
-    var experiencia = document.getElementById('experiencia').value;
-    var fuerza = document.getElementById('fuerza').value;
-    var magia = document.getElementById('magias').value;
-    var maxpg = document.getElementById('maxpg').value;
-    var maxpm = document.getElementById('maxpm').value;
+    var ataque = document.getElementById('ataque').value;
+    var ataquePor = document.getElementById('ataquePor').value;
+    var magia = document.getElementById('magia').value;
     var coste = document.getElementById('coste').value;
-    var radioButtons = document.getElementsByName('tipo');
-    var radio="";
-        // Itera a través de los radio buttons
-    for (var i = 0; i < radioButtons.length; i++) {
-        // Comprueba si el radio button actual está marcado
-        if (radioButtons[i].checked) {
-            // Al menos uno está marcado, puedes continuar o realizar acciones necesarias
-            radio="hay_uno";
-        }
-    }
+    var materia = document.getElementById('materia').value;
 
-    // Puedes agregar más campos según sea necesario
 
+    // Validar que todos los campos estén completos
     if (
         nombre === "" ||
         descripcion === "" ||
-        nivel === "" ||
-        experiencia === "" ||
-        fuerza === "" ||
+        ataque === "" ||
+        ataquePor === "" ||
         magia === "" ||
-        maxpg === "" ||
-        maxpm === "" ||
-        coste === "" || radio===""
+        coste === "" ||
+        materia === "0" || // Asumiendo que 0 es la opción por defecto en el select
+        radio === ""
     ) {
         var menuSound = document.getElementById("error-sound");
         menuSound.pause();
@@ -74,9 +60,15 @@ function validarFormulario() {
         alert("Por favor, completa todos los campos antes de enviar el formulario.");
         return false; // Evita que se envíe el formulario
     }
+
     var menuSound = document.getElementById("start-sound");
+
     menuSound.pause();
     menuSound.currentTime = 0;
     menuSound.play();
+    
+    setTimeout(function() {         
+    }, 1000);
+
     return true; // Permite que se envíe el formulario
 }

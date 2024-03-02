@@ -15,6 +15,14 @@
 </head>
 
 <body>
+    <audio id="start-sound">
+        <source src="../static/assets/audio/menu_start.mp3" type="audio/mpeg">
+        Tu navegador no soporta el elemento de audio.
+    </audio>
+    <audio id="error-sound">
+        <source src="../static/assets/audio/menu_error.mp3" type="audio/mpeg">
+        Tu navegador no soporta el elemento de audio.
+    </audio>
   <button id="backButtom" aria-label="volver" onclick="goToMaterias()">
     <img src="../static/assets/images/volver.png" alt="volver">
   </button>
@@ -76,36 +84,31 @@
                 </select><br>
 
                 <label for="experiencia">Experiencia:</label><br>
-                <input type="text" id="experiencia" name="experiencia" value="{{datos.experiencia}}"><br>
+                <input type="number" id="experiencia" name="experiencia" value="{{datos.experiencia}}" min="1"><br>
 
                 <label for="fuerza">Fuerza:</label><br>
-                <input type="text" id="fuerza" name="fuerza" value="{{datos.fuerza}}"><br>
+                <input type="number" id="fuerza" name="fuerza" value="{{datos.fuerza}}" min="1" max="100"><br>
 
                 <label for="magia">Magia:</label><br>
-                <input type="text" id="magias" name="magia" value="{{datos.magia}}"><br>
+                <input type="number" id="magias" name="magia" value="{{datos.magia}}" min="1" max="100"><br>
 
                 <label for="maxpg">MaxPG%:</label><br>
-                <input type="text" id="maxpg" name="maxpg" value="{{datos.maxpg}}"><br>
+                <input type="number" id="maxpg" name="maxpg" value="{{datos.maxpg}}" min="1" max="100"><br>
 
                 <label for="maxpm">MaxPM%:</label><br>
-                <input type="text" id="maxpm" name="maxpm" value="{{datos.maxpm}}"><br>
+                <input type="number" id="maxpm" name="maxpm" value="{{datos.maxpm}}" min="1" max="100"><br>
 
                 <label for="coste">Coste:</label><br>
-                <input type="text" id="coste" name="coste" value="{{datos.coste}}"><br>
+                <input type="number" id="coste" name="coste" value="{{datos.coste}}" min="1" max="100"><br>
                 
             </div>
             <input type="submit" value="Enviar">
         </form>
     </div>
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            document.getElementById("{{datos.tipo}}").checked = true;
-        });
-
         function goToMaterias() {
         window.location.href = "/materias";
         }
-
     </script>
 </body>
 
