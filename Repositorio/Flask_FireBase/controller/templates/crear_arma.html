@@ -10,12 +10,11 @@
     <script defer type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script defer nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     <script defer src="../static/assets/js/Animated-Radial-Menu.js"></script>
-
     <title>Formulario</title>
 </head>
 <body>
     <div class="cuerpo">
-        <form action="#" method="POST">
+        <form id="dynamicForm" action="#" method="POST">
 
             <input type="hidden" id="clave" name="clave" value="{{datos.clave}}">
 
@@ -34,13 +33,20 @@
             <label for="magia">Magia:</label><br>
             <input type="text" id="magia" name="magia" value="{{datos.magia}}"><br>
 
-            <label for="materia">materia:</label><br>
-            <input type="text" id="materia" name="materia" value="{{datos.materia}}"><br>
-
             <label for="coste">Coste:</label><br>
             <input type="text" id="coste" name="coste" value="{{datos.coste}}"><br>
 
-            <input type="submit" value="Enviar">
+            <label for="materia">Slots de Materias:</label>
+            <select id="materia" onchange="createInputs()" value="{{datos.materia}}">
+             <option value="">-- Select --</option>
+             <option value="1">1</option>
+             <option value="2">2</option>
+             <option value="3">3</option>
+             <option value="4">4</option>
+             <option value="5">5</option>
+            </select><br>
+
+            <input id="env" type="submit" value="Enviar">
         </form>
     </div>
     <script>
@@ -48,6 +54,7 @@
             document.getElementById("{{datos.tipo}}").checked = true;
         });
     </script>
+    <script src="../static/assets/js/dynamicForm.js"></script>
 </body>
 
 </html>
