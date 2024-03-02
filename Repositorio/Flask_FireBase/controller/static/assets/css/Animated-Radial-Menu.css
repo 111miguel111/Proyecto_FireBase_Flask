@@ -38,7 +38,69 @@ body {
 
 }
 
+textarea {
+  resize: none;
+}
+input[type="radio"] {
+  appearance: none; /* Reset de estilos predeterminados */
+  -webkit-appearance: none; /* Para navegadores basados en WebKit, como Chrome y Safari */
+  -moz-appearance: none; /* Para navegadores basados en Gecko, como Firefox */
+  border: 2px solid var(--clr); /* Borde del radio button */
+  border-radius: 50%; /* Hace que el contorno sea redondo */
+  width: 50px; /* Ajusta el tamaño del radio button */
+  height: 50px;
+  cursor: pointer;
+  outline: none; /* Elimina el contorno al hacer clic */
+  background-color: transparent; /* Fondo transparente */
+}
+input[type="radio"]:checked {
+  background: var(--clr);
+  color: #333;
+  box-shadow: 0 0 10px var(--clr), 0 0 30px var(--clr), 0 0 50px var(--clr);
+}
+#imagenCambiante {
+  margin-left: 25px;
+}
+
+
+
+
+input[type="submit"] {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+
+  border: solid 2px #424542;
+  border-radius: 7px;
+  box-shadow: 1px 1px #e7dfe7, -1px -1px #e7dfe7, 1px -1px #e7dfe7, -1px 1px #e7dfe7, 0 -2px #9c9a9c, -2px 0 #7b757b, 0 2px #424542;
+  padding: 5px 10px 0 10px;
+  background: linear-gradient(45deg, rgb(0, 0, 80), rgb(0, 0, 128));
+  z-index: 1;
+  outline: none;
+  overflow: hidden;
+
+  color: #eff1ff;
+  font-family: Verdana, sans-serif;
+  text-shadow: 2px 2px #212421, 1px 1px #212021;
+  font-weight: normal;
+  font-size: 1em;
+  vertical-align: top;
+  line-height: 2em;
+}
+input[type="submit"]:hover {
+  background: linear-gradient(45deg, rgb(0, 0, 128), rgb(0, 0, 80)); /* Cambiamos el gradiente en hover */
+  box-shadow: 2px 2px #e7dfe7, -2px -2px #e7dfe7, 2px -2px #e7dfe7, -2px 2px #e7dfe7, 0 -4px #9c9a9c, -4px 0 #7b757b, 0 4px #424542; /* Cambiamos la sombra en hover */
+  transform: scale(1.05); /* Hacemos que el botón se agrande ligeramente en hover */
+}
+.izquierda{
+  float: left;
+}
+.derecha{
+  float: left;
+}
 .Animated-Radial-Menu {
+  margin-left: 10px;
+  margin-right: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
