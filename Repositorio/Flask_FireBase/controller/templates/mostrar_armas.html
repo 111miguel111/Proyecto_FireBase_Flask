@@ -17,6 +17,7 @@
             <th>Ataque%</th>
             <th>Magia</th>
             <th>Coste</th>
+            <th>Slots</th>
             <th>Materia 1</th>
             <th>Materia 2</th>
             <th>Materia 3</th>
@@ -33,6 +34,11 @@
             <td>{{ datos[dato]["magia"] }}</td>
             <td>{{ datos[dato]["coste"] }}</td>
             <td>{{ datos[dato]["materia"] }}</td>
+            <td>{{ datos[dato]["slot1"] }}</td>
+            <td>{{ datos[dato]["slot2"] }}</td>
+            <td>{{ datos[dato]["slot3"] }}</td>
+            <td>{{ datos[dato]["slot4"] }}</td>
+            <td>{{ datos[dato]["slot5"] }}</td>
             <td><button onclick="modificar(this)">Modificar</button> <button onclick="eliminar(this)">Eliminar</button></td>
         </tr>
         {% endfor %}
