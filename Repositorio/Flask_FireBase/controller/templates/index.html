@@ -4,17 +4,228 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Final Fantasy VII - Inventario</title>
-    <link rel="stylesheet" href="static/assets/css/stylesIndex.css">
+    <link rel="stylesheet" href="assets/css/stylesIndex.css">
 </head>
 <body>
+
+<button id="hamburgerButton" aria-label="Toggle Navigation">
+  <img src="assets/images/corchea.png" alt="Hamburger Menu">
+</button>
+<button id="muteButton" aria-label="Mute Audio">
+  <img src="assets/images/mute.png" alt="Mute Audio">
+</button>
+
+  <!-- Navigation wrapping text elements within anchor elements -->
+   <nav id="mainNav">
+    <svg viewBox="100 0 100 1400" width="230" height="1100">
+      <defs>
+        <path id="path" d="M -150 60 q 50 -20 100 0 t 100 0 100 0 100 0 100 0" fill="none" />
+      </defs>
+      <!-- Botones de las canciones -->
+      <g transform="translate(50 0)">
+        <!-- Botón de la canción Prelude -->
+        <a href="javascript:void(0);" onclick="playMusic('assets/music/01.Prelude.mp3');">
+          <text>
+            <textPath text-anchor="middle" href="#path" startOffset="0%" fill="white">
+              Prelude
+            </textPath>
+          </text>
+        </a>
+      </g>
+      <!-- Botón de la canción Opening -->
+      <g transform="translate(50 50)">
+        <a href="javascript:void(0);" onclick="playMusic('assets/music/02.Opening.mp3');">
+          <text>
+            <textPath text-anchor="middle" href="#path" startOffset="10%" fill="white">
+              Opening
+            </textPath>
+          </text>
+        </a>
+      </g>
+      <!-- Botón de la canción Reactor Mako -->
+      <g transform="translate(50 100)">
+        <a href="javascript:void(0);" onclick="playMusic('assets/music/03.MakouReactor.mp3');">
+          <text>
+            <textPath text-anchor="middle" href="#path" startOffset="20%" fill="white">
+              Reactor Mako
+            </textPath>
+          </text>
+        </a>
+      </g>
+      <!-- Botón de la canción Corazón Ansioso -->
+      <g transform="translate(50 150)">
+        <a href="javascript:void(0);" onclick="playMusic('assets/music/04.AnxiousHeart.mp3');">
+          <text>
+            <textPath text-anchor="middle" href="#path" startOffset="30%" fill="white">
+              Corazón Ansioso
+            </textPath>
+          </text>
+        </a>
+      </g>
+      <!-- Botón de la canción Compañía Shinra -->
+      <g transform="translate(50 200)">
+        <a href="javascript:void(0);" onclick="playMusic('assets/music/09.ShinraCompany.mp3');">
+          <text>
+            <textPath text-anchor="middle" href="#path" startOffset="40%" fill="white">
+              Compañía Shinra
+            </textPath>
+          </text>
+        </a>
+      </g>
+      <!-- Botón de la canción Flores Iglesia -->
+      <g transform="translate(50 250)">
+        <a href="javascript:void(0);" onclick="playMusic('assets/music/12.FlowersBloomingintheChurch.mp3');">
+          <text>
+            <textPath text-anchor="middle" href="#path" startOffset="50%" fill="white">
+              Flores Iglesia
+            </textPath>
+          </text>
+        </a>
+      </g>
+      <!-- Botón de la canción Los Turkos -->
+      <g transform="translate(50 300)">
+        <a href="javascript:void(0);" onclick="playMusic('assets/music/13.TheTurks.mp3');">
+          <text>
+            <textPath text-anchor="middle" href="#path" startOffset="60%" fill="white">
+              Los Turkos
+            </textPath>
+          </text>
+        </a>
+      </g>
+      <!-- Botón de la canción Red XIII -->
+      <g transform="translate(50 350)">
+        <a href="javascript:void(0);" onclick="playMusic('assets/music/21.RedXIII.mp3');">
+          <text>
+            <textPath text-anchor="middle" href="#path" startOffset="70%" fill="white">
+              Red XIII
+            </textPath>
+          </text>
+        </a>
+      </g>
+      <!-- Botón de la canción Costa del Sol -->
+      <g transform="translate(50 400)">
+        <a href="javascript:void(0);" onclick="playMusic('assets/music/39.CostadelSol.mp3');">
+          <text>
+            <textPath text-anchor="middle" href="#path" startOffset="80%" fill="white">
+              Costa del Sol
+            </textPath>
+          </text>
+        </a>
+      </g>
+      <!-- Botón de la canción Chocobos -->
+      <g transform="translate(50 450)">
+        <a href="javascript:void(0);" onclick="playMusic('assets/music/55.RacingChocobos.mp3');">
+          <text>
+            <textPath text-anchor="middle" href="#path" startOffset="90%" fill="white">
+              Chocobos
+            </textPath>
+          </text>
+        </a>
+      </g>
+      <!-- Botón de la canción Viento Fuerte -->
+      <g transform="translate(50 500)">
+        <a href="javascript:void(0);" onclick="playMusic('assets/music/70. HighwindTakestotheSkies.mp3');">
+          <text>
+            <textPath text-anchor="middle" href="#path" startOffset="100%" fill="white">
+              Viento Fuerte
+            </textPath>
+          </text>
+        </a>
+      </g>
+      <!-- Botón de la canción Tema Principal -->
+      <g transform="translate(50 550)">
+        <a href="javascript:void(0);" onclick="playMusic('assets/music/24.MainTheme.mp3');">
+          <text>
+            <textPath text-anchor="middle" href="#path" startOffset="110%" fill="white">
+              Tema Principal
+            </textPath>
+          </text>
+        </a>
+      </g>
+              <!-- Botón de la canción Tema Principal -->
+      <g transform="translate(50 600)">
+        <a href="javascript:void(0);" onclick="playMusic('assets/music/77.GoldSaucer.mp3');">
+          <text>
+            <textPath text-anchor="middle" href="#path" startOffset="120%" fill="white">
+              Gold Saucer <3
+            </textPath>
+          </text>
+        </a>
+      </g>
+    </svg>
+  </nav>
+
+  <audio id="backgroundAudio" preload="auto">
+    <!-- Puedes agregar una pista predeterminada aquí -->
+    <source src="" type="audio/mpeg">
+  </audio>
+
     <div class="container">
-        <img src="static/assets/images/espada3.jpg" alt="Espada de Final Fantasy VII" class="sword">
+        <img src="assets/images/espada3.jpg" alt="Espada de Final Fantasy VII" class="sword">
         <h1>Final Fantasy VII - Inventario</h1>
         <div class="options">
-            <a href="/materias">Gestión de Materia</a>
-            <a href="/armas">Gestión de Armas</a>
+            <a href="#">Gestión de Materia</a>
+            <a href="#">Gestión de Armas</a>
             <a href="#">Gestión de Base de Datos</a>
         </div>
     </div>
+
+  <!-- Script de Anime.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+  <script>
+    const audio = document.getElementById('backgroundAudio');
+
+    function playMusic(filename) {
+      audio.src = filename;
+      audio.play();
+    }
+    muteButton.addEventListener('click', () => {
+      if (audio.paused) {
+        audio.play();
+        isMuted = false;
+        muteButton.firstElementChild.src = 'assets/images/mute.png';
+      } else {
+        audio.pause();
+        isMuted = true;
+        muteButton.firstElementChild.src = 'assets/images/unmute.png';
+      }
+    });
+    const hamburgerButton = document.getElementById('hamburgerButton');
+    const navButtons = document.querySelectorAll('nav svg');
+
+    hamburgerButton.addEventListener('click', () => {
+      // Cambia la visibilidad de los botones de navegación
+      navButtons.forEach(button => {
+        button.style.display = 'block';
+      });
+
+      const mainNav = document.getElementById('mainNav');
+      mainNav.classList.toggle('open');
+      hamburgerButton.classList.toggle('open');
+      const isOpen = mainNav.classList.contains('open');
+
+      anime({
+        targets: 'textPath',
+        startOffset: (d, i) => {
+          if (isOpen) {
+            return i % 2 === 0 ? '60%' : '40%';
+          }
+          return i % 2 === 0 ? '0%' : '100%';
+        },
+        duration: 2500,
+        delay: isOpen ? 200 + anime.stagger(50) : anime.stagger(50),
+        begin: () => {
+          if (mainNav.classList.contains('open')) {
+            mainNav.style.visibility = 'visible';
+          }
+        },
+        complete: () => {
+          if (!mainNav.classList.contains('open')) {
+            mainNav.style.visibility = 'hidden';
+          }
+        },
+      });
+    });
+  </script>
 </body>
 </html>
