@@ -17,25 +17,38 @@
     <div class="cuerpo" ng-controller="MainController">
         <input type="text" id="busqueda" ng-model="clave" ng-change="buscarArma()">
         <table border="1" id="tabla">
-            <thead>
-                <tr>
-                    <th>Codigo</th>
-                    <th>Nombre</th>
-                    <th>Descripcion</th>
-                    <th>Ataque</th>
-                    <th>Ataque%</th>
-                    <th>Magia</th>
-                    <th>Coste</th>
-                    <th>Slots</th>
-                    <th>Materia 1</th>
-                    <th>Materia 2</th>
-                    <th>Materia 3</th>
-                    <th>Materia 4</th>
-                    <th>Materia 5</th>
-            </thead>
-            <tbody>
+            <tr>
+                <th>Codigo</th>
+                <th>Nombre</th>
+                <th>Descripcion</th>
+                <th>Ataque</th>
+                <th>Ataque%</th>
+                <th>Magia</th>
+                <th>Coste</th>
+                <th>Slots</th>
+                <th>Materia 1</th>
+                <th>Materia 2</th>
+                <th>Materia 3</th>
+                <th>Materia 4</th>
+                <th>Materia 5</th>
+
+                <!--{% for dato in datos %}-->
                 <tr data-aos="fade-left" data-aos-duration="1000" ng-repeat="arma in armas">
-                    <td>{{ datos[dato]["clave"] }}</td>
+                    <td>{{ arma.clave }}</td>
+                    <td>{{ arma.nombre }}</td>
+                    <td>{{ arma.descripcion }}</td>
+                    <td>{{ arma.ataque }}</td>
+                    <td>{{ arma.ataquePor }}</td>
+                    <td>{{ arma.magia }}</td>
+                    <td>{{ arma.coste }}</td>
+                    <td>{{ arma.materia }}</td>
+                    <td>{{ arma.slot1 }}</td>
+                    <td>{{ arma.slot2 }}</td>
+                    <td>{{ arma.slot3 }}</td>
+                    <td>{{ arma.slot4 }}</td>
+                    <td>{{ arma.slot5 }}</td>
+                    <td><button onclick="modificar(this)">Modificar</button> <button onclick="eliminar(this)">Eliminar</button></td>
+                    <!--<td>{{ datos[dato]["clave"] }}</td>
                     <td>{{ datos[dato]["nombre"] }}</td>
                     <td>{{ datos[dato]["descripcion"] }}</td>
                     <td>{{ datos[dato]["ataque"] }}</td>
@@ -48,10 +61,9 @@
                     <td>{{ datos[dato]["slot3"] }}</td>
                     <td>{{ datos[dato]["slot4"] }}</td>
                     <td>{{ datos[dato]["slot5"] }}</td>
-                    <td><button onclick="modificar(this)">Modificar</button> <button onclick="eliminar(this)">Eliminar</button></td>
+                    <td><button onclick="modificar(this)">Modificar</button> <button onclick="eliminar(this)">Eliminar</button></td> -->
                 </tr>
-                {% endfor %}
-            </tbody>
+                <!--{% endfor %}-->
         </table>
     </div>
     <script>
@@ -124,7 +136,7 @@
             $scope.buscarArma = function() {
                 $http.get('/armas/' + $scope.clave)
                     .then(function(response) {
-                        $scope.armas = response.data; // response.data es el JSON devuelto por el API
+                        $scope.armas = response.data;
                     }, function(error) {
                         console.error('Error al cargar los datos:', error);
                     });

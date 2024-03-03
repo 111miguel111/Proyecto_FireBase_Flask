@@ -74,7 +74,7 @@ def calcularClave(tabla, datos):
     if elementos != None:
         cont = 0
         for elemento in elementos:
-            if (elementos[elemento]["nombre"] == datos["nombre"]):
+            if elementos[elemento]["nombre"] == datos["nombre"]:
                 num = elementos[elemento]["clave"].split('_')[1]
                 if (int(num) > cont):
                     cont = int(num)
@@ -85,18 +85,16 @@ def calcularClave(tabla, datos):
 
 
 def obtenerVariasArmasPorClave(clave):
-    datos = {}
-    if clave == "":
-        elementos = selectAll("armas")
-        if elementos is not None:
-            return elementos
-        else:
-            return datos
+    ref = db.reference("armas")  # Reemplaza "tu-nodo" con la ruta de tu nodo en la base de datos
+    ocurrencias = {}
+
+    # Obtener todas las claves que comienzan con el prefijo dado
+    if clave != "":
+        keys = ref.order_by_key().start_at(clave).end_at(clave + "\uf8ff").get()
+        for key, value in keys.items():
+            # Añadir cada ocurrencia al diccionario
+            ocurrencias[key] = value
     else:
-        elementos = selectAll("armas")
-        if elementos is not None:
-            for elemento in elementos:
-                if elementos[elemento]['clave'].startWith(clave):
-                    datos.
-        else:
-            return datos
+        ocurrencias = ref.get()
+    print(ocurrencias)
+    return ocurrencias
