@@ -16,7 +16,7 @@
 				<ul>
 					<li><a id="crear" href="personajes/crear">Crear Personaje</a></li>
 					<!--<li><a id="mostrar_todos" href="/personajes/mostrar">Gestión de Personajes</a></li>-->
-					<li><a href="/">Volver a la página principal</a></li>
+					<li><a href="javascript:void(0);" onclick="cerrarPestana()">Volver a la página principal</a></li>
 				</ul>
 			</nav>
 		<main class="ff7-text">
@@ -62,6 +62,10 @@
 }
 	</script>
   <script>
+  function cerrarPestana() {
+	  // Cierra la pestaña actual
+	  window.close();
+	}
     document.addEventListener("DOMContentLoaded", function() {
       var menuSound = document.getElementById("menu-sound");
 

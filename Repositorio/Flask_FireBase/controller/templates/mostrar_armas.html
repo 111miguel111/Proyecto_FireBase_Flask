@@ -10,12 +10,22 @@
 </head>
 
 <body>
+    <audio id="start-sound">
+        <source src="../static/assets/audio/menu_start.mp3" type="audio/mpeg">
+        Tu navegador no soporta el elemento de audio.
+    </audio>
+    <audio id="select-sound">
+        <source src="../static/assets/audio/menu_select.mp3" type="audio/mpeg">
+        Tu navegador no soporta el elemento de audio.
+    </audio>
+
+
 <button id="backButtom" aria-label="volver" onclick="goMenu()">
     <img src="../static/assets/images/volver.png" alt="volver">
 </button>
 <div class="cuerpo">
     {% if datos != None %}
-    <input type="text" id="busqueda">
+    <input type="text" id="busqueda" placeholder="Buscar">
     <table border="1" id="tabla">
         <tr>
             <th>Codigo</th>
@@ -54,7 +64,7 @@
         {% endfor %}
     </table>
     {% else %}
-    <h2>No se han encontrado materias</h2>
+    <h2>No se han encontrado armas</h2>
 {% endif %}
 </div>
 <script>
@@ -63,6 +73,11 @@
     }
 
     function eliminar(boton) {
+        var menuSound = document.getElementById("select-sound");
+        menuSound.pause();
+        menuSound.currentTime = 0;
+         menuSound.play();
+
         var fila = boton.parentNode.parentNode;
         var clave = fila.cells[0].innerText;
 
@@ -85,6 +100,10 @@
     }
 
     function modificar(boton) {
+        var menuSound = document.getElementById("start-sound");
+        menuSound.pause();
+        menuSound.currentTime = 0;
+        menuSound.play();
         var fila = boton.parentNode.parentNode;
         var clave = fila.cells[0].innerText;
 

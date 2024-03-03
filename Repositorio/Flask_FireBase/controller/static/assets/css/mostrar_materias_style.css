@@ -3,6 +3,31 @@ body {
 
 }
 
+#busqueda {
+  margin: auto;
+  margin-top: 10px;
+  display: block;
+  border: solid 2px #424542;
+  border-radius: 7px;
+  box-shadow: 1px 1px #e7dfe7, -1px -1px #e7dfe7, 1px -1px #e7dfe7, -1px 1px #e7dfe7, 0 -2px #9c9a9c, -2px 0 #7b757b, 0 2px #424542;
+  padding: 5px 10px 0 10px;
+  background: #ffffff; /* Blanco */
+  color: #1d1d1d;
+  font-family: Verdana, sans-serif;
+  font-weight: bold;
+  font-size: 1em;
+  vertical-align: top;
+  line-height: 2em;
+  outline: none;
+  overflow: hidden;
+  transition: background 0.3s, box-shadow 0.3s, transform 0.3s;
+}
+
+#busqueda:hover {
+            background: #ffffff; /* Blanco también en hover */
+            box-shadow: 2px 2px #e7dfe7, -2px -2px #e7dfe7, 2px -2px #e7dfe7, -2px 2px #e7dfe7, 0 -4px #9c9a9c, -4px 0 #7b757b, 0 4px #424542;
+            transform: scale(1.05);
+        }
 
 
 .cuerpo {
