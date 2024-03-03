@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" type="text/css" href="../static/assets/css/mostrar_materias_style.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
@@ -14,8 +13,8 @@
     <button id="backButtom" aria-label="volver" onclick="goMenu()">
     <img src="../static/assets/images/volver.png" alt="volver">
   </button>
-    <div class="cuerpo" ng-controller="MainController">
-        <input type="text" id="busqueda" ng-model="clave" ng-change="buscarArma()">
+    <div class="cuerpo">
+        <input type="text" id="busqueda">
         <table border="1" id="tabla">
             <tr>
                 <th>Codigo</th>
@@ -32,23 +31,9 @@
                 <th>Materia 4</th>
                 <th>Materia 5</th>
 
-                <!--{% for dato in datos %}-->
-                <tr data-aos="fade-left" data-aos-duration="1000" ng-repeat="arma in armas">
-                    <td>{{ arma.clave }}</td>
-                    <td>{{ arma.nombre }}</td>
-                    <td>{{ arma.descripcion }}</td>
-                    <td>{{ arma.ataque }}</td>
-                    <td>{{ arma.ataquePor }}</td>
-                    <td>{{ arma.magia }}</td>
-                    <td>{{ arma.coste }}</td>
-                    <td>{{ arma.materia }}</td>
-                    <td>{{ arma.slot1 }}</td>
-                    <td>{{ arma.slot2 }}</td>
-                    <td>{{ arma.slot3 }}</td>
-                    <td>{{ arma.slot4 }}</td>
-                    <td>{{ arma.slot5 }}</td>
-                    <td><button onclick="modificar(this)">Modificar</button> <button onclick="eliminar(this)">Eliminar</button></td>
-                    <!--<td>{{ datos[dato]["clave"] }}</td>
+                {% for dato in datos %}
+                <tr data-aos="fade-left" data-aos-duration="1000">
+                    <td>{{ datos[dato]["clave"] }}</td>
                     <td>{{ datos[dato]["nombre"] }}</td>
                     <td>{{ datos[dato]["descripcion"] }}</td>
                     <td>{{ datos[dato]["ataque"] }}</td>
@@ -61,9 +46,9 @@
                     <td>{{ datos[dato]["slot3"] }}</td>
                     <td>{{ datos[dato]["slot4"] }}</td>
                     <td>{{ datos[dato]["slot5"] }}</td>
-                    <td><button onclick="modificar(this)">Modificar</button> <button onclick="eliminar(this)">Eliminar</button></td> -->
+                    <td><button onclick="modificar(this)">Modificar</button> <button onclick="eliminar(this)">Eliminar</button></td>
                 </tr>
-                <!--{% endfor %}-->
+                {% endfor %}
         </table>
     </div>
     <script>
@@ -128,19 +113,20 @@
         AOS.init();
     </script>
     <script>
-        var app = angular.module('miApp', []);
+        // Obtener la referencia del input de búsqueda
+        var inputBusqueda = document.getElementById('busqueda');
+        // Obtener todas las filas de la tabla excepto la primera (encabezados)
+        var filas = document.querySelectorAll('#tabla tr:not(:first-child)');
 
-        app.controller('MainController', function($scope, $http) {
-            $scope.armas = [];
-
-            $scope.buscarArma = function() {
-                $http.get('/armas/' + $scope.clave)
-                    .then(function(response) {
-                        $scope.armas = response.data;
-                    }, function(error) {
-                        console.error('Error al cargar los datos:', error);
-                    });
-            };
+        // Agregar evento de escucha al input de búsqueda
+        inputBusqueda.addEventListener('input', function() {
+            var filtro = inputBusqueda.value.toLowerCase(); // Convertir el texto de búsqueda a minúsculas
+            filas.forEach(function(fila) {
+                // Obtener el contenido de la primera celda de la fila
+                var contenido = fila.cells[0].textContent.toLowerCase(); // Ajusta el índice según el orden de tus columnas
+                // Mostrar la fila si la primera celda comienza con el texto de búsqueda, ocultarla de lo contrario
+                fila.style.display = contenido.startsWith(filtro) ? '' : 'none';
+            });
         });
     </script>
 </body>
