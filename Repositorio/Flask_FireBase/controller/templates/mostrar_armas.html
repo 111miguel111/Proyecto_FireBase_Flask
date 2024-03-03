@@ -14,6 +14,7 @@
     <img src="../static/assets/images/volver.png" alt="volver">
 </button>
 <div class="cuerpo">
+    {% if datos != None %}
     <input type="text" id="busqueda">
     <table border="1" id="tabla">
         <tr>
@@ -30,7 +31,6 @@
             <th>Materia 3</th>
             <th>Materia 4</th>
             <th>Materia 5</th>
-            {% if datos != None %}
             {% for dato in datos %}
         <tr data-aos="fade-left" data-aos-duration="1000">
             <td>{{ datos[dato]["clave"] }}</td>
@@ -52,8 +52,10 @@
             </td>
         </tr>
         {% endfor %}
-        {% endif %}
     </table>
+    {% else %}
+    <h2>No se han encontrado materias</h2>
+{% endif %}
 </div>
 <script>
     function goMenu() {
