@@ -82,3 +82,21 @@ def calcularClave(tabla, datos):
     else:
         datos["clave"] = datos["nombre"] + "_" + str(1)
     return datos
+
+
+def obtenerVariasArmasPorClave(clave):
+    datos = {}
+    if clave == "":
+        elementos = selectAll("armas")
+        if elementos is not None:
+            return elementos
+        else:
+            return datos
+    else:
+        elementos = selectAll("armas")
+        if elementos is not None:
+            for elemento in elementos:
+                if elementos[elemento]['clave'].startWith(clave):
+                    datos.
+        else:
+            return datos

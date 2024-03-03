@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, url_for, redirect
+from flask import Flask, render_template, request, url_for, redirect, jsonify
 from model import BBDD
 
 app = Flask(__name__)
@@ -144,6 +144,11 @@ def modificar_armas():
     return redirect(url_for('menu_mostrar_armas'))
 
 
+@app.route('/armas/<clave>', methods=['GET'])
+def filtrar_armas(clave):
+    datos = BBDD.obtenerVariasArmasPorClave(clave)
+    return jsonify(datos)
+
 # Empty
 
 def emptyMateria():
@@ -233,7 +238,7 @@ def meter_datos():
     i = 1
     while i <= 10:
         BBDD.insert("materia",
-                    {"clave":"sample_m_"+str(i),
+                    {"clave":"samplem_"+str(i),
                      "nombre":"Sample Materia"+str(i),
                      "descripcion":"Ejemplo",
                      "tipo":"magia",
@@ -246,7 +251,7 @@ def meter_datos():
                      "coste":str(i)})
 
         BBDD.insert("armas",
-                    {"clave":"sample_w_"+str(i),
+                    {"clave":"samplew_"+str(i),
                      "nombre": "Sample Arma" + str(i),
                      "descripcion": "Ejemplo",
                      "ataque":str(i),
@@ -260,6 +265,7 @@ def meter_datos():
         i+=1
 
     return redirect(url_for('menu_bbdd'))
+
 
 @app.route('/bbdd/borrar')
 def borrar_datos():

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -8,107 +9,128 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
+
 <body>
-  <button id="backButtom" aria-label="volver" onclick="goMenu()">
+    <button id="backButtom" aria-label="volver" onclick="goMenu()">
     <img src="../static/assets/images/volver.png" alt="volver">
   </button>
-  <div class="cuerpo">
-    <table border="1" >
-        <tr>
-            <th>Codigo</th>
-            <th>Nombre</th>
-            <th>Descripcion</th>
-            <th>Ataque</th>
-            <th>Ataque%</th>
-            <th>Magia</th>
-            <th>Coste</th>
-            <th>Slots</th>
-            <th>Materia 1</th>
-            <th>Materia 2</th>
-            <th>Materia 3</th>
-            <th>Materia 4</th>
-            <th>Materia 5</th>
-
-        {% for dato in datos %}
-        <tr data-aos="fade-left" data-aos-duration="1000">
-            <td>{{ datos[dato]["clave"] }}</td>
-            <td>{{ datos[dato]["nombre"] }}</td>
-            <td>{{ datos[dato]["descripcion"] }}</td>
-            <td>{{ datos[dato]["ataque"] }}</td>
-            <td>{{ datos[dato]["ataquePor"] }}</td>
-            <td>{{ datos[dato]["magia"] }}</td>
-            <td>{{ datos[dato]["coste"] }}</td>
-            <td>{{ datos[dato]["materia"] }}</td>
-            <td>{{ datos[dato]["slot1"] }}</td>
-            <td>{{ datos[dato]["slot2"] }}</td>
-            <td>{{ datos[dato]["slot3"] }}</td>
-            <td>{{ datos[dato]["slot4"] }}</td>
-            <td>{{ datos[dato]["slot5"] }}</td>
-            <td><button onclick="modificar(this)">Modificar</button> <button onclick="eliminar(this)">Eliminar</button></td>
-        </tr>
-        {% endfor %}
-    </table>
-  </div>
+    <div class="cuerpo" ng-controller="MainController">
+        <input type="text" id="busqueda" ng-model="clave" ng-change="buscarArma()">
+        <table border="1" id="tabla">
+            <thead>
+                <tr>
+                    <th>Codigo</th>
+                    <th>Nombre</th>
+                    <th>Descripcion</th>
+                    <th>Ataque</th>
+                    <th>Ataque%</th>
+                    <th>Magia</th>
+                    <th>Coste</th>
+                    <th>Slots</th>
+                    <th>Materia 1</th>
+                    <th>Materia 2</th>
+                    <th>Materia 3</th>
+                    <th>Materia 4</th>
+                    <th>Materia 5</th>
+            </thead>
+            <tbody>
+                <tr data-aos="fade-left" data-aos-duration="1000" ng-repeat="arma in armas">
+                    <td>{{ datos[dato]["clave"] }}</td>
+                    <td>{{ datos[dato]["nombre"] }}</td>
+                    <td>{{ datos[dato]["descripcion"] }}</td>
+                    <td>{{ datos[dato]["ataque"] }}</td>
+                    <td>{{ datos[dato]["ataquePor"] }}</td>
+                    <td>{{ datos[dato]["magia"] }}</td>
+                    <td>{{ datos[dato]["coste"] }}</td>
+                    <td>{{ datos[dato]["materia"] }}</td>
+                    <td>{{ datos[dato]["slot1"] }}</td>
+                    <td>{{ datos[dato]["slot2"] }}</td>
+                    <td>{{ datos[dato]["slot3"] }}</td>
+                    <td>{{ datos[dato]["slot4"] }}</td>
+                    <td>{{ datos[dato]["slot5"] }}</td>
+                    <td><button onclick="modificar(this)">Modificar</button> <button onclick="eliminar(this)">Eliminar</button></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
     <script>
-                function goMenu() {
-        window.location.href = "/armas";
+        function goMenu() {
+            window.location.href = "/armas";
         }
 
-      function eliminar(boton) {
-        var fila = boton.parentNode.parentNode;
-        var clave = fila.cells[0].innerText;
+        function eliminar(boton) {
+            var fila = boton.parentNode.parentNode;
+            var clave = fila.cells[0].innerText;
 
-        var datos = {
-          "clave": clave
-        };
+            var datos = {
+                "clave": clave
+            };
 
-        // Realizar la solicitud POST a "/armas/modificar"
-        var xhr = new XMLHttpRequest();
-        xhr.open("POST", "/armas/eliminar", true);
-        xhr.setRequestHeader("Content-Type", "application/json");
-        xhr.onreadystatechange = function () {
-          if (xhr.readyState === 4 && xhr.status === 200) {
-            // Manejar la respuesta aquí si es necesario
-            console.log(xhr.responseText);
-          }
-        };
-        xhr.send(JSON.stringify(datos));
-        recargarPagina();
-      }
+            // Realizar la solicitud POST a "/armas/modificar"
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "/armas/eliminar", true);
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    // Manejar la respuesta aquí si es necesario
+                    console.log(xhr.responseText);
+                }
+            };
+            xhr.send(JSON.stringify(datos));
+            recargarPagina();
+        }
 
-      function modificar(boton) {
-        var fila = boton.parentNode.parentNode;
-        var clave = fila.cells[0].innerText;
+        function modificar(boton) {
+            var fila = boton.parentNode.parentNode;
+            var clave = fila.cells[0].innerText;
 
-        var datos = {
-          "clave": clave
-        };
+            var datos = {
+                "clave": clave
+            };
 
-        // Realizar la solicitud GET a "/armas/modificar"
-        var xhr = new XMLHttpRequest();
-        xhr.open("GET", "/armas/modificar", true);
-        xhr.setRequestHeader("Content-Type", "application/json");
-        xhr.onreadystatechange = function () {
-          if (xhr.readyState === 4 && xhr.status === 200) {
-            // Manejar la respuesta aquí si es necesario
-            console.log(xhr.responseText);
-          }
-        };
+            // Realizar la solicitud GET a "/armas/modificar"
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", "/armas/modificar", true);
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    // Manejar la respuesta aquí si es necesario
+                    console.log(xhr.responseText);
+                }
+            };
 
-        const queryString = new URLSearchParams(datos).toString();
+            const queryString = new URLSearchParams(datos).toString();
 
-      window.location.href = `/armas/modificar?${queryString}`;
-      }
+            window.location.href = `/armas/modificar?${queryString}`;
+        }
     </script>
     <script>
         function recargarPagina() {
             setTimeout(function() {
-            location.reload();
-        }, 400);
+                location.reload();
+            }, 400);
         }
     </script>
     <script>
-      AOS.init();
+        AOS.init();
+    </script>
+    <script>
+        var app = angular.module('miApp', []);
+
+        app.controller('MainController', function($scope, $http) {
+            $scope.armas = [];
+
+            $scope.buscarArma = function() {
+                $http.get('/armas/' + $scope.clave)
+                    .then(function(response) {
+                        $scope.armas = response.data; // response.data es el JSON devuelto por el API
+                    }, function(error) {
+                        console.error('Error al cargar los datos:', error);
+                    });
+            };
+        });
     </script>
 </body>
+
 </html>
