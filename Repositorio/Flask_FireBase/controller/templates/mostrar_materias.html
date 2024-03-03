@@ -9,20 +9,21 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
 <body>
-  <audio id="start-sound">
+<audio id="start-sound">
     <source src="../static/assets/audio/menu_start.mp3" type="audio/mpeg">
     Tu navegador no soporta el elemento de audio.
-  </audio>
-  <audio id="select-sound">
+</audio>
+<audio id="select-sound">
     <source src="../static/assets/audio/menu_select.mp3" type="audio/mpeg">
     Tu navegador no soporta el elemento de audio.
-  </audio>
+</audio>
 
-  <button id="backButtom" aria-label="volver"  onclick="goMenu()">
+<button id="backButtom" aria-label="volver" onclick="goMenu()">
     <img src="../static/assets/images/volver.png" alt="volver">
-  </button>
-  <div class="cuerpo">
-    <table border="1" >
+</button>
+<div class="cuerpo">
+    <input type="text" id="busqueda">
+    <table border="1" id="tabla">
         <tr>
             <th>Codigo</th>
             <th>Nombre</th>
@@ -36,107 +37,127 @@
             <th>MaxPM%</th>
             <th>Coste</th>
             <th>Botones</th>
-        {% if datos != None %}
+            {% if datos != None %}
             {% for dato in datos %}
-            <tr data-aos="fade-left" data-aos-duration="1000">
-                <td>{{ datos[dato]["clave"] }}</td>
-                <td>{{ datos[dato]["nombre"] }}</td>
-                <td>{{ datos[dato]["descripcion"] }}</td>
-                {% if datos[dato]["tipo"] == "magia" %}
-                <td><img src="../static/assets/images/materiaVerde.png" title="Magia" height=100 width=100></td>
-                {% elif datos[dato]["tipo"] == "invocacion" %}
-                <td><img src="../static/assets/images/materiaRoja.png" title="Invocacion" height=100 width=100></td>
-                {% elif datos[dato]["tipo"] == "soporte" %}
-                <td><img src="../static/assets/images/materiaAzul.png" title="Soporte" height=100 width=100></td>
-                {% elif datos[dato]["tipo"] == "independiente" %}
-                <td><img src="../static/assets/images/materiaMorada.png" title="Independiente" height=100 width=100></td>
-                {% elif datos[dato]["tipo"] == "comando" %}
-                <td><img src="../static/assets/images/materiaAmarilla.png" title="Comando" height=100 width=100></td>
-                {% else %}
-                <td><img src="../static/assets/images/materia0.png" title="N/A" height=100 width=100></td>
-                {% endif %}
-                <td>{{ datos[dato]["nivel"] }}</td>
-                <td>{{ datos[dato]["experiencia"] }}</td>
-                <td>{{ datos[dato]["fuerza"] }}</td>
-                <td>{{ datos[dato]["magia"] }}</td>
-                <td>{{ datos[dato]["maxpg"] }}</td>
-                <td>{{ datos[dato]["maxpm"] }}</td>
-                <td>{{ datos[dato]["coste"] }}</td>
-                <td><button onclick="modificar(this)">Modificar</button> <button onclick="eliminar(this)">Eliminar</button></td>
-            </tr>
-            {% endfor %}
+        <tr data-aos="fade-left" data-aos-duration="1000">
+            <td>{{ datos[dato]["clave"] }}</td>
+            <td>{{ datos[dato]["nombre"] }}</td>
+            <td>{{ datos[dato]["descripcion"] }}</td>
+            {% if datos[dato]["tipo"] == "magia" %}
+            <td><img src="../static/assets/images/materiaVerde.png" title="Magia" height=100 width=100></td>
+            {% elif datos[dato]["tipo"] == "invocacion" %}
+            <td><img src="../static/assets/images/materiaRoja.png" title="Invocacion" height=100 width=100></td>
+            {% elif datos[dato]["tipo"] == "soporte" %}
+            <td><img src="../static/assets/images/materiaAzul.png" title="Soporte" height=100 width=100></td>
+            {% elif datos[dato]["tipo"] == "independiente" %}
+            <td><img src="../static/assets/images/materiaMorada.png" title="Independiente" height=100 width=100></td>
+            {% elif datos[dato]["tipo"] == "comando" %}
+            <td><img src="../static/assets/images/materiaAmarilla.png" title="Comando" height=100 width=100></td>
+            {% else %}
+            <td><img src="../static/assets/images/materia0.png" title="N/A" height=100 width=100></td>
+            {% endif %}
+            <td>{{ datos[dato]["nivel"] }}</td>
+            <td>{{ datos[dato]["experiencia"] }}</td>
+            <td>{{ datos[dato]["fuerza"] }}</td>
+            <td>{{ datos[dato]["magia"] }}</td>
+            <td>{{ datos[dato]["maxpg"] }}</td>
+            <td>{{ datos[dato]["maxpm"] }}</td>
+            <td>{{ datos[dato]["coste"] }}</td>
+            <td>
+                <button onclick="modificar(this)">Modificar</button>
+                <button onclick="eliminar(this)">Eliminar</button>
+            </td>
+        </tr>
+        {% endfor %}
         {% endif %}
     </table>
-  </div>
-    <script>
-      function eliminar(boton) {
-        var menuSound = document.getElementById("select-sound");
-        menuSound.pause();
-        menuSound.currentTime = 0;
-        menuSound.play();
+</div>
+<script>
+    function eliminar(boton) {
+      var menuSound = document.getElementById("select-sound");
+      menuSound.pause();
+      menuSound.currentTime = 0;
+      menuSound.play();
 
-        var fila = boton.parentNode.parentNode;
-        var clave = fila.cells[0].innerText;
+      var fila = boton.parentNode.parentNode;
+      var clave = fila.cells[0].innerText;
 
-        var datos = {
-          "clave": clave
-        };
+      var datos = {
+        "clave": clave
+      };
 
-        // Realizar la solicitud POST a "/materias/modificar"
-        var xhr = new XMLHttpRequest();
-        xhr.open("POST", "/materias/eliminar", true);
-        xhr.setRequestHeader("Content-Type", "application/json");
-        xhr.onreadystatechange = function () {
-          if (xhr.readyState === 4 && xhr.status === 200) {
-            // Manejar la respuesta aquí si es necesario
-            console.log(xhr.responseText);
-          }
-        };
-        xhr.send(JSON.stringify(datos));
-        recargarPagina();
-      }
-
-      function modificar(boton) {
-        var menuSound = document.getElementById("start-sound");
-        menuSound.pause();
-        menuSound.currentTime = 0;
-        menuSound.play();
-
-        var fila = boton.parentNode.parentNode;
-        var clave = fila.cells[0].innerText;
-
-        var datos = {
-          "clave": clave
-        };
-
-        // Realizar la solicitud GET a "/materias/modificar"
-        var xhr = new XMLHttpRequest();
-        xhr.open("GET", "/materias/modificar", true);
-        xhr.setRequestHeader("Content-Type", "application/json");
-        xhr.onreadystatechange = function () {
-          if (xhr.readyState === 4 && xhr.status === 200) {
-            // Manejar la respuesta aquí si es necesario
-            console.log(xhr.responseText);
-          }
-        };
-
-        const queryString = new URLSearchParams(datos).toString();
-
-      window.location.href = `/materias/modificar?${queryString}`;
-      }
-    </script>
-    <script>
-        function recargarPagina() {
-            setTimeout(function() {
-            location.reload();
-        }, 400);
+      // Realizar la solicitud POST a "/materias/modificar"
+      var xhr = new XMLHttpRequest();
+      xhr.open("POST", "/materias/eliminar", true);
+      xhr.setRequestHeader("Content-Type", "application/json");
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          // Manejar la respuesta aquí si es necesario
+          console.log(xhr.responseText);
         }
-                function goMenu() {
-        window.location.href = "/materias";
+      };
+      xhr.send(JSON.stringify(datos));
+      recargarPagina();
+    }
+
+    function modificar(boton) {
+      var menuSound = document.getElementById("start-sound");
+      menuSound.pause();
+      menuSound.currentTime = 0;
+      menuSound.play();
+
+      var fila = boton.parentNode.parentNode;
+      var clave = fila.cells[0].innerText;
+
+      var datos = {
+        "clave": clave
+      };
+
+      // Realizar la solicitud GET a "/materias/modificar"
+      var xhr = new XMLHttpRequest();
+      xhr.open("GET", "/materias/modificar", true);
+      xhr.setRequestHeader("Content-Type", "application/json");
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          // Manejar la respuesta aquí si es necesario
+          console.log(xhr.responseText);
         }
-    </script>
-    <script>
-      AOS.init();
-    </script>
+      };
+
+      const queryString = new URLSearchParams(datos).toString();
+
+    window.location.href = `/materias/modificar?${queryString}`;
+    }
+</script>
+<script>
+    function recargarPagina() {
+        setTimeout(function() {
+        location.reload();
+    }, 400);
+    }
+            function goMenu() {
+    window.location.href = "/materias";
+    }
+</script>
+<script>
+    AOS.init();
+</script>
+<script>
+    // Obtener la referencia del input de búsqueda
+        var inputBusqueda = document.getElementById('busqueda');
+        // Obtener todas las filas de la tabla excepto la primera (encabezados)
+        var filas = document.querySelectorAll('#tabla tr:not(:first-child)');
+
+        // Agregar evento de escucha al input de búsqueda
+        inputBusqueda.addEventListener('input', function() {
+            var filtro = inputBusqueda.value.toLowerCase(); // Convertir el texto de búsqueda a minúsculas
+            filas.forEach(function(fila) {
+                // Obtener el contenido de la primera celda de la fila
+                var contenido = fila.cells[0].textContent.toLowerCase(); // Ajusta el índice según el orden de tus columnas
+                // Mostrar la fila si la primera celda comienza con el texto de búsqueda, ocultarla de lo contrario
+                fila.style.display = contenido.startsWith(filtro) ? '' : 'none';
+            });
+        });
+</script>
 </body>
 </html>
