@@ -1,31 +1,39 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<!-- Título de la página -->
 	<title>Administrador de Personajes de Final Fantasy 7</title>
+	<!-- Enlace al archivo de estilos CSS -->
 	<link rel="stylesheet" type="text/css" href="static/assets/css/styles.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+
 </head>
 <body>
+	<!-- Elemento de audio para el sonido del menú -->
 	<audio id="menu-sound">
-    <source src="static/assets/audio/menu_display.mp3" type="audio/mpeg">
-    Tu navegador no soporta el elemento de audio.
-  	</audio>
+		<source src="static/assets/audio/menu_display.mp3" type="audio/mpeg">
+		Tu navegador no soporta el elemento de audio.
+	</audio>
+	<!-- Contenedor principal de la ventana de Final Fantasy 7 -->
 	<div class="ff7-window">
+		<!-- Título principal -->
 		<h1 class="ff7-text">Administrador de Personajes de Final Fantasy 7</h1>
-			<nav id="Menu">
-				<ul>
-					<li><a id="crear" href="personajes/crear">Crear Personaje</a></li>
-					<!--<li><a id="mostrar_todos" href="/personajes/mostrar">Gestión de Personajes</a></li>-->
-					<li><a href="javascript:void(0);" onclick="cerrarPestana()">Volver a la página principal</a></li>
-				</ul>
-			</nav>
+		<!-- Barra de navegación -->
+		<nav id="Menu">
+			<ul>
+				<!-- Enlaces de la barra de navegación -->
+				<li><a id="crear" href="personajes/crear">Crear Personaje</a></li>
+				<!--<li><a id="mostrar_todos" href="/personajes/mostrar">Gestión de Personajes</a></li>-->
+				<li><a href="javascript:void(0);" onclick="cerrarPestana()">Volver a la página principal</a></li>
+			</ul>
+		</nav>
 		<main class="ff7-text">
 			<!-- El contenido se mostrará aquí en función de la selección del usuario -->
 		</main>
 	</div>
- 	<div></div>
+
+	<!-- Scripts JavaScript -->
 	<script>
-		// Código JavaScript para manejar la lógica de cada opción
+		// Funciones JavaScript para manejar la lógica de cada opción
 		function crearMateria() {
 			// Código para crear una materia
 		}
@@ -55,31 +63,32 @@
 			event.target.style.backgroundImage = "none";
 			event.target.style.paddingLeft = "10px";
 		}
+		// Función para mostrar la imagen del personaje seleccionado
 		function showCharacterImage() {
-    var select = document.getElementById("character");
-    var selectedCharacter = select.options[select.selectedIndex].value;
-    document.getElementById("character-image").src = selectedCharacter;
-}
+			var select = document.getElementById("character");
+			var selectedCharacter = select.options[select.selectedIndex].value;
+			document.getElementById("character-image").src = selectedCharacter;
+		}
+		// Función para cerrar la pestaña actual
+		function cerrarPestana() {
+			window.close();
+		}
 	</script>
-  <script>
-  function cerrarPestana() {
-	  // Cierra la pestaña actual
-	  window.close();
-	}
-    document.addEventListener("DOMContentLoaded", function() {
-      var menuSound = document.getElementById("menu-sound");
-
-      document.querySelectorAll("*").forEach(function(element) {
-        element.addEventListener("mouseover", function() {
-          menuSound.pause();
-          menuSound.currentTime = 0;
-          menuSound.play();
-        });
-      });
-    });
-  </script>
-
-
+	<!-- Script para reproducir el sonido del menú al pasar el ratón sobre los elementos -->
+	<script>
+		document.addEventListener("DOMContentLoaded", function() {
+			// Obtener el elemento de audio del menú
+			var menuSound = document.getElementById("menu-sound");
+			// Agregar un evento de mouseover a todos los elementos de la página
+			document.querySelectorAll("*").forEach(function(element) {
+				element.addEventListener("mouseover", function() {
+					// Pausar y reiniciar el audio del menú
+					menuSound.pause();
+					menuSound.currentTime = 0;
+					menuSound.play();
+				});
+			});
+		});
+	</script>
 </body>
 </html>
-

@@ -1,17 +1,20 @@
+/* Estilos para los elementos de la lista del menú */
 #Menu ul li {
-	height: 40px;
-	line-height: 40px;
-	padding: 0 10px;
-	background-size: 30px 30px;
+  height: 40px;
+  line-height: 40px;
+  padding: 0 10px;
+  background-size: 30px 30px;
 }
 
+/* Estilos para los elementos de la lista del menú al pasar el ratón */
 #Menu ul li:hover {
-	background-image: url('../images/finger.png');
-	background-repeat: no-repeat;
-	background-position: 10px center;
-	padding-left: 40px;
+  background-image: url('../images/finger.png');
+  background-repeat: no-repeat;
+  background-position: 10px center;
+  padding-left: 40px;
 }
 
+/* Estilos para el contenedor con clase 'ff7-window' */
 .ff7-window {
   border: solid 2px #424542;
   border-radius: 7px;
@@ -27,10 +30,12 @@
   overflow: hidden;
 }
 
+/* Estilos para los elementos h1, p y ul dentro del contenedor 'ff7-window' */
 .ff7-window h1, .ff7-window p, .ff7-window ul {
   margin: 0 0 0 0;
 }
 
+/* Estilos para el texto, elementos h1, p y li dentro del contenedor 'ff7-window' */
 .ff7-text, .ff7-window h1, .ff7-window p, .ff7-window li {
   color: #eff1ff;
   font-family: Verdana, sans-serif;
@@ -41,18 +46,21 @@
   line-height: 2em;
 }
 
+/* Estilos para la lista dentro del contenedor 'ff7-window' */
 .ff7-window ul {
   list-style: none;
   margin-left: -7px;
   padding-left: 3.4em;
 }
 
+/* Estilos para los enlaces */
 a {
-    color: white; /* Mantener el color del texto como está */
-    text-decoration: none; /* Evitar que el enlace se subraye cuando está activo */
-    underline: none;
+  color: white; /* Mantener el color del texto como está */
+  text-decoration: none; /* Evitar que el enlace se subraye cuando está activo */
+  underline: none; /* Eliminar subrayado adicional */
 }
 
+/* Estilos generales del cuerpo del documento */
 body {
-  background: black;
+  background: black; /* Fondo negro */
 }

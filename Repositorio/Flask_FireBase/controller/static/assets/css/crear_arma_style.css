@@ -1,19 +1,21 @@
+/* Importamos la fuente Roboto desde Google Fonts */
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;500;700;900&display=swap");
+
+/* Reset de estilos generales */
 * {
-  
   margin: 0;
   padding: 0;
-  font-family: "Roboto", sans-serif;
+  font-family: "Roboto", sans-serif; /* Establecemos Roboto como la fuente predeterminada */
   box-sizing: border-box;
-  
 }
+
+/* Estilos del cuerpo del documento */
 body {
-  background: black;
-
+  background: black; /* Fondo negro */
 }
 
+/* Estilos para el contenedor principal 'cuerpo' */
 .cuerpo {
-
   margin-top: 50px;
   border: solid 2px #424542;
   border-radius: 7px;
@@ -27,7 +29,6 @@ body {
   z-index: 1;
   outline: none;
   overflow: hidden;
-
   color: #eff1ff;
   font-family: Verdana, sans-serif;
   text-shadow: 2px 2px #212421, 1px 1px #212021;
@@ -35,12 +36,14 @@ body {
   font-size: 1em;
   vertical-align: top;
   line-height: 2em;
-
 }
 
+/* Estilos para el textarea */
 textarea {
-  resize: none;
+  resize: none; /* Deshabilita la redimensionabilidad */
 }
+
+/* Estilos para los radio buttons */
 input[type="radio"] {
   appearance: none; /* Reset de estilos predeterminados */
   -webkit-appearance: none; /* Para navegadores basados en WebKit, como Chrome y Safari */
@@ -53,23 +56,19 @@ input[type="radio"] {
   outline: none; /* Elimina el contorno al hacer clic */
   background-color: transparent; /* Fondo transparente */
 }
+
+/* Estilos para los radio buttons seleccionados */
 input[type="radio"]:checked {
   background: var(--clr);
   color: #333;
   box-shadow: 0 0 10px var(--clr), 0 0 30px var(--clr), 0 0 50px var(--clr);
 }
-#imagenCambiante {
-  margin-left: 25px;
-}
 
-
-
-
+/* Estilos para el botón de submit */
 input[type="submit"] {
   position: relative;
   bottom: 10px;
   left: 10px;
-
   border: solid 2px #424542;
   border-radius: 7px;
   box-shadow: 1px 1px #e7dfe7, -1px -1px #e7dfe7, 1px -1px #e7dfe7, -1px 1px #e7dfe7, 0 -2px #9c9a9c, -2px 0 #7b757b, 0 2px #424542;
@@ -78,7 +77,6 @@ input[type="submit"] {
   z-index: 1;
   outline: none;
   overflow: hidden;
-
   color: #eff1ff;
   font-family: Verdana, sans-serif;
   text-shadow: 2px 2px #212421, 1px 1px #212021;
@@ -87,17 +85,25 @@ input[type="submit"] {
   vertical-align: top;
   line-height: 2em;
 }
+
+/* Estilos para el botón de submit al pasar el ratón */
 input[type="submit"]:hover {
   background: linear-gradient(45deg, rgb(0, 0, 128), rgb(0, 0, 80)); /* Cambiamos el gradiente en hover */
   box-shadow: 2px 2px #e7dfe7, -2px -2px #e7dfe7, 2px -2px #e7dfe7, -2px 2px #e7dfe7, 0 -4px #9c9a9c, -4px 0 #7b757b, 0 4px #424542; /* Cambiamos la sombra en hover */
   transform: scale(1.05); /* Hacemos que el botón se agrande ligeramente en hover */
 }
+
+/* Estilos para la clase 'izquierda' */
 .izquierda{
   float: left;
 }
+
+/* Estilos para la clase 'derecha' */
 .derecha{
   float: left;
 }
+
+/* Estilos para el menú radial animado */
 .Animated-Radial-Menu {
   margin-left: 10px;
   margin-right: 10px;
@@ -106,6 +112,8 @@ input[type="submit"]:hover {
   align-items: center;
   min-height: 10vh;
 }
+
+/* Estilos para el contenedor del menú */
 .Animated-Radial-Menu .menu {
   position: relative;
   width: 280px;
@@ -114,6 +122,8 @@ input[type="submit"]:hover {
   justify-content: center;
   align-items: center;
 }
+
+/* Estilos para el botón de toggle en el menú radial */
 .Animated-Radial-Menu .menu .toggle {
   position: absolute;
   width: 60px;
@@ -130,6 +140,8 @@ input[type="submit"]:hover {
   font-size: 2em;
   transition: transform 0.5s;
 }
+
+/* Estilos para los elementos del menú radial */
 .Animated-Radial-Menu .menu li {
   position: absolute;
   left: 0;
@@ -140,6 +152,7 @@ input[type="submit"]:hover {
   transform-origin: 140px;
 }
 
+/* Estilos para los enlaces dentro de los elementos del menú radial */
 .Animated-Radial-Menu .menu li a {
   display: flex;
   justify-content: center;
@@ -154,19 +167,24 @@ input[type="submit"]:hover {
   transition: 0.3s;
 }
 
+/* Estilos para los enlaces dentro de los elementos del menú radial al pasar el ratón */
 .Animated-Radial-Menu .menu li a:hover {
   background: var(--clr);
   color: #333;
   box-shadow: 0 0 10px var(--clr), 0 0 30px var(--clr), 0 0 50px var(--clr);
 }
 
+/* Estilos para el menú radial cuando está activo */
 .Animated-Radial-Menu .menu.active .toggle {
   transform: rotate(315deg);
 }
+
+/* Estilos para los elementos del menú radial cuando está activo */
 .Animated-Radial-Menu .menu.active li {
   transform: rotate(calc(72deg * var(--i))) translateX(0px);
 }
 
+/* Estilos para el botón de retroceso */
 #backButtom {
   position: relative;
   background: black;
@@ -178,6 +196,7 @@ input[type="submit"]:hover {
   outline: none; /* Elimina el resaltado al hacer clic en el botón */
 }
 
+/* Estilos para la imagen dentro del botón de retroceso al pasar el ratón */
 #backButtom img {
   position: absolute;
   top: 0;
@@ -187,15 +206,18 @@ input[type="submit"]:hover {
   transition: transform 0.2s; /* Agrega una transición suave al cambio de tamaño de la imagen */
 }
 
+/* Estilos para la imagen dentro del botón de retroceso al pasar el ratón */
 #backButtom:hover img {
   transform: scale(1.1); /* Aumenta ligeramente el tamaño de la imagen al pasar el ratón sobre ella */
 }
 
+/* Estilos para la imagen dentro del botón de retroceso al hacer clic */
 #backButtom:active img {
   transform: scale(0.9); /* Reduce ligeramente el tamaño de la imagen cuando se presiona el botón */
 }
 
+/* Estilos específicos para un elemento con id 'env' */
 #env {
-    margin-top: 15px;
-    margin-left: -10px;
+  margin-top: 15px;
+  margin-left: -10px;
 }

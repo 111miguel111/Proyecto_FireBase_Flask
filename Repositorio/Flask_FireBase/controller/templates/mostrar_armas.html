@@ -2,175 +2,198 @@
 <html lang="en">
 
 <head>
+    <!-- Definición del título del documento -->
     <meta charset="UTF-8">
     <title>Title</title>
+    <!-- Enlace al archivo CSS para estilos -->
     <link rel="stylesheet" type="text/css" href="../static/assets/css/mostrar_materias_style.css">
+    <!-- Inclusión de la biblioteca AOS.js para animaciones -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- Enlace al archivo CSS de AOS para animaciones -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
 
 <body>
+    <!-- Elemento de audio para efectos de sonido -->
     <audio id="start-sound">
         <source src="../static/assets/audio/menu_start.mp3" type="audio/mpeg">
         Tu navegador no soporta el elemento de audio.
     </audio>
+    <!-- Elemento de audio para efectos de sonido -->
     <audio id="select-sound">
         <source src="../static/assets/audio/menu_select.mp3" type="audio/mpeg">
         Tu navegador no soporta el elemento de audio.
     </audio>
 
+    <!-- Botón de retroceso -->
+    <button id="backButtom" aria-label="volver" onclick="goMenu()">
+        <img src="../static/assets/images/volver.png" alt="volver">
+    </button>
 
-<button id="backButtom" aria-label="volver" onclick="goMenu()">
-    <img src="../static/assets/images/volver.png" alt="volver">
-</button>
-<div class="cuerpo">
-    {% if datos != None %}
-    <input type="text" id="busqueda" placeholder="Buscar">
-    <table border="1" id="tabla">
-        <tr>
-            <th>Codigo</th>
-            <th>Nombre</th>
-            <th>Descripcion</th>
-            <th>Ataque</th>
-            <th>Ataque%</th>
-            <th>Magia</th>
-            <th>Coste</th>
-            <th>Slots</th>
-            <th>Materia 1</th>
-            <th>Materia 2</th>
-            <th>Materia 3</th>
-            <th>Materia 4</th>
-            <th>Materia 5</th>
-            {% for dato in datos %}
-        <tr data-aos="fade-left" data-aos-duration="1000">
-            <td>{{ datos[dato]["clave"] }}</td>
-            <td>{{ datos[dato]["nombre"] }}</td>
-            <td>{{ datos[dato]["descripcion"] }}</td>
-            <td>{{ datos[dato]["ataque"] }}</td>
-            <td>{{ datos[dato]["ataquePor"] }}</td>
-            <td>{{ datos[dato]["magia"] }}</td>
-            <td>{{ datos[dato]["coste"] }}</td>
-            <td>{{ datos[dato]["materia"] }}</td>
-            <td>{{ datos[dato]["slot1"] }}</td>
-            <td>{{ datos[dato]["slot2"] }}</td>
-            <td>{{ datos[dato]["slot3"] }}</td>
-            <td>{{ datos[dato]["slot4"] }}</td>
-            <td>{{ datos[dato]["slot5"] }}</td>
-            <td>
-                <button onclick="modificar(this)">Modificar</button>
-                <button onclick="eliminar(this)">Eliminar</button>
-            </td>
-        </tr>
-        {% endfor %}
-    </table>
-    {% else %}
-    <h2>No se han encontrado armas</h2>
-{% endif %}
-</div>
-<script>
-    function goMenu() {
-        window.location.href = "/armas";
-    }
+    <!-- Contenedor principal -->
+    <div class="cuerpo">
+        {% if datos != None %}
+        <!-- Input para búsqueda -->
+        <input type="text" id="busqueda" placeholder="Buscar">
+        <!-- Tabla para mostrar los datos -->
+        <table border="1" id="tabla">
+            <tr>
+                <th>Codigo</th>
+                <th>Nombre</th>
+                <th>Descripcion</th>
+                <th>Ataque</th>
+                <th>Ataque%</th>
+                <th>Magia</th>
+                <th>Coste</th>
+                <th>Slots</th>
+                <th>Materia 1</th>
+                <th>Materia 2</th>
+                <th>Materia 3</th>
+                <th>Materia 4</th>
+                <th>Materia 5</th>
+                {% for dato in datos %}
+            <tr data-aos="fade-left" data-aos-duration="1000">
+                <td>{{ datos[dato]["clave"] }}</td>
+                <td>{{ datos[dato]["nombre"] }}</td>
+                <td>{{ datos[dato]["descripcion"] }}</td>
+                <td>{{ datos[dato]["ataque"] }}</td>
+                <td>{{ datos[dato]["ataquePor"] }}</td>
+                <td>{{ datos[dato]["magia"] }}</td>
+                <td>{{ datos[dato]["coste"] }}</td>
+                <td>{{ datos[dato]["materia"] }}</td>
+                <td>{{ datos[dato]["slot1"] }}</td>
+                <td>{{ datos[dato]["slot2"] }}</td>
+                <td>{{ datos[dato]["slot3"] }}</td>
+                <td>{{ datos[dato]["slot4"] }}</td>
+                <td>{{ datos[dato]["slot5"] }}</td>
+                <td>
+                    <!-- Botones para modificar y eliminar -->
+                    <button onclick="modificar(this)">Modificar</button>
+                    <button onclick="eliminar(this)">Eliminar</button>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% else %}
+        <!-- Mensaje si no se encuentran armas -->
+        <h2>No se han encontrado armas</h2>
+        {% endif %}
+    </div>
 
-    function eliminar(boton) {
-        var menuSound = document.getElementById("select-sound");
-        menuSound.pause();
-        menuSound.currentTime = 0;
-         menuSound.play();
+    <!-- Script para la lógica de eliminar y modificar -->
+    <script>
+        // Función para volver al menú principal
+        function goMenu() {
+            window.location.href = "/armas";
+        }
 
-        var fila = boton.parentNode.parentNode;
-        var clave = fila.cells[0].innerText;
+        // Función para eliminar un elemento
+        function eliminar(boton) {
+            var menuSound = document.getElementById("select-sound");
+            menuSound.pause();
+            menuSound.currentTime = 0;
+            menuSound.play();
 
-        var datos = {
-            "clave": clave
-        };
+            var fila = boton.parentNode.parentNode;
+            var clave = fila.cells[0].innerText;
 
-        // Realizar la solicitud POST a "/armas/modificar"
-        var xhr = new XMLHttpRequest();
-        xhr.open("POST", "/armas/eliminar", true);
-        xhr.setRequestHeader("Content-Type", "application/json");
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState === 4 && xhr.status === 200) {
-                // Manejar la respuesta aquí si es necesario
-                console.log(xhr.responseText);
-            }
-        };
-        xhr.send(JSON.stringify(datos));
-        recargarPagina();
-    }
+            var datos = {
+                "clave": clave
+            };
 
-    function modificar(boton) {
-        var menuSound = document.getElementById("start-sound");
-        menuSound.pause();
-        menuSound.currentTime = 0;
-        menuSound.play();
-        var fila = boton.parentNode.parentNode;
-        var clave = fila.cells[0].innerText;
+            // Realizar la solicitud POST a "/armas/modificar"
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "/armas/eliminar", true);
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    // Manejar la respuesta aquí si es necesario
+                    console.log(xhr.responseText);
+                }
+            };
+            xhr.send(JSON.stringify(datos));
+            recargarPagina();
+        }
 
-        var datos = {
-            "clave": clave
-        };
+        // Función para modificar un elemento
+        function modificar(boton) {
+            var menuSound = document.getElementById("start-sound");
+            menuSound.pause();
+            menuSound.currentTime = 0;
+            menuSound.play();
+            var fila = boton.parentNode.parentNode;
+            var clave = fila.cells[0].innerText;
 
-        // Realizar la solicitud GET a "/armas/modificar"
-        var xhr = new XMLHttpRequest();
-        xhr.open("GET", "/armas/modificar", true);
-        xhr.setRequestHeader("Content-Type", "application/json");
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState === 4 && xhr.status === 200) {
-                // Manejar la respuesta aquí si es necesario
-                console.log(xhr.responseText);
-            }
-        };
+            var datos = {
+                "clave": clave
+            };
 
-        const queryString = new URLSearchParams(datos).toString();
+            // Realizar la solicitud GET a "/armas/modificar"
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", "/armas/modificar", true);
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    // Manejar la respuesta aquí si es necesario
+                    console.log(xhr.responseText);
+                }
+            };
 
-        window.location.href = `/armas/modificar?${queryString}`;
-    }
-</script>
-<script>
-    function recargarPagina() {
-        setTimeout(function() {
-            location.reload();
-        }, 400);
-    }
-</script>
-<script>
-    AOS.init();
-</script>
-<script>
-    // Obtener la referencia del input de búsqueda
-    var inputBusqueda = document.getElementById('busqueda');
-    // Obtener todas las filas de la tabla excepto la primera (encabezados)
-    var filas = document.querySelectorAll('#tabla tr:not(:first-child)');
+            const queryString = new URLSearchParams(datos).toString();
 
-    // Agregar evento de escucha al input de búsqueda
-    inputBusqueda.addEventListener('input', function() {
-        var filtro = inputBusqueda.value.trim().toLowerCase(); // Convertir el texto de búsqueda a minúsculas
-        filas.forEach(function(fila) {
-            var mostrarFila = false; // Bandera para determinar si mostrar la fila
-            // Recorrer todas las celdas de la fila
-            Array.from(fila.cells).forEach(function(celda) {
-                var contenido = celda.textContent.trim().toLowerCase();
-                // Verificar si alguna celda comienza con el texto de búsqueda
-                if (contenido.startsWith(filtro)) {
-                    mostrarFila = true;
+            window.location.href = `/armas/modificar?${queryString}`;
+        }
+    </script>
+
+    <!-- Script para recargar la página -->
+    <script>
+        function recargarPagina() {
+            setTimeout(function() {
+                location.reload();
+            }, 400);
+        }
+    </script>
+
+    <!-- Script para inicializar AOS -->
+    <script>
+        AOS.init();
+    </script>
+
+    <!-- Script para la funcionalidad de búsqueda -->
+    <script>
+        // Obtener la referencia del input de búsqueda
+        var inputBusqueda = document.getElementById('busqueda');
+        // Obtener todas las filas de la tabla excepto la primera (encabezados)
+        var filas = document.querySelectorAll('#tabla tr:not(:first-child)');
+
+        // Agregar evento de escucha al input de búsqueda
+        inputBusqueda.addEventListener('input', function() {
+            var filtro = inputBusqueda.value.trim().toLowerCase(); // Convertir el texto de búsqueda a minúsculas
+            filas.forEach(function(fila) {
+                var mostrarFila = false; // Bandera para determinar si mostrar la fila
+                // Recorrer todas las celdas de la fila
+                Array.from(fila.cells).forEach(function(celda) {
+                    var contenido = celda.textContent.trim().toLowerCase();
+                    // Verificar si alguna celda comienza con el texto de búsqueda
+                    if (contenido.includes(filtro)) {
+                        mostrarFila = true;
+                    }
+                });
+                // Mostrar u ocultar la fila según la bandera
+                fila.style.display = mostrarFila ? '' : 'none';
+                // Ajustar la animación AOS solo si la fila se muestra
+                if (mostrarFila) {
+                    fila.setAttribute('data-aos', 'fade-left');
+                    fila.setAttribute('data-aos-duration', '1000');
+                } else {
+                    fila.removeAttribute('data-aos');
+                    fila.removeAttribute('data-aos-duration');
                 }
             });
-            // Mostrar u ocultar la fila según la bandera
-            fila.style.display = mostrarFila ? '' : 'none';
-            // Ajustar la animación AOS solo si la fila se muestra
-            if (mostrarFila) {
-                fila.setAttribute('data-aos', 'fade-left');
-                fila.setAttribute('data-aos-duration', '1000');
-            } else {
-                fila.removeAttribute('data-aos');
-                fila.removeAttribute('data-aos-duration');
-            }
+            // Reiniciar la animación AOS después de actualizar la página
+            AOS.refresh();
         });
-        // Reiniciar la animación AOS después de actualizar la página
-        AOS.refresh();
-    });
-</script>
+    </script>
 </body>
 
 </html>

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<<!DOCTYPE html>
 <html lang="es">
 
 <head>
@@ -6,15 +6,21 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <!-- Enlace al archivo CSS -->
     <link rel="stylesheet" href="../static/assets/css/Animated-Radial-Menu.css">
+
+    <!-- Scripts de ionicons para iconos -->
     <script defer type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script defer nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+    <!-- Script personalizado -->
     <script defer src="../static/assets/js/Animated-Radial-Menu.js"></script>
 
     <title>Formulario</title>
 </head>
 
 <body>
+    <!-- Elementos de audio para sonidos -->
     <audio id="start-sound">
         <source src="../static/assets/audio/menu_start.mp3" type="audio/mpeg">
         Tu navegador no soporta el elemento de audio.
@@ -23,57 +29,70 @@
         <source src="../static/assets/audio/menu_error.mp3" type="audio/mpeg">
         Tu navegador no soporta el elemento de audio.
     </audio>
-  <button id="backButtom" aria-label="volver" onclick="goToMaterias()">
-    <img src="../static/assets/images/volver.png" alt="volver">
-  </button>
+
+    <!-- Botón de retroceso -->
+    <button id="backButtom" aria-label="volver" onclick="goToMaterias()">
+        <img src="../static/assets/images/volver.png" alt="volver">
+    </button>
+
+    <!-- Contenedor principal del formulario -->
     <div class="cuerpo">
         <form action="#" method="POST" onsubmit="return validarFormulario();">
 
-            
+            <!-- Contenedor izquierdo -->
             <div class="izquierda">
-            <label for="nivel">Tipo:</label><br>
-            <div class="Animated-Radial-Menu">
-                
-                <ul class="menu">
-                    <div class="toggle"><ion-icon name="add-outline"></ion-icon></div>
-                    <li style="--i: 0; --clr: #ff2972;">
-                        <a href="#">
-                            <input type="radio" id="invocacion" name="tipo" value="invocacion" onchange="cambiarImagen('../static/assets/images/materiaRoja.png')">
-                        </a>
-                    </li>
-                    <li style="--i: 1; --clr: #fee800;">
-                        <a href="#">
-                            <input type="radio" id="comando" name="tipo" value="comando" onchange="cambiarImagen('../static/assets/images/materiaAmarilla.png')">
-                        </a>
-                    </li>
-                    <li style="--i: 2; --clr: #04fc43;">
-                        <a href="#">
-                            <input type="radio" id="magia" name="tipo" value="magia" onchange="cambiarImagen('../static/assets/images/materiaVerde.png')">
-                        </a>
-                    </li>
-                    <li style="--i: 3; --clr: #00b0fe;">
-                        <a href="#">
-                            <input type="radio" id="soporte" name="tipo" value="soporte" onchange="cambiarImagen('../static/assets/images/materiaAzul.png')">
-                        </a>
-                    </li>
-                    <li style="--i: 4; --clr: #a529ff;">
-                        <a href="#">
-                            <input type="radio" id="independiente" name="tipo" value="independiente" onchange="cambiarImagen('../static/assets/images/materiaMorada.png')">
-                        </a>
-                    </li>
-                </ul>
-
+                <!-- Etiqueta para el tipo -->
+                <label for="nivel">Tipo:</label><br>
+                <!-- Menú radial animado -->
+                <div class="Animated-Radial-Menu">
+                    <ul class="menu">
+                        <!-- Opciones del menú -->
+                        <div class="toggle"><ion-icon name="add-outline"></ion-icon></div>
+                        <li style="--i: 0; --clr: #ff2972;">
+                            <a href="#">
+                                <input type="radio" id="invocacion" name="tipo" value="invocacion" onchange="cambiarImagen('../static/assets/images/materiaRoja.png')">
+                            </a>
+                        </li>
+                        <li style="--i: 1; --clr: #fee800;">
+                            <a href="#">
+                                <input type="radio" id="comando" name="tipo" value="comando" onchange="cambiarImagen('../static/assets/images/materiaAmarilla.png')">
+                            </a>
+                        </li>
+                        <li style="--i: 2; --clr: #04fc43;">
+                            <a href="#">
+                                <input type="radio" id="magia" name="tipo" value="magia" onchange="cambiarImagen('../static/assets/images/materiaVerde.png')">
+                            </a>
+                        </li>
+                        <li style="--i: 3; --clr: #00b0fe;">
+                            <a href="#">
+                                <input type="radio" id="soporte" name="tipo" value="soporte" onchange="cambiarImagen('../static/assets/images/materiaAzul.png')">
+                            </a>
+                        </li>
+                        <li style="--i: 4; --clr: #a529ff;">
+                            <a href="#">
+                                <input type="radio" id="independiente" name="tipo" value="independiente" onchange="cambiarImagen('../static/assets/images/materiaMorada.png')">
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- Imagen cambiante -->
+                <img id="imagenCambiante" src="../static/assets/images/materia0.png">
             </div>
-            <img id="imagenCambiante" src="../static/assets/images/materia0.png" >
-        </div>
+
+            <!-- Contenedor derecho -->
             <div class="derecha">
+                <!-- Campo oculto para la clave -->
                 <input type="hidden" id="clave" name="clave" value="{{datos.clave}}">
 
+                <!-- Campo de entrada para el nombre -->
                 <label for="nombre">Nombre:</label><br>
                 <input type="text" id="nombre" name="nombre" value="{{datos.nombre}}"><br>
 
+                <!-- Campo de entrada para la descripción -->
                 <label for="descripcion">Descripción:</label><br>
                 <textarea id="descripcion" name="descripcion">{{datos.descripcion}}</textarea><br>
+
+                <!-- Selector de nivel -->
                 <label for="nivel">Nivel:</label><br>
                 <select id="nivel" name="nivel" value="{{datos.nivel}}">
                     <option value="1">1</option>
@@ -83,31 +102,40 @@
                     <option value="5">5</option>
                 </select><br>
 
+                <!-- Campo de entrada para la experiencia -->
                 <label for="experiencia">Experiencia:</label><br>
                 <input type="number" id="experiencia" name="experiencia" value="{{datos.experiencia}}" min="1"><br>
 
+                <!-- Campo de entrada para la fuerza -->
                 <label for="fuerza">Fuerza:</label><br>
                 <input type="number" id="fuerza" name="fuerza" value="{{datos.fuerza}}" min="1" max="100"><br>
 
+                <!-- Campo de entrada para la magia -->
                 <label for="magia">Magia:</label><br>
                 <input type="number" id="magias" name="magia" value="{{datos.magia}}" min="1" max="100"><br>
 
+                <!-- Campo de entrada para el MaxPG -->
                 <label for="maxpg">MaxPG%:</label><br>
                 <input type="number" id="maxpg" name="maxpg" value="{{datos.maxpg}}" min="1" max="100"><br>
 
+                <!-- Campo de entrada para el MaxPM -->
                 <label for="maxpm">MaxPM%:</label><br>
                 <input type="number" id="maxpm" name="maxpm" value="{{datos.maxpm}}" min="1" max="100"><br>
 
+                <!-- Campo de entrada para el coste -->
                 <label for="coste">Coste:</label><br>
                 <input type="number" id="coste" name="coste" value="{{datos.coste}}" min="1" max="100"><br>
-                
             </div>
+
+            <!-- Botón de envío del formulario -->
             <input type="submit" value="Enviar">
         </form>
     </div>
+
+    <!-- Script para redirigir al menú de materias -->
     <script>
         function goToMaterias() {
-        window.location.href = "/materias";
+            window.location.href = "/materias";
         }
     </script>
 </body>

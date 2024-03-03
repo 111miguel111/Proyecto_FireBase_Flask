@@ -8,104 +8,122 @@
 <title>Creacción de Personajes de Final Fantasy 7</title>
 </head>
 <body>
+  <!-- Botón para volver al menú anterior -->
   <button id="backButtom" aria-label="volver" onclick="goMenu()">
     <img src="../static/assets/images/volver.png" alt="volver">
   </button>
-<div class="ff7-window">
+  <!-- Contenedor principal -->
+  <div class="ff7-window">
+    <!-- Título del formulario -->
     <h1 class="ff7-text">Creacción de Personajes</h1>
+    <!-- Selector de personajes -->
     <div class="character-select">
         <label for="character">Selecciona una imagen:</label>
+        <!-- Selector de imágenes de personajes -->
         <select id="character" onchange="showCharacterImage()">
-		<option value="../static/assets/images/personajes/desconocido.png">Desconocido</option>
+		    <!-- Opciones para cada personaje -->
+            <option value="../static/assets/images/personajes/desconocido.png">Desconocido</option>
             <option value="../static/assets/images/personajes/antonio.png">Antonio</option>
             <option value="../static/assets/images/personajes/roberto.png">Roberto</option>
             <option value="../static/assets/images/personajes/miguel.png">Miguel</option>
             <option value="../static/assets/images/personajes/sergio.png">Sergio</option>
         </select>
     </div>
+    <!-- Imagen del personaje seleccionado -->
     <img src="../static/assets/images/personajes/desconocido.png" alt="Imagen de personaje" class="character-image" id="character-image">
+    <!-- Detalles del personaje -->
     <div class="character-details">
-<div class="character-details">
         <div>
             <label for="nombre">Nombre:</label>
+            <!-- Campo de entrada para el nombre del personaje -->
             <input type="text" id="nombre">
         </div>
         <div>
             <label for="nivel">Nivel:</label>
+            <!-- Campo de entrada para el nivel del personaje -->
             <input type="text" id="nivel">
         </div>
         <div>
             <label for="hp">HP:</label>
+            <!-- Campo de entrada para los puntos de vida del personaje -->
             <input type="text" id="hp">
         </div>
         <div>
             <label for="mp">MP:</label>
+            <!-- Campo de entrada para los puntos de magia del personaje -->
             <input type="text" id="mp">
         </div>
         <div>
             <label for="arma">Arma Equipada:</label>
+            <!-- Selector de armas -->
             <select id="arma">
-                <!-- Options will be populated dynamically from Firebase -->
+                <!-- Opciones serán cargadas dinámicamente desde Firebase -->
             </select>
         </div>
+        <!-- Botón para crear el personaje -->
 		<div>
-		<button onclick="crearPersonaje()">Crear</button>
+		    <button onclick="crearPersonaje()">Crear</button>
 		</div>
     </div>
-</div>
-    </div>
+  </div>
 
-    <script src="https://www.gstatic.com/firebasejs/9.6.5/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.5/firebase-database.js"></script>
-    <script>
-        function goBack() {
-            window.history.back(); // Esta función de JavaScript permite volver a la página anterior
-        }
+  <!-- Script de Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/9.6.5/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.5/firebase-database.js"></script>
+  <!-- Inicialización de Firebase -->
+  <script>
+      // Función para retroceder
+      function goBack() {
+          window.history.back(); // Esta función de JavaScript permite volver a la página anterior
+      }
 
-        // Configuración de Firebase
-        const firebaseConfig = {
-            apiKey: "YOUR_API_KEY",
-            authDomain: "YOUR_AUTH_DOMAIN",
-            databaseURL: "YOUR_DATABASE_URL",
-            projectId: "YOUR_PROJECT_ID",
-            storageBucket: "YOUR_STORAGE_BUCKET",
-            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-            appId: "YOUR_APP_ID",
-            measurementId: "YOUR_MEASUREMENT_ID"
-        };
-        // Inicializar Firebase
-        firebase.initializeApp(firebaseConfig);
-        const database = firebase.database();
+      // Configuración de Firebase
+      const firebaseConfig = {
+          apiKey: "YOUR_API_KEY",
+          authDomain: "YOUR_AUTH_DOMAIN",
+          databaseURL: "YOUR_DATABASE_URL",
+          projectId: "YOUR_PROJECT_ID",
+          storageBucket: "YOUR_STORAGE_BUCKET",
+          messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+          appId: "YOUR_APP_ID",
+          measurementId: "YOUR_MEASUREMENT_ID"
+      };
+      // Inicializar Firebase
+      firebase.initializeApp(firebaseConfig);
+      const database = firebase.database();
 
-        // Referencia a la colección de armas en la base de datos
-        const armasRef = database.ref('armas');
+      // Referencia a la colección de armas en la base de datos
+      const armasRef = database.ref('armas');
 
-        // Función para cargar las armas desde Firebase
-        function cargarArmas() {
-            armasRef.once('value', snapshot => {
-                const armas = snapshot.val();
-                const armaSelect = document.getElementById('arma');
-                armaSelect.innerHTML = '';
-                for (let arma in armas) {
-                    const option = document.createElement('option');
-                    option.value = armas[arma].nombre;
-                    option.textContent = armas[arma].nombre;
-                    armaSelect.appendChild(option);
-                }
-            });
-        }
+      // Función para cargar las armas desde Firebase
+      function cargarArmas() {
+          armasRef.once('value', snapshot => {
+              const armas = snapshot.val();
+              const armaSelect = document.getElementById('arma');
+              armaSelect.innerHTML = '';
+              for (let arma in armas) {
+                  const option = document.createElement('option');
+                  option.value = armas[arma].nombre;
+                  option.textContent = armas[arma].nombre;
+                  armaSelect.appendChild(option);
+              }
+          });
+      }
 
-        // Llamar a la función para cargar las armas al cargar la página
-        cargarArmas();
+      // Llamar a la función para cargar las armas al cargar la página
+      cargarArmas();
 
-        function showCharacterImage() {
-        var select = document.getElementById("character");
-        var selectedCharacter = select.options[select.selectedIndex].value;
-        document.getElementById("character-image").src = selectedCharacter;
-    }
-        function goMenu() {
-        window.location.href = "/personajes";
-        }
-    </script>
-    </body>
+      // Función para mostrar la imagen del personaje seleccionado
+      function showCharacterImage() {
+          var select = document.getElementById("character");
+          var selectedCharacter = select.options[select.selectedIndex].value;
+          document.getElementById("character-image").src = selectedCharacter;
+      }
+
+      // Función para volver al menú de personajes
+      function goMenu() {
+          window.location.href = "/personajes";
+      }
+  </script>
+</body>
 </html>

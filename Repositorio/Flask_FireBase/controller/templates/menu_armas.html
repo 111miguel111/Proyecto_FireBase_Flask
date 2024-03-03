@@ -2,77 +2,77 @@
 <html>
 <head>
 	<title>Administrador de Materia de Final Fantasy 7</title>
+	<!-- Enlace al archivo de estilos CSS -->
 	<link rel="stylesheet" type="text/css" href="static/assets/css/styles.css">
+	<!-- Inclusión de AngularJS -->
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
 </head>
 <body>
- <audio id="menu-sound">
+<!-- Reproductor de audio para los sonidos del menú -->
+<audio id="menu-sound">
     <source src="static/assets/audio/menu_display.mp3" type="audio/mpeg">
+    <!-- Mensaje de respaldo para navegadores que no soportan el elemento de audio -->
     Tu navegador no soporta el elemento de audio.
-  </audio>
-	<div class="ff7-window">
-		<h1 class="ff7-text">Administrador de Armas de Final Fantasy 7</h1>
-			<nav id="Menu">
-				<ul>
-					<li><a id="crear" href="/armas/crear">Crear Arma</a></li>
-					<li><a id="mostrar_todos" href="/armas/mostrar">Gestión de armas</a></li>
-					<li><a href="javascript:void(0);" onclick="cerrarPestana()">Volver a la página principal</a></li>
-				</ul>
-			</nav>
-		<main class="ff7-text">
-			<!-- El contenido se mostrará aquí en función de la selección del usuario -->
-		</main>
-	</div>
- 	<div></div>
-	<script>
-		// Código JavaScript para manejar la lógica de cada opción
-		function crearMateria() {
-			// Código para crear una materia
-		}
-		function buscarMateria() {
-			// Código para buscar una materia
-		}
-		function eliminarMateria() {
-			// Código para eliminar una materia
-		}
-		function modificarMateria() {
-			// Código para modificar una materia
-		}
-		function mostrarTodasLasMaterias() {
-			// Código para mostrar todas las materias
-		}
-		function volverAPaginaPrincipal() {
-			window.location.href = "index.html";
-		}
-		function mostrarImagen(event) {
-			const imagen = event.target.dataset.image;
-			event.target.style.backgroundImage = `url(${imagen})`;
-			event.target.style.backgroundRepeat = "no-repeat";
-			event.target.style.backgroundPosition = "10px center";
-			event.target.style.paddingLeft = "40px";
-		}
-		function ocultarImagen(event) {
-			event.target.style.backgroundImage = "none";
-			event.target.style.paddingLeft = "10px";
-		}
-		function cerrarPestana() {
-		  // Cierra la pestaña actual
-		  window.close();
-		}
-	</script>
-  <script>
+</audio>
+<!-- Contenedor principal de la interfaz -->
+<div class="ff7-window">
+	<!-- Encabezado con el título de la aplicación -->
+	<h1 class="ff7-text">Administrador de Armas de Final Fantasy 7</h1>
+		<!-- Barra de navegación -->
+		<nav id="Menu">
+			<ul>
+				<!-- Opciones del menú -->
+				<li><a id="crear" href="/armas/crear">Crear Arma</a></li>
+				<li><a id="mostrar_todos" href="/armas/mostrar">Gestión de armas</a></li>
+				<li><a href="javascript:void(0);" onclick="cerrarPestana()">Volver a la página principal</a></li>
+			</ul>
+		</nav>
+	<!-- Contenedor principal de contenido -->
+	<main class="ff7-text">
+		<!-- El contenido se mostrará aquí en función de la selección del usuario -->
+	</main>
+</div>
+<!-- Script de JavaScript -->
+<script>
+
+	function volverAPaginaPrincipal() {
+		// Redirige a la página principal
+		window.location.href = "index.html";
+	}
+	function mostrarImagen(event) {
+		// Muestra la imagen correspondiente al elemento al que se le pasa el mouse
+		const imagen = event.target.dataset.image;
+		event.target.style.backgroundImage = `url(${imagen})`;
+		event.target.style.backgroundRepeat = "no-repeat";
+		event.target.style.backgroundPosition = "10px center";
+		event.target.style.paddingLeft = "40px";
+	}
+	function ocultarImagen(event) {
+		// Oculta la imagen cuando el mouse deja de estar sobre el elemento
+		event.target.style.backgroundImage = "none";
+		event.target.style.paddingLeft = "10px";
+	}
+	function cerrarPestana() {
+	  // Cierra la pestaña actual
+	  window.close();
+	}
+</script>
+<!-- Script adicional para reproducir un sonido al pasar el mouse sobre los elementos -->
+<script>
     document.addEventListener("DOMContentLoaded", function() {
+      // Obtiene el elemento de audio para el sonido del menú
       var menuSound = document.getElementById("menu-sound");
 
+      // Agrega un evento de mouseover a todos los elementos del DOM
       document.querySelectorAll("*").forEach(function(element) {
         element.addEventListener("mouseover", function() {
+          // Pausa y reinicia el sonido del menú cada vez que se pasa el mouse sobre un elemento
           menuSound.pause();
           menuSound.currentTime = 0;
           menuSound.play();
         });
       });
     });
-  </script>
-
+</script>
 </body>
 </html>

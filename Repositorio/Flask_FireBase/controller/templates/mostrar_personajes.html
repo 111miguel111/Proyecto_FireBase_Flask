@@ -1,18 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Definición del juego de caracteres y título del documento -->
     <meta charset="UTF-8">
     <title>Title</title>
+    <!-- Enlace al archivo CSS para estilos -->
     <link rel="stylesheet" type="text/css" href="../static/assets/css/mostrar_materias_style.css">
+    <!-- Inclusión de la biblioteca AngularJS -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <!-- Inclusión de la biblioteca AOS.js para animaciones -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- Enlace al archivo CSS de AOS para animaciones -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
 <body>
+  <!-- Botón de retroceso -->
   <button id="backButtom" aria-label="volver"  onclick="goMenu()">
     <img src="../static/assets/images/volver.png" alt="volver">
   </button>
+  <!-- Contenedor principal -->
   <div class="cuerpo">
+    <!-- Tabla para mostrar los datos -->
     <table border="1" >
         <tr>
             <th>Nombre</th>
@@ -26,6 +34,7 @@
             <td>{{ datos[dato]["nombre"] }}</td>
             <td>{{ datos[dato]["nivel"] }}</td>
             <td>{{ datos[dato]["arma"] }}</td>
+            <!-- Condicional para mostrar la imagen según el tipo -->
             {% if datos[dato]["tipo"] == "antonio" %}
             <td><img src="../static/assets/images/personajes/antonio.png" title="antonio" height=100 width=100></td>
             {% elif datos[dato]["tipo"] == "roberto" %}
@@ -37,18 +46,21 @@
             {% else %}
             <td><img src="../static/assets/images/personajes/desconocido.png" title="N/A" height=100 width=100></td>
             {% endif %}
+            <!-- Mostrar datos en las columnas restantes -->
             <td>{{ datos[dato]["nombre"] }}</td>
             <td>{{ datos[dato]["nivel"] }}</td>
             <td>{{ datos[dato]["hp"] }}</td>
             <td>{{ datos[dato]["mp"] }}</td>
             <td>{{ datos[dato]["arma"] }}</td>
-
+            <!-- Botones para modificar y eliminar -->
             <td><button onclick="modificar(this)">Modificar</button> <button onclick="eliminar(this)">Eliminar</button></td>
         </tr>
         {% endfor %}
     </table>
   </div>
+    <!-- Script para la lógica de eliminar y modificar -->
     <script>
+      // Función para eliminar un elemento
       function eliminar(boton) {
         var fila = boton.parentNode.parentNode;
         var clave = fila.cells[0].innerText;
@@ -71,6 +83,7 @@
         recargarPagina();
       }
 
+      // Función para modificar un elemento
       function modificar(boton) {
         var fila = boton.parentNode.parentNode;
         var clave = fila.cells[0].innerText;
@@ -95,6 +108,7 @@
       window.location.href = `/personajes/modificar?${queryString}`;
       }
     </script>
+    <!-- Script para recargar la página -->
     <script>
         function recargarPagina() {
             setTimeout(function() {
@@ -106,6 +120,7 @@
         }
     </script>
 <script>
+  // Inicialización de AOS para las animaciones
   AOS.init();
 </script>
 </body>

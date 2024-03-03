@@ -6,93 +6,114 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <!-- Enlace al archivo CSS -->
     <link rel="stylesheet" href="../static/assets/css/crear_arma_style.css">
+
+    <!-- Scripts de ionicons para iconos -->
     <script defer type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script defer nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+    <!-- Script personalizado -->
     <script defer src="../static/assets/js/crear_arma.js"></script>
+
     <title>Formulario</title>
 </head>
 
 <body>
+    <!-- Elementos de audio para sonidos -->
     <audio id="start-sound">
         <source src="../static/assets/audio/menu_start.mp3" type="audio/mpeg">
-        Tu navegador no soporta el elemento de audio.
     </audio>
     <audio id="error-sound">
         <source src="../static/assets/audio/menu_error.mp3" type="audio/mpeg">
-        Tu navegador no soporta el elemento de audio.
     </audio>
 
+    <!-- Botón de retroceso -->
     <button id="backButtom" aria-label="volver" onclick="goMenu()">
-    <img src="../static/assets/images/volver.png" alt="volver">
-  </button>
+        <img src="../static/assets/images/volver.png" alt="volver">
+    </button>
 
+    <!-- Contenedor principal del formulario -->
     <div class="cuerpo">
         <form id="dynamicForm" action="#" method="POST" onsubmit="return validarFormulario();">
 
+            <!-- Campo oculto para la clave -->
             <input type="hidden" id="clave" name="clave" value='{{datos.clave}}'>
 
+            <!-- Campo de entrada para el nombre -->
             <label for="nombre">Nombre:</label><br>
             <input type="text" id="nombre" name="nombre" value="{{datos.nombre}}"><br>
 
+            <!-- Campo de entrada para la descripción -->
             <label for="descripcion">Descripción:</label><br>
             <textarea id="descripcion" name="descripcion">{{datos.descripcion}}</textarea><br>
 
+            <!-- Campo de entrada para el ataque -->
             <label for="ataque">Ataque:</label><br>
             <input type="number" min="0" max="99" id="ataque" name="ataque" value="{{datos.ataque}}"><br>
 
+            <!-- Campo de entrada para el porcentaje de ataque -->
             <label for="ataquePor">Ataque%:</label><br>
             <input type="number" min="0" max="99" id="ataquePor" name="ataquePor" value="{{datos.ataquePor}}"><br>
 
+            <!-- Campo de entrada para la magia -->
             <label for="magia">Magia:</label><br>
             <input type="number" min="0" max="99" id="magia" name="magia" value="{{datos.magia}}"><br>
 
+            <!-- Campo de entrada para el coste -->
             <label for="coste">Coste:</label><br>
             <input type="number" min="1" max="50" id="coste" name="coste" value="{{datos.coste}}"><br>
 
+            <!-- Selector de slots de materia -->
             <label for="materia">Slots de Materias:</label>
             <select id="materia" name="materia" onchange="createInputs()" value="{{datos.materia}}">
-             <option value="0">-- SELECT --</option>
-             <option value="1">1</option>
-             <option value="2">2</option>
-             <option value="3">3</option>
-             <option value="4">4</option>
-             <option value="5">5</option>
+                <option value="0">-- SELECT --</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
             </select><br>
 
+            <!-- Botón de envío del formulario -->
             <input id="env" type="submit" value="Enviar">
         </form>
     </div>
+
+    <!-- Script para verificar el valor seleccionado en el selector de materias -->
     <script>
-        // Esta función se ejecuta cuando se carga la página por primera vez
         window.onload = function() {
             var materiaSelect = document.getElementById('materia');
-            // Verificar si el valor seleccionado es mayor que 0
             if (parseInt("{{datos.materia}}") > 0) {
-                // Llamar a una función si se cumple la condición
                 materiaSelect.value = "{{datos.materia}}"
                 createInputs();
             }
         };
     </script>
+
+    <!-- Script para marcar el radio button correspondiente -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             document.getElementById("{{datos.tipo}}").checked = true;
         });
     </script>
+
+    <!-- Script para redirigir al menú principal -->
     <script>
         function goMenu() {
             window.location.href = "/armas";
         }
 
+        // Función para crear campos de entrada dinámicos según el número de slots de materia seleccionados
         function createInputs() {
             var numberOfInputs = parseInt(document.getElementById("materia").value);
             var form = document.getElementById("dynamicForm");
 
-
+            // Eliminar el botón de envío actual
             boton = document.getElementById("env")
             form.removeChild(boton);
-            // Clear existing inputs
+
+            // Limpiar los campos de entrada existentes
             for (var i = 0; i < 5; i++) {
                 espacio = document.getElementById("spc" + (i + 1));
                 label = document.getElementById("label" + (i + 1));
@@ -104,7 +125,6 @@
 
                 if (form.contains(input)) {
                     form.removeChild(input);
-
                 }
 
                 if (form.contains(label)) {
@@ -112,7 +132,7 @@
                 }
             }
 
-            // Create new inputs
+            // Crear nuevos campos de entrada según el número de slots seleccionados
             for (var i = 0; i < numberOfInputs; i++) {
                 var label = document.createElement("label");
                 label.for = "slot" + (i + 1);
@@ -122,7 +142,7 @@
 
                 var input = document.createElement("input");
                 input.type = "text";
-                input.name = "slot" + (i + 1); // Setting unique name for each input
+                input.name = "slot" + (i + 1);
                 input.id = "slot" + (i + 1);
                 switch (i) {
                     case 0:
@@ -165,12 +185,14 @@
                         break;
                 }
                 form.appendChild(input);
+
+                // Crear un espacio para separar los campos de entrada
                 var espacio = document.createElement("br")
                 espacio.id = "spc" + (i + 1);
-                form.appendChild(espacio); // Line break for spacing
+                form.appendChild(espacio);
             }
 
-            // Add submit button
+            // Agregar el botón de envío nuevamente
             var submitButton = document.createElement("input");
             submitButton.type = "submit";
             submitButton.value = "Enviar";
