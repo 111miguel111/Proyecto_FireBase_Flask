@@ -270,4 +270,5 @@ def meter_datos():
 @app.route('/bbdd/borrar')
 def borrar_datos():
     BBDD.dropDDBB()
+    return redirect(url_for('menu_bbdd'))
 

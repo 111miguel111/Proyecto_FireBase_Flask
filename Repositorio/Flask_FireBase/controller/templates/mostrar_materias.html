@@ -36,35 +36,36 @@
             <th>MaxPM%</th>
             <th>Coste</th>
             <th>Botones</th>
-
-        {% for dato in datos %}
-        <tr data-aos="fade-left" data-aos-duration="1000">
-            <td>{{ datos[dato]["clave"] }}</td>
-            <td>{{ datos[dato]["nombre"] }}</td>
-            <td>{{ datos[dato]["descripcion"] }}</td>
-            {% if datos[dato]["tipo"] == "magia" %}
-            <td><img src="../static/assets/images/materiaVerde.png" title="Magia" height=100 width=100></td>
-            {% elif datos[dato]["tipo"] == "invocacion" %}
-            <td><img src="../static/assets/images/materiaRoja.png" title="Invocacion" height=100 width=100></td>
-            {% elif datos[dato]["tipo"] == "soporte" %}
-            <td><img src="../static/assets/images/materiaAzul.png" title="Soporte" height=100 width=100></td>
-            {% elif datos[dato]["tipo"] == "independiente" %}
-            <td><img src="../static/assets/images/materiaMorada.png" title="Independiente" height=100 width=100></td>
-            {% elif datos[dato]["tipo"] == "comando" %}
-            <td><img src="../static/assets/images/materiaAmarilla.png" title="Comando" height=100 width=100></td>
-            {% else %}
-            <td><img src="../static/assets/images/materia0.png" title="N/A" height=100 width=100></td>
-            {% endif %}
-            <td>{{ datos[dato]["nivel"] }}</td>
-            <td>{{ datos[dato]["experiencia"] }}</td>
-            <td>{{ datos[dato]["fuerza"] }}</td>
-            <td>{{ datos[dato]["magia"] }}</td>
-            <td>{{ datos[dato]["maxpg"] }}</td>
-            <td>{{ datos[dato]["maxpm"] }}</td>
-            <td>{{ datos[dato]["coste"] }}</td>
-            <td><button onclick="modificar(this)">Modificar</button> <button onclick="eliminar(this)">Eliminar</button></td>
-        </tr>
-        {% endfor %}
+        {% if datos != None %}
+            {% for dato in datos %}
+            <tr data-aos="fade-left" data-aos-duration="1000">
+                <td>{{ datos[dato]["clave"] }}</td>
+                <td>{{ datos[dato]["nombre"] }}</td>
+                <td>{{ datos[dato]["descripcion"] }}</td>
+                {% if datos[dato]["tipo"] == "magia" %}
+                <td><img src="../static/assets/images/materiaVerde.png" title="Magia" height=100 width=100></td>
+                {% elif datos[dato]["tipo"] == "invocacion" %}
+                <td><img src="../static/assets/images/materiaRoja.png" title="Invocacion" height=100 width=100></td>
+                {% elif datos[dato]["tipo"] == "soporte" %}
+                <td><img src="../static/assets/images/materiaAzul.png" title="Soporte" height=100 width=100></td>
+                {% elif datos[dato]["tipo"] == "independiente" %}
+                <td><img src="../static/assets/images/materiaMorada.png" title="Independiente" height=100 width=100></td>
+                {% elif datos[dato]["tipo"] == "comando" %}
+                <td><img src="../static/assets/images/materiaAmarilla.png" title="Comando" height=100 width=100></td>
+                {% else %}
+                <td><img src="../static/assets/images/materia0.png" title="N/A" height=100 width=100></td>
+                {% endif %}
+                <td>{{ datos[dato]["nivel"] }}</td>
+                <td>{{ datos[dato]["experiencia"] }}</td>
+                <td>{{ datos[dato]["fuerza"] }}</td>
+                <td>{{ datos[dato]["magia"] }}</td>
+                <td>{{ datos[dato]["maxpg"] }}</td>
+                <td>{{ datos[dato]["maxpm"] }}</td>
+                <td>{{ datos[dato]["coste"] }}</td>
+                <td><button onclick="modificar(this)">Modificar</button> <button onclick="eliminar(this)">Eliminar</button></td>
+            </tr>
+            {% endfor %}
+        {% endif %}
     </table>
   </div>
     <script>
