@@ -144,20 +144,37 @@
 </script>
 <script>
     // Obtener la referencia del input de búsqueda
-        var inputBusqueda = document.getElementById('busqueda');
-        // Obtener todas las filas de la tabla excepto la primera (encabezados)
-        var filas = document.querySelectorAll('#tabla tr:not(:first-child)');
+    var inputBusqueda = document.getElementById('busqueda');
+    // Obtener todas las filas de la tabla excepto la primera (encabezados)
+    var filas = document.querySelectorAll('#tabla tr:not(:first-child)');
 
-        // Agregar evento de escucha al input de búsqueda
-        inputBusqueda.addEventListener('input', function() {
-            var filtro = inputBusqueda.value.toLowerCase(); // Convertir el texto de búsqueda a minúsculas
-            filas.forEach(function(fila) {
-                // Obtener el contenido de la primera celda de la fila
-                var contenido = fila.cells[0].textContent.toLowerCase(); // Ajusta el índice según el orden de tus columnas
-                // Mostrar la fila si la primera celda comienza con el texto de búsqueda, ocultarla de lo contrario
-                fila.style.display = contenido.startsWith(filtro) ? '' : 'none';
+    // Agregar evento de escucha al input de búsqueda
+    inputBusqueda.addEventListener('input', function() {
+        var filtro = inputBusqueda.value.trim().toLowerCase(); // Convertir el texto de búsqueda a minúsculas
+        filas.forEach(function(fila) {
+            var mostrarFila = false; // Bandera para determinar si mostrar la fila
+            // Recorrer todas las celdas de la fila
+            Array.from(fila.cells).forEach(function(celda) {
+                var contenido = celda.textContent.trim().toLowerCase();
+                // Verificar si alguna celda comienza con el texto de búsqueda
+                if (contenido.startsWith(filtro)) {
+                    mostrarFila = true;
+                }
             });
+            // Mostrar u ocultar la fila según la bandera
+            fila.style.display = mostrarFila ? '' : 'none';
+            // Ajustar la animación AOS solo si la fila se muestra
+            if (mostrarFila) {
+                fila.setAttribute('data-aos', 'fade-left');
+                fila.setAttribute('data-aos-duration', '1000');
+            } else {
+                fila.removeAttribute('data-aos');
+                fila.removeAttribute('data-aos-duration');
+            }
         });
+        // Reiniciar la animación AOS después de actualizar la página
+        AOS.refresh();
+    });
 </script>
 </body>
 </html>

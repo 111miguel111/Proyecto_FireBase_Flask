@@ -10,125 +10,146 @@
 </head>
 
 <body>
-    <button id="backButtom" aria-label="volver" onclick="goMenu()">
+<button id="backButtom" aria-label="volver" onclick="goMenu()">
     <img src="../static/assets/images/volver.png" alt="volver">
-  </button>
-    <div class="cuerpo">
-        <input type="text" id="busqueda">
-        <table border="1" id="tabla">
-            <tr>
-                <th>Codigo</th>
-                <th>Nombre</th>
-                <th>Descripcion</th>
-                <th>Ataque</th>
-                <th>Ataque%</th>
-                <th>Magia</th>
-                <th>Coste</th>
-                <th>Slots</th>
-                <th>Materia 1</th>
-                <th>Materia 2</th>
-                <th>Materia 3</th>
-                <th>Materia 4</th>
-                <th>Materia 5</th>
+</button>
+<div class="cuerpo">
+    <input type="text" id="busqueda">
+    <table border="1" id="tabla">
+        <tr>
+            <th>Codigo</th>
+            <th>Nombre</th>
+            <th>Descripcion</th>
+            <th>Ataque</th>
+            <th>Ataque%</th>
+            <th>Magia</th>
+            <th>Coste</th>
+            <th>Slots</th>
+            <th>Materia 1</th>
+            <th>Materia 2</th>
+            <th>Materia 3</th>
+            <th>Materia 4</th>
+            <th>Materia 5</th>
+            {% if datos != None %}
+            {% for dato in datos %}
+        <tr data-aos="fade-left" data-aos-duration="1000">
+            <td>{{ datos[dato]["clave"] }}</td>
+            <td>{{ datos[dato]["nombre"] }}</td>
+            <td>{{ datos[dato]["descripcion"] }}</td>
+            <td>{{ datos[dato]["ataque"] }}</td>
+            <td>{{ datos[dato]["ataquePor"] }}</td>
+            <td>{{ datos[dato]["magia"] }}</td>
+            <td>{{ datos[dato]["coste"] }}</td>
+            <td>{{ datos[dato]["materia"] }}</td>
+            <td>{{ datos[dato]["slot1"] }}</td>
+            <td>{{ datos[dato]["slot2"] }}</td>
+            <td>{{ datos[dato]["slot3"] }}</td>
+            <td>{{ datos[dato]["slot4"] }}</td>
+            <td>{{ datos[dato]["slot5"] }}</td>
+            <td>
+                <button onclick="modificar(this)">Modificar</button>
+                <button onclick="eliminar(this)">Eliminar</button>
+            </td>
+        </tr>
+        {% endfor %}
+        {% endif %}
+    </table>
+</div>
+<script>
+    function goMenu() {
+        window.location.href = "/armas";
+    }
 
-                {% for dato in datos %}
-                <tr data-aos="fade-left" data-aos-duration="1000">
-                    <td>{{ datos[dato]["clave"] }}</td>
-                    <td>{{ datos[dato]["nombre"] }}</td>
-                    <td>{{ datos[dato]["descripcion"] }}</td>
-                    <td>{{ datos[dato]["ataque"] }}</td>
-                    <td>{{ datos[dato]["ataquePor"] }}</td>
-                    <td>{{ datos[dato]["magia"] }}</td>
-                    <td>{{ datos[dato]["coste"] }}</td>
-                    <td>{{ datos[dato]["materia"] }}</td>
-                    <td>{{ datos[dato]["slot1"] }}</td>
-                    <td>{{ datos[dato]["slot2"] }}</td>
-                    <td>{{ datos[dato]["slot3"] }}</td>
-                    <td>{{ datos[dato]["slot4"] }}</td>
-                    <td>{{ datos[dato]["slot5"] }}</td>
-                    <td><button onclick="modificar(this)">Modificar</button> <button onclick="eliminar(this)">Eliminar</button></td>
-                </tr>
-                {% endfor %}
-        </table>
-    </div>
-    <script>
-        function goMenu() {
-            window.location.href = "/armas";
-        }
+    function eliminar(boton) {
+        var fila = boton.parentNode.parentNode;
+        var clave = fila.cells[0].innerText;
 
-        function eliminar(boton) {
-            var fila = boton.parentNode.parentNode;
-            var clave = fila.cells[0].innerText;
+        var datos = {
+            "clave": clave
+        };
 
-            var datos = {
-                "clave": clave
-            };
+        // Realizar la solicitud POST a "/armas/modificar"
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "/armas/eliminar", true);
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                // Manejar la respuesta aquí si es necesario
+                console.log(xhr.responseText);
+            }
+        };
+        xhr.send(JSON.stringify(datos));
+        recargarPagina();
+    }
 
-            // Realizar la solicitud POST a "/armas/modificar"
-            var xhr = new XMLHttpRequest();
-            xhr.open("POST", "/armas/eliminar", true);
-            xhr.setRequestHeader("Content-Type", "application/json");
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState === 4 && xhr.status === 200) {
-                    // Manejar la respuesta aquí si es necesario
-                    console.log(xhr.responseText);
+    function modificar(boton) {
+        var fila = boton.parentNode.parentNode;
+        var clave = fila.cells[0].innerText;
+
+        var datos = {
+            "clave": clave
+        };
+
+        // Realizar la solicitud GET a "/armas/modificar"
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "/armas/modificar", true);
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                // Manejar la respuesta aquí si es necesario
+                console.log(xhr.responseText);
+            }
+        };
+
+        const queryString = new URLSearchParams(datos).toString();
+
+        window.location.href = `/armas/modificar?${queryString}`;
+    }
+</script>
+<script>
+    function recargarPagina() {
+        setTimeout(function() {
+            location.reload();
+        }, 400);
+    }
+</script>
+<script>
+    AOS.init();
+</script>
+<script>
+    // Obtener la referencia del input de búsqueda
+    var inputBusqueda = document.getElementById('busqueda');
+    // Obtener todas las filas de la tabla excepto la primera (encabezados)
+    var filas = document.querySelectorAll('#tabla tr:not(:first-child)');
+
+    // Agregar evento de escucha al input de búsqueda
+    inputBusqueda.addEventListener('input', function() {
+        var filtro = inputBusqueda.value.trim().toLowerCase(); // Convertir el texto de búsqueda a minúsculas
+        filas.forEach(function(fila) {
+            var mostrarFila = false; // Bandera para determinar si mostrar la fila
+            // Recorrer todas las celdas de la fila
+            Array.from(fila.cells).forEach(function(celda) {
+                var contenido = celda.textContent.trim().toLowerCase();
+                // Verificar si alguna celda comienza con el texto de búsqueda
+                if (contenido.startsWith(filtro)) {
+                    mostrarFila = true;
                 }
-            };
-            xhr.send(JSON.stringify(datos));
-            recargarPagina();
-        }
-
-        function modificar(boton) {
-            var fila = boton.parentNode.parentNode;
-            var clave = fila.cells[0].innerText;
-
-            var datos = {
-                "clave": clave
-            };
-
-            // Realizar la solicitud GET a "/armas/modificar"
-            var xhr = new XMLHttpRequest();
-            xhr.open("GET", "/armas/modificar", true);
-            xhr.setRequestHeader("Content-Type", "application/json");
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState === 4 && xhr.status === 200) {
-                    // Manejar la respuesta aquí si es necesario
-                    console.log(xhr.responseText);
-                }
-            };
-
-            const queryString = new URLSearchParams(datos).toString();
-
-            window.location.href = `/armas/modificar?${queryString}`;
-        }
-    </script>
-    <script>
-        function recargarPagina() {
-            setTimeout(function() {
-                location.reload();
-            }, 400);
-        }
-    </script>
-    <script>
-        AOS.init();
-    </script>
-    <script>
-        // Obtener la referencia del input de búsqueda
-        var inputBusqueda = document.getElementById('busqueda');
-        // Obtener todas las filas de la tabla excepto la primera (encabezados)
-        var filas = document.querySelectorAll('#tabla tr:not(:first-child)');
-
-        // Agregar evento de escucha al input de búsqueda
-        inputBusqueda.addEventListener('input', function() {
-            var filtro = inputBusqueda.value.toLowerCase(); // Convertir el texto de búsqueda a minúsculas
-            filas.forEach(function(fila) {
-                // Obtener el contenido de la primera celda de la fila
-                var contenido = fila.cells[0].textContent.toLowerCase(); // Ajusta el índice según el orden de tus columnas
-                // Mostrar la fila si la primera celda comienza con el texto de búsqueda, ocultarla de lo contrario
-                fila.style.display = contenido.startsWith(filtro) ? '' : 'none';
             });
+            // Mostrar u ocultar la fila según la bandera
+            fila.style.display = mostrarFila ? '' : 'none';
+            // Ajustar la animación AOS solo si la fila se muestra
+            if (mostrarFila) {
+                fila.setAttribute('data-aos', 'fade-left');
+                fila.setAttribute('data-aos-duration', '1000');
+            } else {
+                fila.removeAttribute('data-aos');
+                fila.removeAttribute('data-aos-duration');
+            }
         });
-    </script>
+        // Reiniciar la animación AOS después de actualizar la página
+        AOS.refresh();
+    });
+</script>
 </body>
 
 </html>
