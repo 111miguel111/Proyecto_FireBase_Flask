@@ -12,6 +12,10 @@
         <source src="static/assets/audio/menu_display.mp3" type="audio/mpeg">
         Tu navegador no soporta el elemento de audio.
     </audio>
+	<audio id="start-sound">
+        <source src="../static/assets/audio/menu_start.mp3" type="audio/mpeg">
+        Tu navegador no soporta el elemento de audio.
+    </audio>
 	<!-- Contenedor principal de la ventana de Final Fantasy 7 -->
 	<div class="ff7-window">
 		<!-- Título principal -->
@@ -20,8 +24,8 @@
 		<nav id="Menu">
 			<ul>
 				<!-- Enlaces de la barra de navegación -->
-				<li><a id="crear" href="/bbdd/llenar">Crear ejemplos </a></li>
-				<li><a id="borrar" href="/bbdd/borrar">Borrar Base de datos</a></li>
+				<li><a id="crear" href="/bbdd/llenar" onclick="sonidos()">Crear ejemplos </a></li>
+				<li><a id="borrar" href="/bbdd/borrar" onclick="sonidos()">Borrar Base de datos</a></li>
 				<li><a href="javascript:void(0);" onclick="cerrarPestana()">Volver a la página principal</a></li>
 			</ul>
 		</nav>
@@ -35,6 +39,12 @@
 	<!-- Scripts JavaScript -->
 	<script>
 		// Función para redirigir a la página principal
+		function sonidos(){
+			var menuSound = document.getElementById("start-sound");
+            menuSound.pause();
+            menuSound.currentTime = 0;
+            menuSound.play();
+		}
 		function volverAPaginaPrincipal() {
 			window.location.href = "index.html";
 		}
