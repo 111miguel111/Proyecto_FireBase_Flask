@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, url_for, redirect, jsonify
 from model import BBDD  # Importación del modelo de la base de datos
+import time
 
 app = Flask(__name__)  # Creación de la instancia de la aplicación Flask
 
@@ -412,6 +413,7 @@ def borrar_datos():
     Returns:
         Redirect: Redirige al menú de la base de datos.
     """
+    time.sleep(0.5)
     BBDD.dropDDBB()
     return redirect(url_for('menu_bbdd'))
 
