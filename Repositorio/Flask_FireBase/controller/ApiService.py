@@ -6,6 +6,7 @@ app = Flask(__name__)  # Creación de la instancia de la aplicación Flask
 app.config['STATIC_FOLDER'] = 'static'
 app.config['JSON_AS_ASCII'] = False
 
+
 @app.route('/')
 def menu_principal():
     """Ruta para el menú principal.
@@ -14,6 +15,7 @@ def menu_principal():
         HTML: Template 'index.html'.
     """
     return render_template('index.html')
+
 
 # Materias ----------------------------------------------------------------------
 # Rutas relacionadas con la gestión de materias
@@ -27,6 +29,7 @@ def menu_materias():
     """
     return render_template('menu_materias.html', materias=BBDD.selectAll("materia"))
 
+
 @app.route('/materias/crear', methods=['GET'])
 def menu_crear_materias():
     """Ruta para crear una nueva materia.
@@ -36,6 +39,7 @@ def menu_crear_materias():
     """
     datos = emptyMateria()
     return render_template('crear_materia.html', datos=datos)
+
 
 @app.route('/materias/crear', methods=['POST'])
 def crear_materias():
@@ -52,6 +56,7 @@ def crear_materias():
     BBDD.insert("materia", datos)
     return redirect(url_for('menu_mostrar_materias'))
 
+
 @app.route('/materias/modificar', methods=['GET'])
 def menu_modificar_materias():
     """Ruta para modificar una materia existente.
@@ -64,6 +69,7 @@ def menu_modificar_materias():
     if (datos == None):
         datos = emptyMateria()
     return render_template('crear_materia.html', datos=datos)
+
 
 @app.route('/materias/modificar', methods=['POST'])
 def modificar_materias():
@@ -80,6 +86,7 @@ def modificar_materias():
     BBDD.update("materia", datos)
     return redirect(url_for('menu_mostrar_materias'))
 
+
 @app.route('/materias/mostrar', methods=['GET'])
 def menu_mostrar_materias():
     """Ruta para mostrar todas las materias.
@@ -89,6 +96,7 @@ def menu_mostrar_materias():
     """
     datos = BBDD.selectAll("materia")
     return render_template('mostrar_materias.html', datos=datos)
+
 
 @app.route('/materias/eliminar', methods=['POST'])
 def eliminar_materia():
@@ -105,6 +113,7 @@ def eliminar_materia():
             BBDD.delete("materia", clave)
     return redirect(url_for('menu_mostrar_materias'))
 
+
 # Armas ----------------------------------------------
 # Rutas relacionadas con la gestión de armas
 
@@ -117,6 +126,7 @@ def menu_armas():
     """
     return render_template('menu_armas.html', armas=BBDD.selectAll("armas"))
 
+
 @app.route('/armas/crear', methods=['GET'])
 def menu_crear_armas():
     """Ruta para crear una nueva arma.
@@ -126,6 +136,7 @@ def menu_crear_armas():
     """
     datos = emptyMateria()
     return render_template('crear_arma.html', datos=datos)
+
 
 @app.route('/armas/crear', methods=['POST'])
 def crear_armas():
@@ -142,6 +153,7 @@ def crear_armas():
     BBDD.insert("armas", datos)
     return redirect(url_for('menu_mostrar_armas'))
 
+
 @app.route('/armas/mostrar', methods=['GET'])
 def menu_mostrar_armas():
     """Ruta para mostrar todas las armas.
@@ -151,6 +163,7 @@ def menu_mostrar_armas():
     """
     datos = BBDD.selectAll("armas")
     return render_template('mostrar_armas.html', datos=datos)
+
 
 @app.route('/armas/eliminar', methods=['POST'])
 def eliminar_armas():
@@ -167,6 +180,7 @@ def eliminar_armas():
             BBDD.delete("armas", clave)
     return redirect(url_for('menu_mostrar_armas'))
 
+
 @app.route('/armas/modificar', methods=['GET'])
 def menu_modificar_armas():
     """Ruta para modificar un arma existente.
@@ -179,6 +193,7 @@ def menu_modificar_armas():
     if (datos == None):
         datos = emptyMateria()
     return render_template('crear_arma.html', datos=datos)
+
 
 @app.route('/armas/modificar', methods=['POST'])
 def modificar_armas():
@@ -195,6 +210,7 @@ def modificar_armas():
     BBDD.update("armas", datos)
     return redirect(url_for('menu_mostrar_armas'))
 
+
 def emptyMateria():
     """Crea un diccionario con campos vacíos para una nueva materia.
 
@@ -205,20 +221,24 @@ def emptyMateria():
              "magia": "", "maxpg": "", "maxpm": "", "coste": ""}
     return datos
 
+
 def emptyArma():
     """Crea un diccionario con campos vacíos para una nueva arma.
 
     Returns:
         dict: Datos vacíos para una nueva arma.
     """
-    datos = {"clave": "", "nombre": "", "descripcion": "", "ataque": "", "ataque%": "", "magia": "", "coste": "", "materia": "",
+    datos = {"clave": "", "nombre": "", "descripcion": "", "ataque": "", "ataque%": "", "magia": "", "coste": "",
+             "materia": "",
              "slot1": "", "slot2": "", "slot3": "", "slot4": "", "slot5": ""
              }
     return datos
 
+
 def lanzar():
     """Inicia la aplicación Flask en modo debug."""
     app.run(debug=True)
+
 
 # Personajes ----------------------------------------------
 # Rutas relacionadas con la gestión de personajes
@@ -232,6 +252,7 @@ def menu_personajes():
     """
     return render_template('menu_personajes.html', personajes=BBDD.selectAll("personajes"))
 
+
 @app.route('/personajes/crear', methods=['GET'])
 def menu_crear_personajes():
     """Ruta para crear un nuevo personaje.
@@ -241,6 +262,7 @@ def menu_crear_personajes():
     """
     datos = emptyMateria()
     return render_template('crear_personaje.html', datos=datos)
+
 
 @app.route('/personajes/crear', methods=['POST'])
 def crear_personajes():
@@ -257,6 +279,7 @@ def crear_personajes():
     BBDD.insert("personajes", datos)
     return redirect(url_for('menu_mostrar_personajes'))
 
+
 @app.route('/personajes/mostrar', methods=['GET'])
 def menu_mostrar_personajes():
     """Ruta para mostrar todos los personajes.
@@ -266,6 +289,7 @@ def menu_mostrar_personajes():
     """
     datos = BBDD.selectAll("personajes")
     return render_template('mostrar_personajes.html', datos=datos)
+
 
 @app.route('/personajes/eliminar', methods=['POST'])
 def eliminar_personajes():
@@ -282,6 +306,7 @@ def eliminar_personajes():
             BBDD.delete("personajes", clave)
     return redirect(url_for('menu_mostrar_personajes'))
 
+
 @app.route('/personajes/modificar', methods=['GET'])
 def menu_modificar_personajes():
     """Ruta para modificar un personaje existente.
@@ -294,6 +319,7 @@ def menu_modificar_personajes():
     if (datos == None):
         datos = emptyMateria()
     return render_template('crear_personaje.html', datos=datos)
+
 
 @app.route('/personajes/modificar', methods=['POST'])
 def modificar_personajes():
@@ -310,6 +336,7 @@ def modificar_personajes():
     BBDD.update("personajes", datos)
     return redirect(url_for('menu_mostrar_personajes'))
 
+
 # Llenar bbdd --------------------------------------------------
 # Rutas relacionadas con el llenado de la base de datos
 
@@ -322,6 +349,7 @@ def menu_bbdd():
     """
     return render_template('menu_bbdd.html')
 
+
 @app.route('/bbdd/llenar')
 def meter_datos():
     """Ruta para llenar la base de datos con datos de ejemplo.
@@ -332,32 +360,33 @@ def meter_datos():
     i = 1
     while i <= 10:
         BBDD.insert("materia",
-                    {"clave":"samplem_"+str(i),
-                     "nombre":"Sample Materia"+str(i),
-                     "descripcion":"Ejemplo",
-                     "tipo":"magia",
-                     "nivel":"1",
-                     "experiencia":str(i),
-                     "fuerza":str(i),
-                     "magia":str(i),
-                     "maxpg":str(i),
-                     "maxpm":str(i),
-                     "coste":str(i)})
+                    {"clave": "samplem_" + str(i),
+                     "nombre": "Sample Materia" + str(i),
+                     "descripcion": "Ejemplo",
+                     "tipo": "magia",
+                     "nivel": "1",
+                     "experiencia": str(i),
+                     "fuerza": str(i),
+                     "magia": str(i),
+                     "maxpg": str(i),
+                     "maxpm": str(i),
+                     "coste": str(i)})
 
         BBDD.insert("armas",
-                    {"clave":"samplew_"+str(i),
+                    {"clave": "samplew_" + str(i),
                      "nombre": "Sample Arma" + str(i),
                      "descripcion": "Ejemplo",
-                     "ataque":str(i),
-                     "ataquePor":str(i),
+                     "ataque": str(i),
+                     "ataquePor": str(i),
                      "magia": str(i),
                      "coste": str(i),
-                     "materia":str(3),
-                     "slot1":"sample_m_"+str(i),
-                     "slot2":"sample_m_"+str(i),
-                     "slot3":"sample_m_"+str(i)})
-        i+=1
+                     "materia": str(3),
+                     "slot1": "sample_m_" + str(i),
+                     "slot2": "sample_m_" + str(i),
+                     "slot3": "sample_m_" + str(i)})
+        i += 1
     return redirect(url_for('menu_bbdd'))
+
 
 @app.route('/bbdd/borrar')
 def borrar_datos():
@@ -369,3 +398,8 @@ def borrar_datos():
     BBDD.dropDDBB()
     return redirect(url_for('menu_bbdd'))
 
+
+@app.route("/bbdd/materia", methods=['GET'])
+def get_all():
+    datos = BBDD.selectAll("materia")
+    return jsonify(datos)

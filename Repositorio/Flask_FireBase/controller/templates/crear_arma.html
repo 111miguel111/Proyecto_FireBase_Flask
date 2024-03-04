@@ -104,27 +104,54 @@
             window.location.href = "/armas";
         }
 
-        // Función para crear campos de entrada dinámicos según el número de slots de materia seleccionados
+        function loadOptionsForComboBox(comboBox) {
+            // Hacer la petición al servicio REST
+            fetch(`/bbdd/materia`)
+                .then(function(response) {
+                    if (!response.ok) {
+                        throw new Error('Error al obtener los datos');
+                    }
+                    return response.json();
+                })
+                .then(function(data) {
+                    console.log('Datos de la consulta:', data); // Agregar un log para mostrar los datos
+                    // Limpiar opciones existentes
+                    comboBox.innerHTML = '';
+
+                    // Iterar sobre las claves del objeto data
+                    Object.keys(data).forEach(function(key) {
+                        let optionElement = document.createElement('option');
+                        optionElement.value = data[key].clave; // Usar el campo "clave"
+                        optionElement.textContent = data[key].clave;
+                        comboBox.appendChild(optionElement);
+                    });
+                })
+                .catch(function(error) {
+                    console.error('Error al cargar opciones:', error);
+                });
+        }
+
+
         function createInputs() {
             var numberOfInputs = parseInt(document.getElementById("materia").value);
             var form = document.getElementById("dynamicForm");
 
             // Eliminar el botón de envío actual
-            boton = document.getElementById("env")
+            var boton = document.getElementById("env");
             form.removeChild(boton);
 
             // Limpiar los campos de entrada existentes
             for (var i = 0; i < 5; i++) {
-                espacio = document.getElementById("spc" + (i + 1));
-                label = document.getElementById("label" + (i + 1));
-                input = document.getElementById("slot" + (i + 1));
+                var espacio = document.getElementById("spc" + (i + 1));
+                var label = document.getElementById("label" + (i + 1));
+                var comboBox = document.getElementById("comboBox" + (i + 1));
 
                 if (form.contains(espacio)) {
                     form.removeChild(espacio);
                 }
 
-                if (form.contains(input)) {
-                    form.removeChild(input);
+                if (form.contains(comboBox)) {
+                    form.removeChild(comboBox);
                 }
 
                 if (form.contains(label)) {
@@ -132,62 +159,24 @@
                 }
             }
 
-            // Crear nuevos campos de entrada según el número de slots seleccionados
+            // Crear nuevos comboboxes según el número de slots seleccionados
             for (var i = 0; i < numberOfInputs; i++) {
                 var label = document.createElement("label");
-                label.for = "slot" + (i + 1);
+                label.for = "comboBox" + (i + 1);
                 label.textContent = "slot de materia " + (i + 1) + ":";
                 label.id = "label" + (i + 1);
                 form.appendChild(label);
 
-                var input = document.createElement("input");
-                input.type = "text";
-                input.name = "slot" + (i + 1);
-                input.id = "slot" + (i + 1);
-                switch (i) {
-                    case 0:
-                        if ("{{datos.slot1}}" != "") {
-                            input.value = "{{datos.slot1}}";
-                        } else {
-                            input.value = "N/A";
-                        }
-                        break;
-                    case 1:
-                        if ("{{datos.slot2}}" != "") {
-                            input.value = "{{datos.slot2}}";
-                        } else {
-                            input.value = "N/A";
-                        }
-                        break;
-                    case 2:
-                        if ("{{datos.slot3}}" != "") {
-                            input.value = "{{datos.slot3}}";
-                        } else {
-                            input.value = "N/A";
-                        }
-                        break;
-                    case 3:
-                        if ("{{datos.slot4}}" != "") {
-                            input.value = "{{datos.slot4}}";
-                        } else {
-                            input.value = "N/A";
-                        }
-                        break;
-                    case 4:
-                        if ("{{datos.slot5}}" != "") {
-                            input.value = "{{datos.slot5}}";
-                        } else {
-                            input.value = "N/A";
-                        }
-                        break;
-                    default:
-                        console.log("Valor por defecto");
-                        break;
-                }
-                form.appendChild(input);
+                var comboBox = document.createElement("select");
+                comboBox.name = "slot" + (i + 1);
+                comboBox.id = "comboBox" + (i + 1);
+                form.appendChild(comboBox);
+
+                // Cargar las opciones para el combobox recién creado
+                loadOptionsForComboBox(comboBox);
 
                 // Crear un espacio para separar los campos de entrada
-                var espacio = document.createElement("br")
+                var espacio = document.createElement("br");
                 espacio.id = "spc" + (i + 1);
                 form.appendChild(espacio);
             }
@@ -200,7 +189,6 @@
             form.appendChild(submitButton);
         }
     </script>
-
 </body>
 
 </html>
