@@ -358,13 +358,30 @@ def meter_datos():
         Redirect: Redirige al menú de la base de datos.
     """
     i = 1
+    cont = 1
     while i <= 10:
+        tipoMateria = ""
+        match cont:
+            case 1:
+                tipoMateria = "magia"
+            case 2:
+                tipoMateria = "invocacion"
+            case 3:
+                tipoMateria = "soporte"
+            case 4:
+                tipoMateria = "comando"
+            case 5:
+                tipoMateria = "independiente"
+                cont = 0
+        cont += 1
+
+
         BBDD.insert("materia",
-                    {"clave": "samplem_" + str(i),
+                    {"clave": "sampleM_" + str(i),
                      "nombre": "Sample Materia" + str(i),
                      "descripcion": "Ejemplo",
-                     "tipo": "magia",
-                     "nivel": "1",
+                     "tipo": tipoMateria,
+                     "nivel": str(cont),
                      "experiencia": str(i),
                      "fuerza": str(i),
                      "magia": str(i),
@@ -373,14 +390,14 @@ def meter_datos():
                      "coste": str(i)})
 
         BBDD.insert("armas",
-                    {"clave": "samplew_" + str(i),
+                    {"clave": "sampleW_" + str(i),
                      "nombre": "Sample Arma" + str(i),
                      "descripcion": "Ejemplo",
                      "ataque": str(i),
                      "ataquePor": str(i),
                      "magia": str(i),
                      "coste": str(i),
-                     "materia": str(3),
+                     "materia": str(cont),
                      "slot1": "sample_m_" + str(i),
                      "slot2": "sample_m_" + str(i),
                      "slot3": "sample_m_" + str(i)})
