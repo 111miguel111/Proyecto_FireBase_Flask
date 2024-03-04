@@ -398,9 +398,9 @@ def meter_datos():
                      "magia": str(i),
                      "coste": str(i),
                      "materia": str(cont),
-                     "slot1": "sample_m_" + str(i),
-                     "slot2": "sample_m_" + str(i),
-                     "slot3": "sample_m_" + str(i)})
+                     "slot1": "sampleM_" + str(i),
+                     "slot2": "sampleM_" + str(i),
+                     "slot3": "sampleM_" + str(i)})
         i += 1
     return redirect(url_for('menu_bbdd'))
 
