@@ -28,7 +28,7 @@ def menu_materias():
     Returns:
         HTML: Template 'menu_materias.html' con las materias obtenidas de la base de datos.
     """
-    return render_template('menu_materias.html', materias=BBDD.selectAll("materia"))
+    return render_template('menu_materias.html')
 
 
 @app.route('/materias/crear', methods=['GET'])
@@ -125,7 +125,7 @@ def menu_armas():
     Returns:
         HTML: Template 'menu_armas.html' con las armas obtenidas de la base de datos.
     """
-    return render_template('menu_armas.html', armas=BBDD.selectAll("armas"))
+    return render_template('menu_armas.html')
 
 
 @app.route('/armas/crear', methods=['GET'])
