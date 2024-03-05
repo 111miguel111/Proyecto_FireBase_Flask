@@ -82,7 +82,9 @@ def modificar_materias():
     datos = {}
     for key in request.form:
         datos[key] = request.form[key]
+
     if datos["nombre"] != datos["clave"].split("_")[0]:
+        BBDD.delete("materias",datos["clave"])
         datos = BBDD.calcularClave("materia", datos)
     BBDD.update("materia", datos)
     return redirect(url_for('menu_mostrar_materias'))
@@ -207,6 +209,7 @@ def modificar_armas():
     for key in request.form:
         datos[key] = request.form[key]
     if datos["nombre"] != datos["clave"].split("_")[0]:
+        BBDD.delete("armas", datos["clave"])
         datos = BBDD.calcularClave("armas", datos)
     BBDD.update("armas", datos)
     return redirect(url_for('menu_mostrar_armas'))
