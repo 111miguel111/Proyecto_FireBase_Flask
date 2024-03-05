@@ -378,8 +378,8 @@ def meter_datos():
 
 
         BBDD.insert("materia",
-                    {"clave": "sampleM_" + str(i),
-                     "nombre": "Sample Materia" + str(i),
+                    {"clave": "SampleMateria_" + str(i),
+                     "nombre": "SampleMateria",
                      "descripcion": "Ejemplo",
                      "tipo": tipoMateria,
                      "nivel": str(cont),
@@ -391,8 +391,8 @@ def meter_datos():
                      "coste": str(i)})
 
         BBDD.insert("armas",
-                    {"clave": "sampleW_" + str(i),
-                     "nombre": "Sample Arma" + str(i),
+                    {"clave": "SampleArma_" + str(i),
+                     "nombre": "SampleArma",
                      "descripcion": "Ejemplo",
                      "ataque": str(i),
                      "ataquePor": str(i),
