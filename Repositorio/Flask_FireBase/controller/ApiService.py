@@ -1,10 +1,10 @@
 from flask import Flask, render_template, request, url_for, redirect, jsonify
 from model import BBDD  # Importación del modelo de la base de datos
 import time
+import os
 
-app = Flask(__name__)  # Creación de la instancia de la aplicación Flask
+app = Flask(__name__,template_folder='../view/templates',static_folder='../view/static')  # Creación de la instancia de la aplicación Flask
 
-app.config['STATIC_FOLDER'] = 'static'
 app.config['JSON_AS_ASCII'] = False
 
 
